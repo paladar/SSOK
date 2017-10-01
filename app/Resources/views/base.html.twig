@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+    {% block stylesheets %}
+        <link rel="stylesheet" href="{{ asset('bootstrap/css/bootstrap.min.css') }}">
+        <link rel="stylesheet" href="{{ asset('font-awesome/css/font-awesome.min.css') }}">
+        <link rel="stylesheet" href="{{ asset('adminlte/css/AdminLTE.min.css') }}">
+        <link rel="stylesheet" href="{{ asset('adminlte/css/skins/_all-skins.min.css') }}">
+        <link href="{{ asset('css/backend.css') }}?v=250417" rel="stylesheet"/>
+        <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
+    {% endblock stylesheets %}
+
+    {% block javascripts %}
+        <script src="{{ asset('js/jquery-3.2.1.min.js') }}"></script>
+        <script src="{{ asset('js/jquery-ui.min.js') }}"></script>
+        <script src="{{ asset('bootstrap/js/bootstrap.min.js') }}" type="text/javascript"></script>    
+        <script src="{{ asset('adminlte/js/app.min.js') }}" type="text/javascript"></script>
+        <script src="{{ asset('js/admin.js') }}" type="text/javascript"></script>
+    {% endblock javascripts %}
+</html>
+{% block body %} 
+{% endblock %}
