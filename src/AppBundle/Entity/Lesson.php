@@ -51,7 +51,7 @@ class Lesson {
     /**
      * @var \Datetime $start
      *
-     * @ORM\Column(name="start", type="datetime")
+     * @ORM\Column(name="start", type="time")
      */
     protected $start;
 

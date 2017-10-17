@@ -39,7 +39,7 @@ class Presence {
      * @ORM\JoinColumn(name="id_lesson", referencedColumnName="id", nullable=false)
      */
     protected $lesson;
-    
+
     /**
      * @var PresenceType $presenceType
      *
@@ -47,6 +47,13 @@ class Presence {
      * @ORM\JoinColumn(name="id_presence_type", referencedColumnName="id", nullable=false)
      */
     protected $presenceType;
+
+    /**
+     * @var \Datetime $date
+     *
+     * @ORM\Column(name="date", type="date")
+     */
+    protected $date;
 
     /**
      * @var \Datetime $createdAt
@@ -71,15 +78,12 @@ class Presence {
      */
     protected $deletedAt;
 
-
-
     /**
      * Get id
      *
      * @return integer
      */
-    public function getId()
-    {
+    public function getId() {
         return $this->id;
     }
 
@@ -90,8 +94,7 @@ class Presence {
      *
      * @return Presence
      */
-    public function setCreatedAt($createdAt)
-    {
+    public function setCreatedAt($createdAt) {
         $this->createdAt = $createdAt;
 
         return $this;
@@ -102,8 +105,7 @@ class Presence {
      *
      * @return \DateTime
      */
-    public function getCreatedAt()
-    {
+    public function getCreatedAt() {
         return $this->createdAt;
     }
 
@@ -114,8 +116,7 @@ class Presence {
      *
      * @return Presence
      */
-    public function setUpdatedAt($updatedAt)
-    {
+    public function setUpdatedAt($updatedAt) {
         $this->updatedAt = $updatedAt;
 
         return $this;
@@ -126,8 +127,7 @@ class Presence {
      *
      * @return \DateTime
      */
-    public function getUpdatedAt()
-    {
+    public function getUpdatedAt() {
         return $this->updatedAt;
     }
 
@@ -138,8 +138,7 @@ class Presence {
      *
      * @return Presence
      */
-    public function setDeletedAt($deletedAt)
-    {
+    public function setDeletedAt($deletedAt) {
         $this->deletedAt = $deletedAt;
 
         return $this;
@@ -150,8 +149,7 @@ class Presence {
      *
      * @return \DateTime
      */
-    public function getDeletedAt()
-    {
+    public function getDeletedAt() {
         return $this->deletedAt;
     }
 
@@ -162,8 +160,7 @@ class Presence {
      *
      * @return Presence
      */
-    public function setStudent(\AppBundle\Entity\Student $student)
-    {
+    public function setStudent(\AppBundle\Entity\Student $student) {
         $this->student = $student;
 
         return $this;
@@ -174,8 +171,7 @@ class Presence {
      *
      * @return \AppBundle\Entity\Student
      */
-    public function getStudent()
-    {
+    public function getStudent() {
         return $this->student;
     }
 
@@ -186,8 +182,7 @@ class Presence {
      *
      * @return Presence
      */
-    public function setLesson(\AppBundle\Entity\Lesson $lesson)
-    {
+    public function setLesson(\AppBundle\Entity\Lesson $lesson) {
         $this->lesson = $lesson;
 
         return $this;
@@ -198,8 +193,7 @@ class Presence {
      *
      * @return \AppBundle\Entity\Lesson
      */
-    public function getLesson()
-    {
+    public function getLesson() {
         return $this->lesson;
     }
 
@@ -210,8 +204,7 @@ class Presence {
      *
      * @return Presence
      */
-    public function setPresenceType(\AppBundle\Entity\PresenceType $presenceType)
-    {
+    public function setPresenceType(\AppBundle\Entity\PresenceType $presenceType) {
         $this->presenceType = $presenceType;
 
         return $this;
@@ -222,8 +215,8 @@ class Presence {
      *
      * @return \AppBundle\Entity\PresenceType
      */
-    public function getPresenceType()
-    {
+    public function getPresenceType() {
         return $this->presenceType;
     }
+
 }
