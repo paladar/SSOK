@@ -1,0 +1,45 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Grades list</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Value</th>
+                <th>Createdat</th>
+                <th>Updatedat</th>
+                <th>Deletedat</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for grade in grades %}
+            <tr>
+                <td><a href="{{ path('grade_show', { 'id': grade.id }) }}">{{ grade.id }}</a></td>
+                <td>{{ grade.value }}</td>
+                <td>{% if grade.createdAt %}{{ grade.createdAt|date('Y-m-d H:i:s') }}{% endif %}</td>
+                <td>{% if grade.updatedAt %}{{ grade.updatedAt|date('Y-m-d H:i:s') }}{% endif %}</td>
+                <td>{% if grade.deletedAt %}{{ grade.deletedAt|date('Y-m-d H:i:s') }}{% endif %}</td>
+                <td>
+                    <ul>
+                        <li>
+                            <a href="{{ path('grade_show', { 'id': grade.id }) }}">show</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('grade_edit', { 'id': grade.id }) }}">edit</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('grade_new') }}">Create a new grade</a>
+        </li>
+    </ul>
+{% endblock %}

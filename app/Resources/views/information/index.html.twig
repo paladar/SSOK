@@ -1,0 +1,45 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Information list</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Description</th>
+                <th>Createdat</th>
+                <th>Updatedat</th>
+                <th>Deletedat</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for information in information %}
+            <tr>
+                <td><a href="{{ path('information_show', { 'id': information.id }) }}">{{ information.id }}</a></td>
+                <td>{{ information.description }}</td>
+                <td>{% if information.createdAt %}{{ information.createdAt|date('Y-m-d H:i:s') }}{% endif %}</td>
+                <td>{% if information.updatedAt %}{{ information.updatedAt|date('Y-m-d H:i:s') }}{% endif %}</td>
+                <td>{% if information.deletedAt %}{{ information.deletedAt|date('Y-m-d H:i:s') }}{% endif %}</td>
+                <td>
+                    <ul>
+                        <li>
+                            <a href="{{ path('information_show', { 'id': information.id }) }}">show</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('information_edit', { 'id': information.id }) }}">edit</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('information_new') }}">Create a new information</a>
+        </li>
+    </ul>
+{% endblock %}

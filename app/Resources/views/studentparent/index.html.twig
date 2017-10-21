@@ -1,0 +1,55 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Studentparents list</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Motheremail</th>
+                <th>Fatheremail</th>
+                <th>Mothername</th>
+                <th>Fathername</th>
+                <th>Motherphone</th>
+                <th>Fatherphone</th>
+                <th>Createdat</th>
+                <th>Updatedat</th>
+                <th>Deletedat</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for studentParent in studentParents %}
+            <tr>
+                <td><a href="{{ path('studentparent_show', { 'id': studentParent.id }) }}">{{ studentParent.id }}</a></td>
+                <td>{{ studentParent.motherEmail }}</td>
+                <td>{{ studentParent.fatherEmail }}</td>
+                <td>{{ studentParent.motherName }}</td>
+                <td>{{ studentParent.fatherName }}</td>
+                <td>{{ studentParent.motherPhone }}</td>
+                <td>{{ studentParent.fatherPhone }}</td>
+                <td>{% if studentParent.createdAt %}{{ studentParent.createdAt|date('Y-m-d H:i:s') }}{% endif %}</td>
+                <td>{% if studentParent.updatedAt %}{{ studentParent.updatedAt|date('Y-m-d H:i:s') }}{% endif %}</td>
+                <td>{% if studentParent.deletedAt %}{{ studentParent.deletedAt|date('Y-m-d H:i:s') }}{% endif %}</td>
+                <td>
+                    <ul>
+                        <li>
+                            <a href="{{ path('studentparent_show', { 'id': studentParent.id }) }}">show</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('studentparent_edit', { 'id': studentParent.id }) }}">edit</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('studentparent_new') }}">Create a new studentParent</a>
+        </li>
+    </ul>
+{% endblock %}

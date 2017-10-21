@@ -1,0 +1,52 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Presencetype</h1>
+
+    <table>
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ presenceType.id }}</td>
+            </tr>
+            <tr>
+                <th>Label</th>
+                <td>{{ presenceType.label }}</td>
+            </tr>
+            <tr>
+                <th>Description</th>
+                <td>{{ presenceType.description }}</td>
+            </tr>
+            <tr>
+                <th>Countasabsence</th>
+                <td>{% if presenceType.countAsAbsence %}Yes{% else %}No{% endif %}</td>
+            </tr>
+            <tr>
+                <th>Createdat</th>
+                <td>{% if presenceType.createdAt %}{{ presenceType.createdAt|date('Y-m-d H:i:s') }}{% endif %}</td>
+            </tr>
+            <tr>
+                <th>Updatedat</th>
+                <td>{% if presenceType.updatedAt %}{{ presenceType.updatedAt|date('Y-m-d H:i:s') }}{% endif %}</td>
+            </tr>
+            <tr>
+                <th>Deletedat</th>
+                <td>{% if presenceType.deletedAt %}{{ presenceType.deletedAt|date('Y-m-d H:i:s') }}{% endif %}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('presencetype_index') }}">Back to the list</a>
+        </li>
+        <li>
+            <a href="{{ path('presencetype_edit', { 'id': presenceType.id }) }}">Edit</a>
+        </li>
+        <li>
+            {{ form_start(delete_form) }}
+                <input type="submit" value="Delete">
+            {{ form_end(delete_form) }}
+        </li>
+    </ul>
+{% endblock %}

@@ -1,0 +1,44 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Replecement</h1>
+
+    <table>
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ replecement.id }}</td>
+            </tr>
+            <tr>
+                <th>Description</th>
+                <td>{{ replecement.description }}</td>
+            </tr>
+            <tr>
+                <th>Createdat</th>
+                <td>{% if replecement.createdAt %}{{ replecement.createdAt|date('Y-m-d H:i:s') }}{% endif %}</td>
+            </tr>
+            <tr>
+                <th>Updatedat</th>
+                <td>{% if replecement.updatedAt %}{{ replecement.updatedAt|date('Y-m-d H:i:s') }}{% endif %}</td>
+            </tr>
+            <tr>
+                <th>Deletedat</th>
+                <td>{% if replecement.deletedAt %}{{ replecement.deletedAt|date('Y-m-d H:i:s') }}{% endif %}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('replecement_index') }}">Back to the list</a>
+        </li>
+        <li>
+            <a href="{{ path('replecement_edit', { 'id': replecement.id }) }}">Edit</a>
+        </li>
+        <li>
+            {{ form_start(delete_form) }}
+                <input type="submit" value="Delete">
+            {{ form_end(delete_form) }}
+        </li>
+    </ul>
+{% endblock %}

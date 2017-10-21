@@ -1,0 +1,48 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Schoolclass</h1>
+
+    <table>
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ schoolClass.id }}</td>
+            </tr>
+            <tr>
+                <th>Letter</th>
+                <td>{{ schoolClass.letter }}</td>
+            </tr>
+            <tr>
+                <th>Number</th>
+                <td>{{ schoolClass.number }}</td>
+            </tr>
+            <tr>
+                <th>Createdat</th>
+                <td>{% if schoolClass.createdAt %}{{ schoolClass.createdAt|date('Y-m-d H:i:s') }}{% endif %}</td>
+            </tr>
+            <tr>
+                <th>Updatedat</th>
+                <td>{% if schoolClass.updatedAt %}{{ schoolClass.updatedAt|date('Y-m-d H:i:s') }}{% endif %}</td>
+            </tr>
+            <tr>
+                <th>Deletedat</th>
+                <td>{% if schoolClass.deletedAt %}{{ schoolClass.deletedAt|date('Y-m-d H:i:s') }}{% endif %}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('schoolclass_index') }}">Back to the list</a>
+        </li>
+        <li>
+            <a href="{{ path('schoolclass_edit', { 'id': schoolClass.id }) }}">Edit</a>
+        </li>
+        <li>
+            {{ form_start(delete_form) }}
+                <input type="submit" value="Delete">
+            {{ form_end(delete_form) }}
+        </li>
+    </ul>
+{% endblock %}

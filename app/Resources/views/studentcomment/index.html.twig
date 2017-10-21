@@ -1,0 +1,45 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Studentcomments list</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Value</th>
+                <th>Createdat</th>
+                <th>Updatedat</th>
+                <th>Deletedat</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for studentComment in studentComments %}
+            <tr>
+                <td><a href="{{ path('studentcomment_show', { 'id': studentComment.id }) }}">{{ studentComment.id }}</a></td>
+                <td>{{ studentComment.value }}</td>
+                <td>{% if studentComment.createdAt %}{{ studentComment.createdAt|date('Y-m-d H:i:s') }}{% endif %}</td>
+                <td>{% if studentComment.updatedAt %}{{ studentComment.updatedAt|date('Y-m-d H:i:s') }}{% endif %}</td>
+                <td>{% if studentComment.deletedAt %}{{ studentComment.deletedAt|date('Y-m-d H:i:s') }}{% endif %}</td>
+                <td>
+                    <ul>
+                        <li>
+                            <a href="{{ path('studentcomment_show', { 'id': studentComment.id }) }}">show</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('studentcomment_edit', { 'id': studentComment.id }) }}">edit</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('studentcomment_new') }}">Create a new studentComment</a>
+        </li>
+    </ul>
+{% endblock %}
