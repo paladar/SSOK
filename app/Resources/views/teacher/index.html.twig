@@ -1,51 +1,43 @@
-{% extends 'base.html.twig' %}
+{% extends 'default/index.html.twig' %}
 
-{% block body %}
-    <h1>Teachers list</h1>
-
-    <table>
+{% block content %}
+    <h1>Lista nauczycieli</h1>
+    <ul>
+        <li>
+            <a href="{{ path('teacher_new') }}">Dodaj nauczyciela</a>
+        </li>
+    </ul>
+    <table class="datatable">
         <thead>
             <tr>
                 <th>Id</th>
+                <th>Imię</th>
+                <th>Nazwisko</th>
                 <th>Email</th>
-                <th>Firstname</th>
-                <th>Surname</th>
-                <th>Phone</th>
-                <th>Createdat</th>
-                <th>Updatedat</th>
-                <th>Deletedat</th>
-                <th>Actions</th>
+                <th>Telefon</th>
+                <th>Akcje</th>
             </tr>
         </thead>
         <tbody>
-        {% for teacher in teachers %}
-            <tr>
-                <td><a href="{{ path('teacher_show', { 'id': teacher.id }) }}">{{ teacher.id }}</a></td>
-                <td>{{ teacher.email }}</td>
-                <td>{{ teacher.firstName }}</td>
-                <td>{{ teacher.surname }}</td>
-                <td>{{ teacher.phone }}</td>
-                <td>{% if teacher.createdAt %}{{ teacher.createdAt|date('Y-m-d H:i:s') }}{% endif %}</td>
-                <td>{% if teacher.updatedAt %}{{ teacher.updatedAt|date('Y-m-d H:i:s') }}{% endif %}</td>
-                <td>{% if teacher.deletedAt %}{{ teacher.deletedAt|date('Y-m-d H:i:s') }}{% endif %}</td>
-                <td>
-                    <ul>
-                        <li>
-                            <a href="{{ path('teacher_show', { 'id': teacher.id }) }}">show</a>
-                        </li>
-                        <li>
-                            <a href="{{ path('teacher_edit', { 'id': teacher.id }) }}">edit</a>
-                        </li>
-                    </ul>
-                </td>
-            </tr>
-        {% endfor %}
+            {% for teacher in teachers %}
+                <tr>
+                    <td><a href="{{ path('teacher_show', { 'id': teacher.id }) }}">{{ teacher.id }}</a></td>
+                    <td>{{ teacher.firstName }}</td>
+                    <td>{{ teacher.surname }}</td>
+                    <td>{{ teacher.email }}</td>
+                    <td>{{ teacher.phone }}</td>
+                    <td>
+                        <ul>
+                            <li>
+                                <a href="{{ path('teacher_show', { 'id': teacher.id }) }}">Pokaż</a>
+                            </li>
+                            <li>
+                                <a href="{{ path('teacher_edit', { 'id': teacher.id }) }}">Edytuj</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+            {% endfor %}
         </tbody>
     </table>
-
-    <ul>
-        <li>
-            <a href="{{ path('teacher_new') }}">Create a new teacher</a>
-        </li>
-    </ul>
 {% endblock %}

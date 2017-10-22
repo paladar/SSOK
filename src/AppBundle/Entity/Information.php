@@ -25,6 +25,13 @@ class Information {
     private $id;
 
     /**
+     * @var string $title
+     *
+     * @ORM\Column(name="title", type="string", length=255, nullable=false)
+     */
+    private $title;
+
+    /**
      * @var string $description
      *
      * @ORM\Column(name="description", type="string", length=255, nullable=false)
@@ -54,14 +61,12 @@ class Information {
      */
     protected $deletedAt;
 
-
     /**
      * Get id
      *
      * @return integer
      */
-    public function getId()
-    {
+    public function getId() {
         return $this->id;
     }
 
@@ -72,8 +77,7 @@ class Information {
      *
      * @return Information
      */
-    public function setDescription($description)
-    {
+    public function setDescription($description) {
         $this->description = $description;
 
         return $this;
@@ -84,8 +88,7 @@ class Information {
      *
      * @return string
      */
-    public function getDescription()
-    {
+    public function getDescription() {
         return $this->description;
     }
 
@@ -96,8 +99,7 @@ class Information {
      *
      * @return Information
      */
-    public function setCreatedAt($createdAt)
-    {
+    public function setCreatedAt($createdAt) {
         $this->createdAt = $createdAt;
 
         return $this;
@@ -108,8 +110,7 @@ class Information {
      *
      * @return \DateTime
      */
-    public function getCreatedAt()
-    {
+    public function getCreatedAt() {
         return $this->createdAt;
     }
 
@@ -120,8 +121,7 @@ class Information {
      *
      * @return Information
      */
-    public function setUpdatedAt($updatedAt)
-    {
+    public function setUpdatedAt($updatedAt) {
         $this->updatedAt = $updatedAt;
 
         return $this;
@@ -132,8 +132,7 @@ class Information {
      *
      * @return \DateTime
      */
-    public function getUpdatedAt()
-    {
+    public function getUpdatedAt() {
         return $this->updatedAt;
     }
 
@@ -144,8 +143,7 @@ class Information {
      *
      * @return Information
      */
-    public function setDeletedAt($deletedAt)
-    {
+    public function setDeletedAt($deletedAt) {
         $this->deletedAt = $deletedAt;
 
         return $this;
@@ -156,8 +154,14 @@ class Information {
      *
      * @return \DateTime
      */
-    public function getDeletedAt()
-    {
+    public function getDeletedAt() {
         return $this->deletedAt;
+    }
+    function getTitle() {
+        return $this->title;
+    }
+
+    function setTitle($title) {
+        $this->title = $title;
     }
 }

@@ -13,7 +13,7 @@ class StudentCommentType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->add('value')->add('createdAt')->add('updatedAt')->add('deletedAt')->add('student')->add('teacher');
+        $builder->add('value')->add('student')->add('teacher');
     }
     
     /**

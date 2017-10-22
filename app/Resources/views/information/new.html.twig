@@ -1,16 +1,17 @@
-{% extends 'base.html.twig' %}
+{% extends 'default/index.html.twig' %}
 
-{% block body %}
-    <h1>Information creation</h1>
-
-    {{ form_start(form) }}
-        {{ form_widget(form) }}
-        <input type="submit" value="Create" />
-    {{ form_end(form) }}
-
-    <ul>
-        <li>
-            <a href="{{ path('information_index') }}">Back to the list</a>
-        </li>
-    </ul>
+{% block content %}
+    <div class="row">
+        <h1 class="col-xs-6">Dodawanie aktualności</h1>
+        <div class="col-xs-6"><a class="btn btn-ssok" href="{{ path('information_index') }}">Powrót do listy</a></div>
+        <div class="col-xs-12">
+            {{ form_start(form) }}
+            {% form_theme form 'form/form_theme.html.twig' %}
+            {{ form_widget(form) }}
+        </div>
+        <div class="col-xs-12">
+            <input class="btn btn-ssok" type="submit" value="Dodaj" />
+        </div>
+        {{ form_end(form) }}
+    </div>
 {% endblock %}

@@ -13,7 +13,7 @@ class SchoolClassType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->add('letter')->add('number')->add('createdAt')->add('updatedAt')->add('deletedAt')->add('teacher');
+        $builder->add('number')->add('letter')->add('teacher');
     }
     
     /**

@@ -1,0 +1,17 @@
+{% block form_row %}
+    <div class="form-group row">
+        {{ form_errors(form) }}
+        {{ form_label(form,null,{'label_attr' : {'class' : 'col-md-2 form-label'} }) }}
+        <div class="col-md-10">
+            {{ form_widget(form, { 'attr': {'class': 'col-sm-10 form-control'} }) }}
+        </div>
+    </div>
+{% endblock form_row %}
+
+{% block textarea_widget %}
+{% spaceless %}
+    <div class="textarea_widget">
+        <textarea class="ckeditor-textarea" {{ block('widget_attributes') }}>{{ value }}</textarea>
+    </div>
+{% endspaceless %}
+{% endblock textarea_widget %}

@@ -25,6 +25,13 @@ class Subject {
     private $id;
 
     /**
+     * @var string $title
+     *
+     * @ORM\Column(name="title", type="string", length=255, nullable=false)
+     */
+    private $title;
+
+    /**
      * @var ArrayCollection|Teacher[] $teachers
      *
      * @ORM\ManyToMany(targetEntity="Teacher", inversedBy="subject")
@@ -83,14 +90,12 @@ class Subject {
         $this->lessons = new \Doctrine\Common\Collections\ArrayCollection();
     }
 
-
     /**
      * Get id
      *
      * @return integer
      */
-    public function getId()
-    {
+    public function getId() {
         return $this->id;
     }
 
@@ -101,8 +106,7 @@ class Subject {
      *
      * @return Subject
      */
-    public function setCreatedAt($createdAt)
-    {
+    public function setCreatedAt($createdAt) {
         $this->createdAt = $createdAt;
 
         return $this;
@@ -113,8 +117,7 @@ class Subject {
      *
      * @return \DateTime
      */
-    public function getCreatedAt()
-    {
+    public function getCreatedAt() {
         return $this->createdAt;
     }
 
@@ -125,8 +128,7 @@ class Subject {
      *
      * @return Subject
      */
-    public function setUpdatedAt($updatedAt)
-    {
+    public function setUpdatedAt($updatedAt) {
         $this->updatedAt = $updatedAt;
 
         return $this;
@@ -137,8 +139,7 @@ class Subject {
      *
      * @return \DateTime
      */
-    public function getUpdatedAt()
-    {
+    public function getUpdatedAt() {
         return $this->updatedAt;
     }
 
@@ -149,8 +150,7 @@ class Subject {
      *
      * @return Subject
      */
-    public function setDeletedAt($deletedAt)
-    {
+    public function setDeletedAt($deletedAt) {
         $this->deletedAt = $deletedAt;
 
         return $this;
@@ -161,8 +161,7 @@ class Subject {
      *
      * @return \DateTime
      */
-    public function getDeletedAt()
-    {
+    public function getDeletedAt() {
         return $this->deletedAt;
     }
 
@@ -173,8 +172,7 @@ class Subject {
      *
      * @return Subject
      */
-    public function addTeacher(\AppBundle\Entity\Teacher $teacher)
-    {
+    public function addTeacher(\AppBundle\Entity\Teacher $teacher) {
         $this->teachers[] = $teacher;
 
         return $this;
@@ -185,8 +183,7 @@ class Subject {
      *
      * @param \AppBundle\Entity\Teacher $teacher
      */
-    public function removeTeacher(\AppBundle\Entity\Teacher $teacher)
-    {
+    public function removeTeacher(\AppBundle\Entity\Teacher $teacher) {
         $this->teachers->removeElement($teacher);
     }
 
@@ -195,8 +192,7 @@ class Subject {
      *
      * @return \Doctrine\Common\Collections\Collection
      */
-    public function getTeachers()
-    {
+    public function getTeachers() {
         return $this->teachers;
     }
 
@@ -207,8 +203,7 @@ class Subject {
      *
      * @return Subject
      */
-    public function addLesson(\AppBundle\Entity\Lesson $lesson)
-    {
+    public function addLesson(\AppBundle\Entity\Lesson $lesson) {
         $this->lessons[] = $lesson;
 
         return $this;
@@ -219,8 +214,7 @@ class Subject {
      *
      * @param \AppBundle\Entity\Lesson $lesson
      */
-    public function removeLesson(\AppBundle\Entity\Lesson $lesson)
-    {
+    public function removeLesson(\AppBundle\Entity\Lesson $lesson) {
         $this->lessons->removeElement($lesson);
     }
 
@@ -229,8 +223,7 @@ class Subject {
      *
      * @return \Doctrine\Common\Collections\Collection
      */
-    public function getLessons()
-    {
+    public function getLessons() {
         return $this->lessons;
     }
 
@@ -241,8 +234,7 @@ class Subject {
      *
      * @return Subject
      */
-    public function addGrade(\AppBundle\Entity\Grade $grade)
-    {
+    public function addGrade(\AppBundle\Entity\Grade $grade) {
         $this->grades[] = $grade;
 
         return $this;
@@ -253,8 +245,7 @@ class Subject {
      *
      * @param \AppBundle\Entity\Grade $grade
      */
-    public function removeGrade(\AppBundle\Entity\Grade $grade)
-    {
+    public function removeGrade(\AppBundle\Entity\Grade $grade) {
         $this->grades->removeElement($grade);
     }
 
@@ -263,8 +254,17 @@ class Subject {
      *
      * @return \Doctrine\Common\Collections\Collection
      */
-    public function getGrades()
-    {
+    public function getGrades() {
         return $this->grades;
     }
+    function getTitle() {
+        return $this->title;
+    }
+
+    function setTitle($title) {
+        $this->title = $title;
+    }
+
+
+
 }

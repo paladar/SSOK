@@ -1,49 +1,42 @@
-{% extends 'base.html.twig' %}
+{% extends 'default/index.html.twig' %}
 
-{% block body %}
-    <h1>Presencetypes list</h1>
+{% block content %}
+    <h1>Lista typów obecności</h1>
+    <ul>
+        <li>
+            <a href="{{ path('presencetype_new') }}">Dodaj typ obecności</a>
+        </li>
+    </ul>
 
-    <table>
+    <table class="datatable">
         <thead>
             <tr>
                 <th>Id</th>
-                <th>Label</th>
-                <th>Description</th>
-                <th>Countasabsence</th>
-                <th>Createdat</th>
-                <th>Updatedat</th>
-                <th>Deletedat</th>
-                <th>Actions</th>
+                <th>Skrót</th>
+                <th>Opis</th>
+                <th>Czy liczony jako nieobecny?</th>
+                <th>Akcje</th>
             </tr>
         </thead>
         <tbody>
-        {% for presenceType in presenceTypes %}
-            <tr>
-                <td><a href="{{ path('presencetype_show', { 'id': presenceType.id }) }}">{{ presenceType.id }}</a></td>
-                <td>{{ presenceType.label }}</td>
-                <td>{{ presenceType.description }}</td>
-                <td>{% if presenceType.countAsAbsence %}Yes{% else %}No{% endif %}</td>
-                <td>{% if presenceType.createdAt %}{{ presenceType.createdAt|date('Y-m-d H:i:s') }}{% endif %}</td>
-                <td>{% if presenceType.updatedAt %}{{ presenceType.updatedAt|date('Y-m-d H:i:s') }}{% endif %}</td>
-                <td>{% if presenceType.deletedAt %}{{ presenceType.deletedAt|date('Y-m-d H:i:s') }}{% endif %}</td>
-                <td>
-                    <ul>
-                        <li>
-                            <a href="{{ path('presencetype_show', { 'id': presenceType.id }) }}">show</a>
-                        </li>
-                        <li>
-                            <a href="{{ path('presencetype_edit', { 'id': presenceType.id }) }}">edit</a>
-                        </li>
-                    </ul>
-                </td>
-            </tr>
-        {% endfor %}
+            {% for presenceType in presenceTypes %}
+                <tr>
+                    <td><a href="{{ path('presencetype_show', { 'id': presenceType.id }) }}">{{ presenceType.id }}</a></td>
+                    <td>{{ presenceType.label }}</td>
+                    <td>{{ presenceType.description }}</td>
+                    <td>{% if presenceType.countAsAbsence %}Tak{% else %}Nie{% endif %}</td>
+                    <td>
+                        <ul>
+                            <li>
+                                <a href="{{ path('presencetype_show', { 'id': presenceType.id }) }}">Pokaż</a>
+                            </li>
+                            <li>
+                                <a href="{{ path('presencetype_edit', { 'id': presenceType.id }) }}">Edytuj</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+            {% endfor %}
         </tbody>
     </table>
-
-    <ul>
-        <li>
-            <a href="{{ path('presencetype_new') }}">Create a new presenceType</a>
-        </li>
-    </ul>
 {% endblock %}

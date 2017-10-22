@@ -5,9 +5,8 @@
         <div class="wrapper" style="height: auto; min-height: 100%;">
 
             <header class="main-header">
-
-                <a href="index2.html" class="logo">
-                    <span class="logo-lg"><b>SSOK</b></span>
+                <a href="/" class="logo">
+                    <span class="logo-lg"><img src="{{ asset('images/ssok.png') }}"></span>
                 </a>
 
                 <nav class="navbar navbar-static-top">
@@ -19,7 +18,7 @@
                 <section class="sidebar" style="height: auto;">
                     {% if is_granted('ROLE_ADMIN') %}
                         {% include 'default/Menus/admin.html.twig' %}
-                    {% else if is_granted('ROLE_TEACHER')
+                    {% elseif is_granted('ROLE_TEACHER') %}
                         {% include 'default/Menus/teacher.html.twig' %}
                     {% else %}
                         {% include 'default/Menus/student.html.twig' %}

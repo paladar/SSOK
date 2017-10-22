@@ -13,7 +13,7 @@ class GradeType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->add('value')->add('createdAt')->add('updatedAt')->add('deletedAt')->add('student')->add('lesson');
+        $builder->add('value')->add('student')->add('lesson');
     }
     
     /**

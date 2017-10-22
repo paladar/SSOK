@@ -1,47 +1,40 @@
-{% extends 'base.html.twig' %}
+{% extends 'default/index.html.twig' %}
 
-{% block body %}
-    <h1>Schoolclasses list</h1>
+{% block content %}
+    <h1>Lista Klas</h1>
+    <ul>
+        <li>
+            <a href="{{ path('schoolclass_new') }}">Dodaj klasę</a>
+        </li>
+    </ul>
 
-    <table>
+    <table class="datatable">
         <thead>
             <tr>
                 <th>Id</th>
-                <th>Letter</th>
-                <th>Number</th>
-                <th>Createdat</th>
-                <th>Updatedat</th>
-                <th>Deletedat</th>
-                <th>Actions</th>
+                <th>Klasa</th>
+                <th>Wychowawca</th>
+                <th>Akcje</th>
             </tr>
         </thead>
         <tbody>
-        {% for schoolClass in schoolClasses %}
-            <tr>
-                <td><a href="{{ path('schoolclass_show', { 'id': schoolClass.id }) }}">{{ schoolClass.id }}</a></td>
-                <td>{{ schoolClass.letter }}</td>
-                <td>{{ schoolClass.number }}</td>
-                <td>{% if schoolClass.createdAt %}{{ schoolClass.createdAt|date('Y-m-d H:i:s') }}{% endif %}</td>
-                <td>{% if schoolClass.updatedAt %}{{ schoolClass.updatedAt|date('Y-m-d H:i:s') }}{% endif %}</td>
-                <td>{% if schoolClass.deletedAt %}{{ schoolClass.deletedAt|date('Y-m-d H:i:s') }}{% endif %}</td>
-                <td>
-                    <ul>
-                        <li>
-                            <a href="{{ path('schoolclass_show', { 'id': schoolClass.id }) }}">show</a>
-                        </li>
-                        <li>
-                            <a href="{{ path('schoolclass_edit', { 'id': schoolClass.id }) }}">edit</a>
-                        </li>
-                    </ul>
-                </td>
-            </tr>
-        {% endfor %}
+            {% for schoolClass in schoolClasses %}
+                <tr>
+                    <td><a href="{{ path('schoolclass_show', { 'id': schoolClass.id }) }}">{{ schoolClass.id }}</a></td>
+                    <td>{{ schoolClass.number }}{{ schoolClass.letter }}</td>
+                    <td>{#{{ schoolClass.teacher.firstname }} {{ schoolClass.teacher.surname }}#}</td>
+                    <td>
+                        <ul>
+                            <li>
+                                <a href="{{ path('schoolclass_show', { 'id': schoolClass.id }) }}">Pokaż</a>
+                            </li>
+                            <li>
+                                <a href="{{ path('schoolclass_edit', { 'id': schoolClass.id }) }}">Edytuj</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+            {% endfor %}
         </tbody>
     </table>
-
-    <ul>
-        <li>
-            <a href="{{ path('schoolclass_new') }}">Create a new schoolClass</a>
-        </li>
-    </ul>
 {% endblock %}

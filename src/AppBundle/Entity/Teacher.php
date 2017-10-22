@@ -364,13 +364,13 @@ class Teacher {
     /**
      * Set class
      *
-     * @param \AppBundle\Entity\SchoolClass $class
+     * @param \AppBundle\Entity\SchoolClass $schoolClass
      *
      * @return Teacher
      */
-    public function setClass(\AppBundle\Entity\SchoolClass $class = null)
+    public function setClass(\AppBundle\Entity\SchoolClass $schoolClass = null)
     {
-        $this->class = $class;
+        $this->class = $schoolClass;
 
         return $this;
     }

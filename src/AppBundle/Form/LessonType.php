@@ -13,7 +13,7 @@ class LessonType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->add('start')->add('createdAt')->add('updatedAt')->add('deletedAt')->add('subject')->add('teacher');
+        $builder->add('start')->add('subject')->add('teacher');
     }
     
     /**

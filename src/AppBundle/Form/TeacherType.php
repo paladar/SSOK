@@ -13,7 +13,7 @@ class TeacherType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->add('email')->add('firstName')->add('surname')->add('phone')->add('createdAt')->add('updatedAt')->add('deletedAt')->add('user')->add('subjects')->add('class');
+        $builder->add('email')->add('firstName')->add('surname')->add('phone')->add('user')->add('subjects')->add('class');
     }
     
     /**

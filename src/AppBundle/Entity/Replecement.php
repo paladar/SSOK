@@ -38,6 +38,13 @@ class Replecement {
      * @ORM\Column(name="description", type="string", length=255, nullable=false)
      */
     private $description;
+    
+    /**
+     * @var \Datetime $date
+     *
+     * @ORM\Column(name="date", type="date")
+     */
+    protected $date;
 
     /**
      * @var \Datetime $createdAt
@@ -192,4 +199,14 @@ class Replecement {
     {
         return $this->class;
     }
+    function getDate() {
+        return $this->date;
+    }
+
+    function setDate(\Datetime $date) {
+        $this->date = $date;
+    }
+
+
 }
+

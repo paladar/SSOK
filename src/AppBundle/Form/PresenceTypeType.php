@@ -13,7 +13,7 @@ class PresenceTypeType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->add('label')->add('description')->add('countAsAbsence')->add('createdAt')->add('updatedAt')->add('deletedAt');
+        $builder->add('label')->add('description')->add('countAsAbsence');
     }
     
     /**

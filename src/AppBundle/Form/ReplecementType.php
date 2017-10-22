@@ -13,7 +13,8 @@ class ReplecementType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->add('description')->add('createdAt')->add('updatedAt')->add('deletedAt')->add('class');
+        $builder->add('description')
+                ->add('class');
     }
     
     /**

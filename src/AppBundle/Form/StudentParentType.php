@@ -13,7 +13,7 @@ class StudentParentType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->add('motherEmail')->add('fatherEmail')->add('motherName')->add('fatherName')->add('motherPhone')->add('fatherPhone')->add('createdAt')->add('updatedAt')->add('deletedAt')->add('user')->add('student');
+        $builder->add('motherEmail')->add('fatherEmail')->add('motherName')->add('fatherName')->add('motherPhone')->add('fatherPhone')->add('user')->add('student');
     }
     
     /**

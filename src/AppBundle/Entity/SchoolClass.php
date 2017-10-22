@@ -43,7 +43,7 @@ class SchoolClass {
     /**
      * @var ArrayCollection|Replecement[] $replecements
      *
-     * @ORM\OneToMany(targetEntity="Replecement", mappedBy="schoolClass", cascade={"all"}, orphanRemoval=true)
+     * @ORM\OneToMany(targetEntity="Replecement", mappedBy="class", cascade={"all"}, orphanRemoval=true)
      * @ORM\OrderBy({"id"="ASC"})
      */
     protected $replecements;
@@ -51,7 +51,7 @@ class SchoolClass {
     /**
      * @var Teacher $teacher
      *
-     * @ORM\OneToOne(targetEntity="AppBundle\Entity\Teacher", cascade={"persist"}, mappedBy="schoolClass")
+     * @ORM\OneToOne(targetEntity="AppBundle\Entity\Teacher", cascade={"persist"}, mappedBy="class")
      */
     protected $teacher;
 
@@ -101,14 +101,16 @@ class SchoolClass {
         $this->replecements = new \Doctrine\Common\Collections\ArrayCollection();
     }
 
+    public function __toString() {
+        return $this->getNumber() . ' ' . $this->getLetter();
+    }
 
     /**
      * Get id
      *
      * @return integer
      */
-    public function getId()
-    {
+    public function getId() {
         return $this->id;
     }
 
@@ -119,8 +121,7 @@ class SchoolClass {
      *
      * @return SchoolClass
      */
-    public function setLetter($letter)
-    {
+    public function setLetter($letter) {
         $this->letter = $letter;
 
         return $this;
@@ -131,8 +132,7 @@ class SchoolClass {
      *
      * @return string
      */
-    public function getLetter()
-    {
+    public function getLetter() {
         return $this->letter;
     }
 
@@ -143,8 +143,7 @@ class SchoolClass {
      *
      * @return SchoolClass
      */
-    public function setNumber($number)
-    {
+    public function setNumber($number) {
         $this->number = $number;
 
         return $this;
@@ -155,8 +154,7 @@ class SchoolClass {
      *
      * @return string
      */
-    public function getNumber()
-    {
+    public function getNumber() {
         return $this->number;
     }
 
@@ -167,8 +165,7 @@ class SchoolClass {
      *
      * @return SchoolClass
      */
-    public function setCreatedAt($createdAt)
-    {
+    public function setCreatedAt($createdAt) {
         $this->createdAt = $createdAt;
 
         return $this;
@@ -179,8 +176,7 @@ class SchoolClass {
      *
      * @return \DateTime
      */
-    public function getCreatedAt()
-    {
+    public function getCreatedAt() {
         return $this->createdAt;
     }
 
@@ -191,8 +187,7 @@ class SchoolClass {
      *
      * @return SchoolClass
      */
-    public function setUpdatedAt($updatedAt)
-    {
+    public function setUpdatedAt($updatedAt) {
         $this->updatedAt = $updatedAt;
 
         return $this;
@@ -203,8 +198,7 @@ class SchoolClass {
      *
      * @return \DateTime
      */
-    public function getUpdatedAt()
-    {
+    public function getUpdatedAt() {
         return $this->updatedAt;
     }
 
@@ -215,8 +209,7 @@ class SchoolClass {
      *
      * @return SchoolClass
      */
-    public function setDeletedAt($deletedAt)
-    {
+    public function setDeletedAt($deletedAt) {
         $this->deletedAt = $deletedAt;
 
         return $this;
@@ -227,8 +220,7 @@ class SchoolClass {
      *
      * @return \DateTime
      */
-    public function getDeletedAt()
-    {
+    public function getDeletedAt() {
         return $this->deletedAt;
     }
 
@@ -239,8 +231,7 @@ class SchoolClass {
      *
      * @return SchoolClass
      */
-    public function addStudent(\AppBundle\Entity\Student $student)
-    {
+    public function addStudent(\AppBundle\Entity\Student $student) {
         $this->students[] = $student;
 
         return $this;
@@ -251,8 +242,7 @@ class SchoolClass {
      *
      * @param \AppBundle\Entity\Student $student
      */
-    public function removeStudent(\AppBundle\Entity\Student $student)
-    {
+    public function removeStudent(\AppBundle\Entity\Student $student) {
         $this->students->removeElement($student);
     }
 
@@ -261,8 +251,7 @@ class SchoolClass {
      *
      * @return \Doctrine\Common\Collections\Collection
      */
-    public function getStudents()
-    {
+    public function getStudents() {
         return $this->students;
     }
 
@@ -273,8 +262,7 @@ class SchoolClass {
      *
      * @return SchoolClass
      */
-    public function addLesson(\AppBundle\Entity\Lesson $lesson)
-    {
+    public function addLesson(\AppBundle\Entity\Lesson $lesson) {
         $this->lessons[] = $lesson;
 
         return $this;
@@ -285,8 +273,7 @@ class SchoolClass {
      *
      * @param \AppBundle\Entity\Lesson $lesson
      */
-    public function removeLesson(\AppBundle\Entity\Lesson $lesson)
-    {
+    public function removeLesson(\AppBundle\Entity\Lesson $lesson) {
         $this->lessons->removeElement($lesson);
     }
 
@@ -295,8 +282,7 @@ class SchoolClass {
      *
      * @return \Doctrine\Common\Collections\Collection
      */
-    public function getLessons()
-    {
+    public function getLessons() {
         return $this->lessons;
     }
 
@@ -307,8 +293,7 @@ class SchoolClass {
      *
      * @return SchoolClass
      */
-    public function addReplecement(\AppBundle\Entity\Replecement $replecement)
-    {
+    public function addReplecement(\AppBundle\Entity\Replecement $replecement) {
         $this->replecements[] = $replecement;
 
         return $this;
@@ -319,8 +304,7 @@ class SchoolClass {
      *
      * @param \AppBundle\Entity\Replecement $replecement
      */
-    public function removeReplecement(\AppBundle\Entity\Replecement $replecement)
-    {
+    public function removeReplecement(\AppBundle\Entity\Replecement $replecement) {
         $this->replecements->removeElement($replecement);
     }
 
@@ -329,8 +313,7 @@ class SchoolClass {
      *
      * @return \Doctrine\Common\Collections\Collection
      */
-    public function getReplecements()
-    {
+    public function getReplecements() {
         return $this->replecements;
     }
 
@@ -341,8 +324,7 @@ class SchoolClass {
      *
      * @return SchoolClass
      */
-    public function setTeacher(\AppBundle\Entity\Teacher $teacher = null)
-    {
+    public function setTeacher(\AppBundle\Entity\Teacher $teacher = null) {
         $this->teacher = $teacher;
 
         return $this;
@@ -353,8 +335,8 @@ class SchoolClass {
      *
      * @return \AppBundle\Entity\Teacher
      */
-    public function getTeacher()
-    {
+    public function getTeacher() {
         return $this->teacher;
     }
+
 }
