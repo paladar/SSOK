@@ -3,31 +3,32 @@
 namespace AppBundle\Controller;
 
 use AppBundle\Entity\Student;
+use AppBundle\Entity\User;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;use Symfony\Component\HttpFoundation\Request;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Symfony\Component\HttpFoundation\Request;
 
 /**
  * Student controller.
  *
  * @Route("student")
  */
-class StudentController extends Controller
-{
+class StudentController extends Controller {
+
     /**
      * Lists all student entities.
      *
      * @Route("/", name="student_index")
      * @Method("GET")
      */
-    public function indexAction()
-    {
+    public function indexAction() {
         $em = $this->getDoctrine()->getManager();
 
         $students = $em->getRepository('AppBundle:Student')->findAll();
 
         return $this->render('student/index.html.twig', array(
-            'students' => $students,
+                    'students' => $students,
         ));
     }
 
@@ -37,11 +38,56 @@ class StudentController extends Controller
      * @Route("/new", name="student_new")
      * @Method({"GET", "POST"})
      */
-    public function newAction(Request $request)
-    {
+    public function newAction(Request $request) {
+        $em = $this->getDoctrine()->getManager();
+
         $student = new Student();
+        $user = new User();
+        $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+        $charactersLength = strlen($characters);
+        $username = strtolower($request->get('appbundle_student')['firstName']) . strtolower($request->get('appbundle_student')['surname']);
+
+        $i = 1;
+        do {
+            $check = $em->getRepository('AppBundle:User')->findOneByUsername($username);
+            $username = $username . $i;
+            $i++;
+        } while ($check != '');
+
+
+        $randomString = '';
+        for ($i = 0; $i < 12; $i++) {
+            $randomString .= $characters[rand(0, $charactersLength - 1)];
+        }
+
+        $user->setUsername($username);
+        $user->setPassword($randomString);
+        if ($request->request->get('appbundle_student')['email'] != '') {
+            $user->setEmail($request->request->get('appbundle_student')['email']);
+        } else {
+            $user->setEmail($username);
+        }
+
+        $student->setUser($user);
+        $user->setStudent($student);
         $form = $this->createForm('AppBundle\Form\StudentType', $student);
         $form->handleRequest($request);
+
+        $parent = $student->getStudentParent();
+        $parentUser = new User();
+        $parentUser->setUsername('rodzic.' . $username);
+        $randomString = '';
+        for ($i = 0; $i < 12; $i++) {
+            $randomString .= $characters[rand(0, $charactersLength - 1)];
+        }
+        $parentUser->setPassword($randomString);
+        if ($request->request->get('appbundle_student')['studentParent']['Email'] != '') {
+            $parentUser->setEmail($request->request->get('appbundle_student')['studentParent']['Email']);
+        } else {
+            $parentUser->setEmail('rodzic.' . $username);
+        }
+        $parent->setUser($parentUser);
+        $parentUser->setStudentParent($parent);
 
         if ($form->isSubmitted() && $form->isValid()) {
             $em = $this->getDoctrine()->getManager();
@@ -52,8 +98,8 @@ class StudentController extends Controller
         }
 
         return $this->render('student/new.html.twig', array(
-            'student' => $student,
-            'form' => $form->createView(),
+                    'student' => $student,
+                    'form' => $form->createView(),
         ));
     }
 
@@ -63,13 +109,12 @@ class StudentController extends Controller
      * @Route("/{id}", name="student_show")
      * @Method("GET")
      */
-    public function showAction(Student $student)
-    {
+    public function showAction(Student $student) {
         $deleteForm = $this->createDeleteForm($student);
 
         return $this->render('student/show.html.twig', array(
-            'student' => $student,
-            'delete_form' => $deleteForm->createView(),
+                    'student' => $student,
+                    'delete_form' => $deleteForm->createView(),
         ));
     }
 
@@ -79,8 +124,7 @@ class StudentController extends Controller
      * @Route("/{id}/edit", name="student_edit")
      * @Method({"GET", "POST"})
      */
-    public function editAction(Request $request, Student $student)
-    {
+    public function editAction(Request $request, Student $student) {
         $deleteForm = $this->createDeleteForm($student);
         $editForm = $this->createForm('AppBundle\Form\StudentType', $student);
         $editForm->handleRequest($request);
@@ -92,9 +136,9 @@ class StudentController extends Controller
         }
 
         return $this->render('student/edit.html.twig', array(
-            'student' => $student,
-            'edit_form' => $editForm->createView(),
-            'delete_form' => $deleteForm->createView(),
+                    'student' => $student,
+                    'edit_form' => $editForm->createView(),
+                    'delete_form' => $deleteForm->createView(),
         ));
     }
 
@@ -104,8 +148,7 @@ class StudentController extends Controller
      * @Route("/{id}", name="student_delete")
      * @Method("DELETE")
      */
-    public function deleteAction(Request $request, Student $student)
-    {
+    public function deleteAction(Request $request, Student $student) {
         $form = $this->createDeleteForm($student);
         $form->handleRequest($request);
 
@@ -125,12 +168,12 @@ class StudentController extends Controller
      *
      * @return \Symfony\Component\Form\Form The form
      */
-    private function createDeleteForm(Student $student)
-    {
+    private function createDeleteForm(Student $student) {
         return $this->createFormBuilder()
-            ->setAction($this->generateUrl('student_delete', array('id' => $student->getId())))
-            ->setMethod('DELETE')
-            ->getForm()
+                        ->setAction($this->generateUrl('student_delete', array('id' => $student->getId())))
+                        ->setMethod('DELETE')
+                        ->getForm()
         ;
     }
+
 }

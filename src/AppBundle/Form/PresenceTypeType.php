@@ -5,6 +5,7 @@ namespace AppBundle\Form;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 
 class PresenceTypeType extends AbstractType
 {
@@ -13,7 +14,9 @@ class PresenceTypeType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->add('label')->add('description')->add('countAsAbsence');
+        $builder->add('label',null,array('label' => 'Nazwa'))
+                ->add('description',null,array('label' => 'Opis'))
+                ->add('countAsAbsence',ChoiceType::class,array('label' => 'Czy liczona jako nieobecna?','choices' => array('Tak' => 1, 'Nie' => 0)));
     }
     
     /**

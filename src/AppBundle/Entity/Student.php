@@ -68,7 +68,7 @@ class Student {
      * @var SchoolClass $class
      *
      * @ORM\ManyToOne(targetEntity="SchoolClass", inversedBy="students", fetch="EAGER")
-     * @ORM\JoinColumn(name="id_student", referencedColumnName="id", nullable=false)
+     * @ORM\JoinColumn(name="id_class", referencedColumnName="id", nullable=true)
      */
     protected $class;
 
@@ -134,6 +134,7 @@ class Student {
      * Constructor
      */
     public function __construct() {
+        $this->studentParent = new StudentParent();
         $this->grades = new \Doctrine\Common\Collections\ArrayCollection();
         $this->presences = new \Doctrine\Common\Collections\ArrayCollection();
         $this->studentComments = new \Doctrine\Common\Collections\ArrayCollection();

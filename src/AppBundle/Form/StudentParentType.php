@@ -5,6 +5,7 @@ namespace AppBundle\Form;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Form\Extension\Core\Type\EmailType;
 
 class StudentParentType extends AbstractType
 {
@@ -13,7 +14,7 @@ class StudentParentType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->add('motherEmail')->add('fatherEmail')->add('motherName')->add('fatherName')->add('motherPhone')->add('fatherPhone')->add('user')->add('student');
+        $builder->add('Name',null,array('label'=>'Imię','required' => false))->add('Email',EmailType::class,array('label' => 'Email','required' => false))->add('Phone',null,array('label'=>'Telefon','required' => false));
     }
     
     /**

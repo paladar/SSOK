@@ -42,11 +42,10 @@ class Teacher {
     /**
      * @var SchoolClass $class
      *
-     * @ORM\OneToOne(targetEntity="SchoolClass", inversedBy="teacher", fetch="EAGER")
-     * @ORM\JoinColumn(name="id_class", referencedColumnName="id", nullable=true)
+     * @ORM\OneToOne(targetEntity="AppBundle\Entity\SchoolClass", cascade={"persist"}, mappedBy="teacher")
      */
     protected $class;
-    
+
     /**
      * @var ArrayCollection|StudentComment[] $studentComments
      *
@@ -54,7 +53,6 @@ class Teacher {
      * @ORM\OrderBy({"id"="ASC"})
      */
     protected $studentComments;
-    
 
     /**
      * @var ArrayCollection|Lesson[] $lessons
@@ -124,14 +122,16 @@ class Teacher {
         $this->lessons = new \Doctrine\Common\Collections\ArrayCollection();
     }
 
+    public function __toString() {
+        return $this->getFirstName() . ' ' . $this->getSurname();
+    }
 
     /**
      * Get id
      *
      * @return integer
      */
-    public function getId()
-    {
+    public function getId() {
         return $this->id;
     }
 
@@ -142,8 +142,7 @@ class Teacher {
      *
      * @return Teacher
      */
-    public function setEmail($email)
-    {
+    public function setEmail($email) {
         $this->email = $email;
 
         return $this;
@@ -154,8 +153,7 @@ class Teacher {
      *
      * @return string
      */
-    public function getEmail()
-    {
+    public function getEmail() {
         return $this->email;
     }
 
@@ -166,8 +164,7 @@ class Teacher {
      *
      * @return Teacher
      */
-    public function setFirstName($firstName)
-    {
+    public function setFirstName($firstName) {
         $this->firstName = $firstName;
 
         return $this;
@@ -178,8 +175,7 @@ class Teacher {
      *
      * @return string
      */
-    public function getFirstName()
-    {
+    public function getFirstName() {
         return $this->firstName;
     }
 
@@ -190,8 +186,7 @@ class Teacher {
      *
      * @return Teacher
      */
-    public function setSurname($surname)
-    {
+    public function setSurname($surname) {
         $this->surname = $surname;
 
         return $this;
@@ -202,8 +197,7 @@ class Teacher {
      *
      * @return string
      */
-    public function getSurname()
-    {
+    public function getSurname() {
         return $this->surname;
     }
 
@@ -214,8 +208,7 @@ class Teacher {
      *
      * @return Teacher
      */
-    public function setPhone($phone)
-    {
+    public function setPhone($phone) {
         $this->phone = $phone;
 
         return $this;
@@ -226,8 +219,7 @@ class Teacher {
      *
      * @return string
      */
-    public function getPhone()
-    {
+    public function getPhone() {
         return $this->phone;
     }
 
@@ -238,8 +230,7 @@ class Teacher {
      *
      * @return Teacher
      */
-    public function setCreatedAt($createdAt)
-    {
+    public function setCreatedAt($createdAt) {
         $this->createdAt = $createdAt;
 
         return $this;
@@ -250,8 +241,7 @@ class Teacher {
      *
      * @return \DateTime
      */
-    public function getCreatedAt()
-    {
+    public function getCreatedAt() {
         return $this->createdAt;
     }
 
@@ -262,8 +252,7 @@ class Teacher {
      *
      * @return Teacher
      */
-    public function setUpdatedAt($updatedAt)
-    {
+    public function setUpdatedAt($updatedAt) {
         $this->updatedAt = $updatedAt;
 
         return $this;
@@ -274,8 +263,7 @@ class Teacher {
      *
      * @return \DateTime
      */
-    public function getUpdatedAt()
-    {
+    public function getUpdatedAt() {
         return $this->updatedAt;
     }
 
@@ -286,8 +274,7 @@ class Teacher {
      *
      * @return Teacher
      */
-    public function setDeletedAt($deletedAt)
-    {
+    public function setDeletedAt($deletedAt) {
         $this->deletedAt = $deletedAt;
 
         return $this;
@@ -298,8 +285,7 @@ class Teacher {
      *
      * @return \DateTime
      */
-    public function getDeletedAt()
-    {
+    public function getDeletedAt() {
         return $this->deletedAt;
     }
 
@@ -310,8 +296,7 @@ class Teacher {
      *
      * @return Teacher
      */
-    public function setUser(\AppBundle\Entity\User $user = null)
-    {
+    public function setUser(\AppBundle\Entity\User $user = null) {
         $this->user = $user;
 
         return $this;
@@ -322,8 +307,7 @@ class Teacher {
      *
      * @return \AppBundle\Entity\User
      */
-    public function getUser()
-    {
+    public function getUser() {
         return $this->user;
     }
 
@@ -334,8 +318,7 @@ class Teacher {
      *
      * @return Teacher
      */
-    public function addSubject(\AppBundle\Entity\Subject $subject)
-    {
+    public function addSubject(\AppBundle\Entity\Subject $subject) {
         $this->subjects[] = $subject;
 
         return $this;
@@ -346,8 +329,7 @@ class Teacher {
      *
      * @param \AppBundle\Entity\Subject $subject
      */
-    public function removeSubject(\AppBundle\Entity\Subject $subject)
-    {
+    public function removeSubject(\AppBundle\Entity\Subject $subject) {
         $this->subjects->removeElement($subject);
     }
 
@@ -356,8 +338,7 @@ class Teacher {
      *
      * @return \Doctrine\Common\Collections\Collection
      */
-    public function getSubjects()
-    {
+    public function getSubjects() {
         return $this->subjects;
     }
 
@@ -368,8 +349,7 @@ class Teacher {
      *
      * @return Teacher
      */
-    public function setClass(\AppBundle\Entity\SchoolClass $schoolClass = null)
-    {
+    public function setClass(\AppBundle\Entity\SchoolClass $schoolClass = null) {
         $this->class = $schoolClass;
 
         return $this;
@@ -380,8 +360,7 @@ class Teacher {
      *
      * @return \AppBundle\Entity\SchoolClass
      */
-    public function getClass()
-    {
+    public function getClass() {
         return $this->class;
     }
 
@@ -392,8 +371,7 @@ class Teacher {
      *
      * @return Teacher
      */
-    public function addStudentComment(\AppBundle\Entity\StudentComment $studentComment)
-    {
+    public function addStudentComment(\AppBundle\Entity\StudentComment $studentComment) {
         $this->studentComments[] = $studentComment;
 
         return $this;
@@ -404,8 +382,7 @@ class Teacher {
      *
      * @param \AppBundle\Entity\StudentComment $studentComment
      */
-    public function removeStudentComment(\AppBundle\Entity\StudentComment $studentComment)
-    {
+    public function removeStudentComment(\AppBundle\Entity\StudentComment $studentComment) {
         $this->studentComments->removeElement($studentComment);
     }
 
@@ -414,8 +391,7 @@ class Teacher {
      *
      * @return \Doctrine\Common\Collections\Collection
      */
-    public function getStudentComments()
-    {
+    public function getStudentComments() {
         return $this->studentComments;
     }
 
@@ -426,8 +402,7 @@ class Teacher {
      *
      * @return Teacher
      */
-    public function addLesson(\AppBundle\Entity\Lesson $lesson)
-    {
+    public function addLesson(\AppBundle\Entity\Lesson $lesson) {
         $this->lessons[] = $lesson;
 
         return $this;
@@ -438,8 +413,7 @@ class Teacher {
      *
      * @param \AppBundle\Entity\Lesson $lesson
      */
-    public function removeLesson(\AppBundle\Entity\Lesson $lesson)
-    {
+    public function removeLesson(\AppBundle\Entity\Lesson $lesson) {
         $this->lessons->removeElement($lesson);
     }
 
@@ -448,8 +422,8 @@ class Teacher {
      *
      * @return \Doctrine\Common\Collections\Collection
      */
-    public function getLessons()
-    {
+    public function getLessons() {
         return $this->lessons;
     }
+
 }

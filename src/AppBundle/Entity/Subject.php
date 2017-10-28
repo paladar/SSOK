@@ -90,6 +90,10 @@ class Subject {
         $this->lessons = new \Doctrine\Common\Collections\ArrayCollection();
     }
 
+    public function __toString() {
+        return $this->getTitle();
+    }
+
     /**
      * Get id
      *
@@ -257,6 +261,7 @@ class Subject {
     public function getGrades() {
         return $this->grades;
     }
+
     function getTitle() {
         return $this->title;
     }
@@ -264,7 +269,5 @@ class Subject {
     function setTitle($title) {
         $this->title = $title;
     }
-
-
 
 }

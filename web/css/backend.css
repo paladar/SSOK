@@ -67,6 +67,11 @@ h5{
 .form-label{
     font-size: 16px;
 }
+#appbundle_student_studentParent{
+    border: none;
+    background-color: transparent;
+    height: auto;
+}
 
 /* Table */
 .datatable th{

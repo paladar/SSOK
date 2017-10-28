@@ -19,7 +19,7 @@
                         <tr>
                             <td><a href="{{ path('schoolclass_show', { 'id': schoolClass.id }) }}">{{ schoolClass.id }}</a></td>
                             <td>{{ schoolClass.number }}{{ schoolClass.letter }}</td>
-                            <td>{#{{ schoolClass.teacher.firstname }} {{ schoolClass.teacher.surname }}#}</td>
+                            <td>{{ schoolClass.teacher.firstname }} {{ schoolClass.teacher.surname }}</td>
                             <td>
                                 <ul class="actions">
                                     <li>

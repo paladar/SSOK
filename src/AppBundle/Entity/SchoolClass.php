@@ -51,7 +51,8 @@ class SchoolClass {
     /**
      * @var Teacher $teacher
      *
-     * @ORM\OneToOne(targetEntity="AppBundle\Entity\Teacher", cascade={"persist"}, mappedBy="class")
+     * @ORM\OneToOne(targetEntity="Teacher", inversedBy="class", fetch="EAGER")
+     * @ORM\JoinColumn(name="id_teacher", referencedColumnName="id", nullable=true)
      */
     protected $teacher;
 

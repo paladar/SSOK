@@ -3,31 +3,32 @@
 namespace AppBundle\Controller;
 
 use AppBundle\Entity\Teacher;
+use AppBundle\Entity\User;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;use Symfony\Component\HttpFoundation\Request;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Symfony\Component\HttpFoundation\Request;
 
 /**
  * Teacher controller.
  *
  * @Route("teacher")
  */
-class TeacherController extends Controller
-{
+class TeacherController extends Controller {
+
     /**
      * Lists all teacher entities.
      *
      * @Route("/", name="teacher_index")
      * @Method("GET")
      */
-    public function indexAction()
-    {
+    public function indexAction() {
         $em = $this->getDoctrine()->getManager();
 
         $teachers = $em->getRepository('AppBundle:Teacher')->findAll();
 
         return $this->render('teacher/index.html.twig', array(
-            'teachers' => $teachers,
+                    'teachers' => $teachers,
         ));
     }
 
@@ -37,9 +38,37 @@ class TeacherController extends Controller
      * @Route("/new", name="teacher_new")
      * @Method({"GET", "POST"})
      */
-    public function newAction(Request $request)
-    {
+    public function newAction(Request $request) {
+        $em = $this->getDoctrine()->getManager();
+
         $teacher = new Teacher();
+        $user = new User();
+        $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+        $charactersLength = strlen($characters);
+        $username = 'nauczyciel.' . strtolower($request->get('appbundle_teacher')['firstName']) . strtolower($request->get('appbundle_teacher')['surname']);
+
+        $i = 1;
+        do {
+            $check = $em->getRepository('AppBundle:User')->findOneByUsername($username);
+            $username = $username . $i;
+            $i++;
+        } while ($check != '');
+
+
+        $randomString = '';
+        for ($i = 0; $i < 12; $i++) {
+            $randomString .= $characters[rand(0, $charactersLength - 1)];
+        }
+
+        $user->setUsername($username);
+        $user->setPassword($randomString);
+        if ($request->request->get('appbundle_teacher')['email'] != '') {
+            $user->setEmail($request->request->get('appbundle_student')['email']);
+        } else {
+            $user->setEmail($username);
+        }
+
+        $teacher->setUser($user);
         $form = $this->createForm('AppBundle\Form\TeacherType', $teacher);
         $form->handleRequest($request);
 
@@ -52,8 +81,8 @@ class TeacherController extends Controller
         }
 
         return $this->render('teacher/new.html.twig', array(
-            'teacher' => $teacher,
-            'form' => $form->createView(),
+                    'teacher' => $teacher,
+                    'form' => $form->createView(),
         ));
     }
 
@@ -63,13 +92,12 @@ class TeacherController extends Controller
      * @Route("/{id}", name="teacher_show")
      * @Method("GET")
      */
-    public function showAction(Teacher $teacher)
-    {
+    public function showAction(Teacher $teacher) {
         $deleteForm = $this->createDeleteForm($teacher);
 
         return $this->render('teacher/show.html.twig', array(
-            'teacher' => $teacher,
-            'delete_form' => $deleteForm->createView(),
+                    'teacher' => $teacher,
+                    'delete_form' => $deleteForm->createView(),
         ));
     }
 
@@ -79,8 +107,7 @@ class TeacherController extends Controller
      * @Route("/{id}/edit", name="teacher_edit")
      * @Method({"GET", "POST"})
      */
-    public function editAction(Request $request, Teacher $teacher)
-    {
+    public function editAction(Request $request, Teacher $teacher) {
         $deleteForm = $this->createDeleteForm($teacher);
         $editForm = $this->createForm('AppBundle\Form\TeacherType', $teacher);
         $editForm->handleRequest($request);
@@ -92,9 +119,9 @@ class TeacherController extends Controller
         }
 
         return $this->render('teacher/edit.html.twig', array(
-            'teacher' => $teacher,
-            'edit_form' => $editForm->createView(),
-            'delete_form' => $deleteForm->createView(),
+                    'teacher' => $teacher,
+                    'edit_form' => $editForm->createView(),
+                    'delete_form' => $deleteForm->createView(),
         ));
     }
 
@@ -104,8 +131,7 @@ class TeacherController extends Controller
      * @Route("/{id}", name="teacher_delete")
      * @Method("DELETE")
      */
-    public function deleteAction(Request $request, Teacher $teacher)
-    {
+    public function deleteAction(Request $request, Teacher $teacher) {
         $form = $this->createDeleteForm($teacher);
         $form->handleRequest($request);
 
@@ -125,12 +151,12 @@ class TeacherController extends Controller
      *
      * @return \Symfony\Component\Form\Form The form
      */
-    private function createDeleteForm(Teacher $teacher)
-    {
+    private function createDeleteForm(Teacher $teacher) {
         return $this->createFormBuilder()
-            ->setAction($this->generateUrl('teacher_delete', array('id' => $teacher->getId())))
-            ->setMethod('DELETE')
-            ->getForm()
+                        ->setAction($this->generateUrl('teacher_delete', array('id' => $teacher->getId())))
+                        ->setMethod('DELETE')
+                        ->getForm()
         ;
     }
+
 }
