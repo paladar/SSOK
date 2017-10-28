@@ -47,12 +47,17 @@ h5{
 }
 .content-wrapper{
     padding: 60px 30px;
+    background-color: #E4FFEA;
 }
 .btn-ssok{
     background-color: #00a65a;
     color: #fff;
     margin-top: 20px;
     float: right;
+}
+.btn-ssok:hover{
+    background-color: #fff;
+    color: #00a65a;
 }
 /* Form */
 .cke{
@@ -63,4 +68,38 @@ h5{
     font-size: 16px;
 }
 
+/* Table */
+.datatable th{
+    background-color: #00a65a;
+    color: #fff;
+    border:1px solid #ddd !important;
+    border-bottom: none;
+    border-right: none;
+}
+.datatable th:last-child{
+    border-right: 1px solid #ccc !important;
+}
+.datatable tbody td{
+    border:1px solid #ccc !important; 
+    border-top: none;
+}
+.datatable td, .datatable th{
+    text-align: center;
+}
+.datatable tbody .even{
+    background-color: #ededed;
+}
+table.dataTable.no-footer{
+    border-bottom:1px solid #ccc !important;   
+}
+table .actions{
+    list-style: none;
+    display: inline-block;
+    margin: 0;
+    padding: 0;
+}
+table .actions li{
+    float: left;
+    padding: 5px;
+}
 

@@ -1,43 +1,43 @@
 {% extends 'default/index.html.twig' %}
 
 {% block content %}
-    <h1>Lista nauczycieli</h1>
-    <ul>
-        <li>
-            <a href="{{ path('teacher_new') }}">Dodaj nauczyciela</a>
-        </li>
-    </ul>
-    <table class="datatable">
-        <thead>
-            <tr>
-                <th>Id</th>
-                <th>Imię</th>
-                <th>Nazwisko</th>
-                <th>Email</th>
-                <th>Telefon</th>
-                <th>Akcje</th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for teacher in teachers %}
-                <tr>
-                    <td><a href="{{ path('teacher_show', { 'id': teacher.id }) }}">{{ teacher.id }}</a></td>
-                    <td>{{ teacher.firstName }}</td>
-                    <td>{{ teacher.surname }}</td>
-                    <td>{{ teacher.email }}</td>
-                    <td>{{ teacher.phone }}</td>
-                    <td>
-                        <ul>
-                            <li>
-                                <a href="{{ path('teacher_show', { 'id': teacher.id }) }}">Pokaż</a>
-                            </li>
-                            <li>
-                                <a href="{{ path('teacher_edit', { 'id': teacher.id }) }}">Edytuj</a>
-                            </li>
-                        </ul>
-                    </td>
-                </tr>
-            {% endfor %}
-        </tbody>
-    </table>
+    <div class="row">
+        <h1 class="col-xs-6">Lista nauczycieli</h1>
+        <div class="col-xs-6"><a class="btn btn-ssok" href="{{ path('teacher_new') }}">Dodaj nauczyciela</a></div>
+        <div class="col-xs-12">
+            <table class="datatable table table-striped table-bordered">
+                <thead>
+                    <tr>
+                        <th>Id</th>
+                        <th>Imię</th>
+                        <th>Nazwisko</th>
+                        <th>Email</th>
+                        <th>Telefon</th>
+                        <th>Akcje</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for teacher in teachers %}
+                        <tr>
+                            <td><a href="{{ path('teacher_show', { 'id': teacher.id }) }}">{{ teacher.id }}</a></td>
+                            <td>{{ teacher.firstName }}</td>
+                            <td>{{ teacher.surname }}</td>
+                            <td>{{ teacher.email }}</td>
+                            <td>{{ teacher.phone }}</td>
+                            <td>
+                                <ul class="actions">
+                                    <li>
+                                        <a href="{{ path('teacher_show', { 'id': teacher.id }) }}">Pokaż</a>
+                                    </li>
+                                    <li>
+                                        <a href="{{ path('teacher_edit', { 'id': teacher.id }) }}">Edytuj</a>
+                                    </li>
+                                </ul>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
 {% endblock %}

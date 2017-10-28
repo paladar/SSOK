@@ -1,40 +1,39 @@
 {% extends 'default/index.html.twig' %}
 
 {% block content %}
-    <h1>Lista zastępstw</h1>
-    <ul>
-        <li>
-            <a href="{{ path('replecement_new') }}">Dodaj zastępstwo</a>
-        </li>
-    </ul>
-
-    <table class="datatable">
-        <thead>
-            <tr>
-                <th>Id</th>
-                <th>Opis</th>
-                <th>Data</th>
-                <th>Akcje</th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for replecement in replecements %}
-                <tr>
-                    <td><a href="{{ path('replecement_show', { 'id': replecement.id }) }}">{{ replecement.id }}</a></td>
-                    <td>{{ replecement.description }}</td>
-                    <td>{% if replecement.date %}{{ replecement.createdAt|date('Y-m-d') }}{% endif %}</td>
-                    <td>
-                        <ul>
-                            <li>
-                                <a href="{{ path('replecement_show', { 'id': replecement.id }) }}">Pokaż</a>
-                            </li>
-                            <li>
-                                <a href="{{ path('replecement_edit', { 'id': replecement.id }) }}">Edytuj</a>
-                            </li>
-                        </ul>
-                    </td>
-                </tr>
-            {% endfor %}
-        </tbody>
-    </table>
+    <div class="row">
+        <h1 class="col-xs-6">Lista zastępstw</h1>
+        <div class="col-xs-6"><a class="btn btn-ssok" href="{{ path('replecement_new') }}">Dodaj zastępstwo</a></div>
+        <div class="col-xs-12">
+            <table class="datatable table table-striped table-bordered">
+                <thead>
+                    <tr>
+                        <th>Id</th>
+                        <th>Opis</th>
+                        <th>Data</th>
+                        <th>Akcje</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for replecement in replecements %}
+                        <tr>
+                            <td><a href="{{ path('replecement_show', { 'id': replecement.id }) }}">{{ replecement.id }}</a></td>
+                            <td>{{ replecement.description }}</td>
+                            <td>{% if replecement.date %}{{ replecement.createdAt|date('Y-m-d') }}{% endif %}</td>
+                            <td>
+                                <ul class="actions">
+                                    <li>
+                                        <a href="{{ path('replecement_show', { 'id': replecement.id }) }}">Pokaż</a>
+                                    </li>
+                                    <li>
+                                        <a href="{{ path('replecement_edit', { 'id': replecement.id }) }}">Edytuj</a>
+                                    </li>
+                                </ul>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
 {% endblock %}

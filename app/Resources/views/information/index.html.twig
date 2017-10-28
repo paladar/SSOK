@@ -1,40 +1,39 @@
 {% extends 'default/index.html.twig' %}
 
 {% block content %}
-    <h1>Lista aktualności</h1>
-    <ul>
-        <li>
-            <a href="{{ path('information_new') }}">Dodaj aktualność</a>
-        </li>
-    </ul>
-
-    <table class="datatable">
-        <thead>
-            <tr>
-                <th>Id</th>
-                <th>Temat</th>
-                <th>Data dodania</th>
-                <th>Akcje</th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for information in information %}
-                <tr>
-                    <td><a href="{{ path('information_show', { 'id': information.id }) }}">{{ information.id }}</a></td>
-                    <td>{{ information.title }}</td>
-                    <td>{% if information.createdAt %}{{ information.createdAt|date('Y-m-d') }}{% endif %}</td>
-                    <td>
-                        <ul>
-                            <li>
-                                <a href="{{ path('information_show', { 'id': information.id }) }}">Pokaż</a>
-                            </li>
-                            <li>
-                                <a href="{{ path('information_edit', { 'id': information.id }) }}">Edytuj</a>
-                            </li>
-                        </ul>
-                    </td>
-                </tr>
-            {% endfor %}
-        </tbody>
-    </table>
+    <div class="row">
+        <h1 class="col-xs-6">Lista aktualności</h1>
+        <div class="col-xs-6"><a class="btn btn-ssok" href="{{ path('information_new') }}">Dodaj aktualność</a></div>
+        <div class="col-xs-12">
+            <table class="datatable table table-striped table-bordered">
+                <thead>
+                    <tr>
+                        <th>Id</th>
+                        <th>Temat</th>
+                        <th>Data dodania</th>
+                        <th>Akcje</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for information in information %}
+                        <tr>
+                            <td><a href="{{ path('information_show', { 'id': information.id }) }}">{{ information.id }}</a></td>
+                            <td>{{ information.title }}</td>
+                            <td>{% if information.createdAt %}{{ information.createdAt|date('Y-m-d') }}{% endif %}</td>
+                            <td>
+                                <ul class="actions">
+                                    <li>
+                                        <a href="{{ path('information_show', { 'id': information.id }) }}">Pokaż</a>
+                                    </li>
+                                    <li>
+                                        <a href="{{ path('information_edit', { 'id': information.id }) }}">Edytuj</a>
+                                    </li>
+                                </ul>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
 {% endblock %}

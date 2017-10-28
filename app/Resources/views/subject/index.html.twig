@@ -1,37 +1,37 @@
 {% extends 'default/index.html.twig' %}
 
 {% block content %}
-    <h1>Lista przedmiotów</h1>
-    <ul>
-        <li>
-            <a href="{{ path('subject_new') }}">Dodaj przedmiot</a>
-        </li>
-    </ul>
-    <table class="datatable">
-        <thead>
-            <tr>
-                <th>Id</th>
-                <th>Nazwa</th>
-                <th>Akcje</th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for subject in subjects %}
-                <tr>
-                    <td><a href="{{ path('subject_show', { 'id': subject.id }) }}">{{ subject.id }}</a></td>
-                    <td>{{ subject.title }}</td>
-                    <td>
-                        <ul>
-                            <li>
-                                <a href="{{ path('subject_show', { 'id': subject.id }) }}">Pokaż</a>
-                            </li>
-                            <li>
-                                <a href="{{ path('subject_edit', { 'id': subject.id }) }}">Edytuj</a>
-                            </li>
-                        </ul>
-                    </td>
-                </tr>
-            {% endfor %}
-        </tbody>
-    </table>
+    <div class="row">
+        <h1 class="col-xs-6">Lista przedmiotów</h1>
+        <div class="col-xs-6"><a class="btn btn-ssok" href="{{ path('subject_new') }}">Dodaj przedmiot</a></div>
+        <div class="col-xs-12">
+            <table class="datatable table table-striped table-bordered">
+                <thead>
+                    <tr>
+                        <th>Id</th>
+                        <th>Nazwa</th>
+                        <th>Akcje</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for subject in subjects %}
+                        <tr>
+                            <td><a href="{{ path('subject_show', { 'id': subject.id }) }}">{{ subject.id }}</a></td>
+                            <td>{{ subject.title }}</td>
+                            <td>
+                                <ul class="actions">
+                                    <li>
+                                        <a href="{{ path('subject_show', { 'id': subject.id }) }}">Pokaż</a>
+                                    </li>
+                                    <li>
+                                        <a href="{{ path('subject_edit', { 'id': subject.id }) }}">Edytuj</a>
+                                    </li>
+                                </ul>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
 {% endblock %}

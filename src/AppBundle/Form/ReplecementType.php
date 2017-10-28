@@ -5,23 +5,27 @@ namespace AppBundle\Form;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 
-class ReplecementType extends AbstractType
-{
+class ReplecementType extends AbstractType {
+
     /**
      * {@inheritdoc}
      */
-    public function buildForm(FormBuilderInterface $builder, array $options)
-    {
-        $builder->add('description')
-                ->add('class');
+    public function buildForm(FormBuilderInterface $builder, array $options) {
+        $builder->add('class', null, array(
+                    'label' => 'Klasa',
+                ))
+                ->add('description', TextareaType::class, array(
+                    'attr' => array('class' => 'ckeditor-textarea'),
+                    'label' => 'Treść',
+        ));
     }
-    
+
     /**
      * {@inheritdoc}
      */
-    public function configureOptions(OptionsResolver $resolver)
-    {
+    public function configureOptions(OptionsResolver $resolver) {
         $resolver->setDefaults(array(
             'data_class' => 'AppBundle\Entity\Replecement'
         ));
@@ -30,10 +34,8 @@ class ReplecementType extends AbstractType
     /**
      * {@inheritdoc}
      */
-    public function getBlockPrefix()
-    {
+    public function getBlockPrefix() {
         return 'appbundle_replecement';
     }
-
 
 }
