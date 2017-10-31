@@ -1,40 +1,23 @@
 {% extends 'default/index.html.twig' %}
 
 {% block content %}
-    <h1>Subject</h1>
-
-    <table>
-        <tbody>
-            <tr>
-                <th>Id</th>
-                <td>{{ subject.id }}</td>
-            </tr>
-            <tr>
-                <th>Createdat</th>
-                <td>{% if subject.createdAt %}{{ subject.createdAt|date('Y-m-d H:i:s') }}{% endif %}</td>
-            </tr>
-            <tr>
-                <th>Updatedat</th>
-                <td>{% if subject.updatedAt %}{{ subject.updatedAt|date('Y-m-d H:i:s') }}{% endif %}</td>
-            </tr>
-            <tr>
-                <th>Deletedat</th>
-                <td>{% if subject.deletedAt %}{{ subject.deletedAt|date('Y-m-d H:i:s') }}{% endif %}</td>
-            </tr>
-        </tbody>
-    </table>
-
-    <ul>
-        <li>
-            <a href="{{ path('subject_index') }}">Back to the list</a>
-        </li>
-        <li>
-            <a href="{{ path('subject_edit', { 'id': subject.id }) }}">Edit</a>
-        </li>
-        <li>
-            {{ form_start(delete_form) }}
-                <input type="submit" value="Delete">
-            {{ form_end(delete_form) }}
-        </li>
-    </ul>
+    <div class="row">
+        <h1 class="col-xs-6">Przedmiot #{{subject.id}}</h1>
+        <div class="col-xs-6"><a class="btn btn-ssok" href="{{ path('subject_index') }}">Powrót do listy</a></div>
+        <div class="col-xs-12 admin-show">
+            <div class="admin-details">
+                <div class="admin-label col-xs-3">Nazwa</div><div class="admin-content col-xs-9">{{subject.title}}</div>
+            </div>
+            {% if subject.teachers is not empty %}
+            <div class="admin-details">
+                {% for teacher in subject.teachers %}
+                    <div class="admin-label col-xs-3">{% if loop.first %}Nauczyciele{% endif %}</div><div class="admin-content col-xs-9">{{teacher}}</div>
+                {% endfor %}
+            </div>
+            {% endif %}
+        </div>
+        <div class="col-xs-12">
+            <a class="btn btn-ssok" href="{{ path('subject_edit', { 'id': subject.id }) }}">Edytuj</a>
+        </div>
+    </div>
 {% endblock %}

@@ -6,6 +6,7 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
+use Symfony\Component\Form\Extension\Core\Type\DateType;
 
 class ReplecementType extends AbstractType {
 
@@ -15,6 +16,10 @@ class ReplecementType extends AbstractType {
     public function buildForm(FormBuilderInterface $builder, array $options) {
         $builder->add('class', null, array(
                     'label' => 'Klasa',
+                ))
+                ->add('date', DateType::class, array(
+                    'widget' => 'choice',
+                    'label' => 'Data',
                 ))
                 ->add('description', TextareaType::class, array(
                     'attr' => array('class' => 'ckeditor-textarea'),

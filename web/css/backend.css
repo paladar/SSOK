@@ -59,6 +59,25 @@ h5{
     background-color: #fff;
     color: #00a65a;
 }
+.btn-danger{
+    float: right;
+    margin-top: 10px;
+}
+.sidebar-menu li.header{
+    font-size: 22px;
+}
+.admin-show .admin-details:first-child{
+    border-top: 1px solid #000; 
+}
+.admin-details{
+    float: left;
+    width: 100%;
+    border-bottom: 1px solid #000;
+    padding: 10px 0;
+}
+.admin-label{
+    font-weight: bold;
+}
 /* Form */
 .cke{
     float: left;
@@ -72,6 +91,7 @@ h5{
     background-color: transparent;
     height: auto;
 }
+
 
 /* Table */
 .datatable th{

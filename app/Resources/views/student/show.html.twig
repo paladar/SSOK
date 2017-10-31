@@ -1,60 +1,28 @@
 {% extends 'default/index.html.twig' %}
 
 {% block content %}
-    <h1>Student</h1>
-
-    <table>
-        <tbody>
-            <tr>
-                <th>Id</th>
-                <td>{{ student.id }}</td>
-            </tr>
-            <tr>
-                <th>Email</th>
-                <td>{{ student.email }}</td>
-            </tr>
-            <tr>
-                <th>Firstname</th>
-                <td>{{ student.firstName }}</td>
-            </tr>
-            <tr>
-                <th>Surname</th>
-                <td>{{ student.surname }}</td>
-            </tr>
-            <tr>
-                <th>Phone</th>
-                <td>{{ student.phone }}</td>
-            </tr>
-            <tr>
-                <th>Address</th>
-                <td>{{ student.address }}</td>
-            </tr>
-            <tr>
-                <th>Createdat</th>
-                <td>{% if student.createdAt %}{{ student.createdAt|date('Y-m-d H:i:s') }}{% endif %}</td>
-            </tr>
-            <tr>
-                <th>Updatedat</th>
-                <td>{% if student.updatedAt %}{{ student.updatedAt|date('Y-m-d H:i:s') }}{% endif %}</td>
-            </tr>
-            <tr>
-                <th>Deletedat</th>
-                <td>{% if student.deletedAt %}{{ student.deletedAt|date('Y-m-d H:i:s') }}{% endif %}</td>
-            </tr>
-        </tbody>
-    </table>
-
-    <ul>
-        <li>
-            <a href="{{ path('student_index') }}">Back to the list</a>
-        </li>
-        <li>
-            <a href="{{ path('student_edit', { 'id': student.id }) }}">Edit</a>
-        </li>
-        <li>
-            {{ form_start(delete_form) }}
-                <input type="submit" value="Delete">
-            {{ form_end(delete_form) }}
-        </li>
-    </ul>
+    <div class="row">
+        <h1 class="col-xs-6">Student #{{student.id}}</h1>
+        <div class="col-xs-6"><a class="btn btn-ssok" href="{{ path('student_index') }}">Powrót do listy</a></div>
+        <div class="col-xs-12 admin-show">
+            <div class="admin-details">
+                <div class="admin-label col-xs-3">Imię</div><div class="admin-content col-xs-9">{{student.firstname}}</div>
+            </div>
+            <div class="admin-details">
+                <div class="admin-label col-xs-3">Nazwisko</div><div class="admin-content col-xs-9">{{student.surname}}</div>
+            </div>
+            <div class="admin-details">
+                <div class="admin-label col-xs-3">Email</div><div class="admin-content col-xs-9">{{student.email}}</div>
+            </div>
+            <div class="admin-details">
+                <div class="admin-label col-xs-3">Telefon</div><div class="admin-content col-xs-9">{{student.phone}}</div>
+            </div>
+            <div class="admin-details">
+                <div class="admin-label col-xs-3">Adres</div><div class="admin-content col-xs-9">{{student.address}}</div>
+            </div>
+        </div>
+        <div class="col-xs-12">
+            <a class="btn btn-ssok" href="{{ path('student_edit', { 'id': student.id }) }}">Edytuj</a>
+        </div>
+    </div>
 {% endblock %}

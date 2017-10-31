@@ -4,6 +4,7 @@ namespace AppBundle\Controller;
 
 use AppBundle\Entity\Student;
 use AppBundle\Entity\User;
+use AppBundle\Entity\Password;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
@@ -43,6 +44,8 @@ class StudentController extends Controller {
 
         $student = new Student();
         $user = new User();
+        $password = new Password();
+        $parentPassword = new Password();
         $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
         $charactersLength = strlen($characters);
         $username = strtolower($request->get('appbundle_student')['firstName']) . strtolower($request->get('appbundle_student')['surname']);
@@ -61,15 +64,18 @@ class StudentController extends Controller {
         }
 
         $user->setUsername($username);
-        $user->setPassword($randomString);
+        $user->setPlainPassword($randomString);
+        $password->setUsername($username);
+        $password->setPassword($randomString);
         if ($request->request->get('appbundle_student')['email'] != '') {
             $user->setEmail($request->request->get('appbundle_student')['email']);
         } else {
             $user->setEmail($username);
         }
-
         $student->setUser($user);
         $user->setStudent($student);
+        $user->setRoles(array('ROLE_STUDENT'));
+        $user->setEnabled(true);
         $form = $this->createForm('AppBundle\Form\StudentType', $student);
         $form->handleRequest($request);
 
@@ -80,7 +86,9 @@ class StudentController extends Controller {
         for ($i = 0; $i < 12; $i++) {
             $randomString .= $characters[rand(0, $charactersLength - 1)];
         }
-        $parentUser->setPassword($randomString);
+        $parentUser->setPlainPassword($randomString);
+        $parentPassword->setUsername('rodzic.'.$username);
+        $parentPassword->setPassword($randomString);
         if ($request->request->get('appbundle_student')['studentParent']['Email'] != '') {
             $parentUser->setEmail($request->request->get('appbundle_student')['studentParent']['Email']);
         } else {
@@ -88,9 +96,12 @@ class StudentController extends Controller {
         }
         $parent->setUser($parentUser);
         $parentUser->setStudentParent($parent);
+        $parentUser->setRoles(array('ROLE_PARENT'));
+        $parentUser->setEnabled(true);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $em = $this->getDoctrine()->getManager();
+            $em->persist($password);
+            $em->persist($parentPassword);
             $em->persist($student);
             $em->flush();
 

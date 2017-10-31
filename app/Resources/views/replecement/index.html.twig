@@ -18,15 +18,15 @@
                     {% for replecement in replecements %}
                         <tr>
                             <td><a href="{{ path('replecement_show', { 'id': replecement.id }) }}">{{ replecement.id }}</a></td>
-                            <td>{{ replecement.description }}</td>
+                            <td>{{ replecement.description|raw  }}</td>
                             <td>{% if replecement.date %}{{ replecement.createdAt|date('Y-m-d') }}{% endif %}</td>
                             <td>
                                 <ul class="actions">
                                     <li>
-                                        <a href="{{ path('replecement_show', { 'id': replecement.id }) }}">Pokaż</a>
+                                        <a href="{{ path('replecement_show', { 'id': replecement.id }) }}"><i class="fa fa-eye" aria-hidden="true"></i></a>
                                     </li>
                                     <li>
-                                        <a href="{{ path('replecement_edit', { 'id': replecement.id }) }}">Edytuj</a>
+                                        <a href="{{ path('replecement_edit', { 'id': replecement.id }) }}"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
                                     </li>
                                 </ul>
                             </td>

@@ -1,44 +1,22 @@
 {% extends 'default/index.html.twig' %}
 
 {% block content %}
-    <h1>Information</h1>
-
-    <table>
-        <tbody>
-            <tr>
-                <th>Id</th>
-                <td>{{ information.id }}</td>
-            </tr>
-            <tr>
-                <th>Description</th>
-                <td>{{ information.description }}</td>
-            </tr>
-            <tr>
-                <th>Createdat</th>
-                <td>{% if information.createdAt %}{{ information.createdAt|date('Y-m-d H:i:s') }}{% endif %}</td>
-            </tr>
-            <tr>
-                <th>Updatedat</th>
-                <td>{% if information.updatedAt %}{{ information.updatedAt|date('Y-m-d H:i:s') }}{% endif %}</td>
-            </tr>
-            <tr>
-                <th>Deletedat</th>
-                <td>{% if information.deletedAt %}{{ information.deletedAt|date('Y-m-d H:i:s') }}{% endif %}</td>
-            </tr>
-        </tbody>
-    </table>
-
-    <ul>
-        <li>
-            <a href="{{ path('information_index') }}">Back to the list</a>
-        </li>
-        <li>
-            <a href="{{ path('information_edit', { 'id': information.id }) }}">Edit</a>
-        </li>
-        <li>
-            {{ form_start(delete_form) }}
-                <input type="submit" value="Delete">
-            {{ form_end(delete_form) }}
-        </li>
-    </ul>
+    <div class="row">
+        <h1 class="col-xs-6">Aktualność #{{information.id}}</h1>
+        <div class="col-xs-6"><a class="btn btn-ssok" href="{{ path('information_index') }}">Powrót do listy</a></div>
+        <div class="col-xs-12 admin-show">
+            <div class="admin-details">
+                <div class="admin-label col-xs-3">Tytuł</div><div class="admin-content col-xs-9">{{information.title}}</div>
+            </div>
+            <div class="admin-details">
+                <div class="admin-label col-xs-3">Opis</div><div class="admin-content col-xs-9">{{information.description| raw}}</div>
+            </div>
+            <div class="admin-details">
+                <div class="admin-label col-xs-3">Data dodania</div><div class="admin-content col-xs-9">{{ information.createdAt|date('Y-m-d') }}</div>
+            </div>
+        </div>
+        <div class="col-xs-12">
+            <a class="btn btn-ssok" href="{{ path('information_edit', { 'id': information.id }) }}">Edytuj</a>
+        </div>
+    </div>
 {% endblock %}

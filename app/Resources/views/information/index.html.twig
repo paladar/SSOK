@@ -9,7 +9,7 @@
                 <thead>
                     <tr>
                         <th>Id</th>
-                        <th>Temat</th>
+                        <th>Tytu;</th>
                         <th>Data dodania</th>
                         <th>Akcje</th>
                     </tr>
@@ -19,14 +19,14 @@
                         <tr>
                             <td><a href="{{ path('information_show', { 'id': information.id }) }}">{{ information.id }}</a></td>
                             <td>{{ information.title }}</td>
-                            <td>{% if information.createdAt %}{{ information.createdAt|date('Y-m-d') }}{% endif %}</td>
+                            <td>{{ information.createdAt|date('Y-m-d') }}</td>
                             <td>
                                 <ul class="actions">
                                     <li>
-                                        <a href="{{ path('information_show', { 'id': information.id }) }}">Pokaż</a>
+                                        <a href="{{ path('information_show', { 'id': information.id }) }}"><i class="fa fa-eye" aria-hidden="true"></i></a>
                                     </li>
                                     <li>
-                                        <a href="{{ path('information_edit', { 'id': information.id }) }}">Edytuj</a>
+                                        <a href="{{ path('information_edit', { 'id': information.id }) }}"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
                                     </li>
                                 </ul>
                             </td>

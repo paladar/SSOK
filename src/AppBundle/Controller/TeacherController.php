@@ -4,6 +4,7 @@ namespace AppBundle\Controller;
 
 use AppBundle\Entity\Teacher;
 use AppBundle\Entity\User;
+use AppBundle\Entity\Password;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
@@ -43,6 +44,8 @@ class TeacherController extends Controller {
 
         $teacher = new Teacher();
         $user = new User();
+        $password = new Password();
+        $parentPassword = new Password();
         $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
         $charactersLength = strlen($characters);
         $username = 'nauczyciel.' . strtolower($request->get('appbundle_teacher')['firstName']) . strtolower($request->get('appbundle_teacher')['surname']);
@@ -61,7 +64,10 @@ class TeacherController extends Controller {
         }
 
         $user->setUsername($username);
-        $user->setPassword($randomString);
+        $user->setPlainPassword($randomString);
+        $password->setUsername($username);
+        $password->setPassword($randomString);
+        $user->setEnabled(true);
         if ($request->request->get('appbundle_teacher')['email'] != '') {
             $user->setEmail($request->request->get('appbundle_student')['email']);
         } else {
@@ -69,10 +75,18 @@ class TeacherController extends Controller {
         }
 
         $teacher->setUser($user);
+        $user->setTeacher($teacher);
+        $user->setRoles(array('ROLE_TEACHER'));
         $form = $this->createForm('AppBundle\Form\TeacherType', $teacher);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $subjects = $request->request->get('appbundle_teacher')['subjects'];
+            foreach ($subjects as $id) {
+                $subject = $em->getRepository('AppBundle:Subject')->find($id);
+                $teacher->addSubject($subject);
+                $subject->addTeacher($teacher);
+            }
             $em = $this->getDoctrine()->getManager();
             $em->persist($teacher);
             $em->flush();
@@ -108,11 +122,20 @@ class TeacherController extends Controller {
      * @Method({"GET", "POST"})
      */
     public function editAction(Request $request, Teacher $teacher) {
+        $em = $this->getDoctrine()->getManager();
+
         $deleteForm = $this->createDeleteForm($teacher);
         $editForm = $this->createForm('AppBundle\Form\TeacherType', $teacher);
         $editForm->handleRequest($request);
 
+
         if ($editForm->isSubmitted() && $editForm->isValid()) {
+            $subjects = $request->request->get('appbundle_teacher')['subjects'];
+            foreach ($subjects as $id) {
+                $subject = $em->getRepository('AppBundle:Subject')->find($id);
+                $teacher->addSubject($subject);
+                $subject->addTeacher($teacher);
+            }
             $this->getDoctrine()->getManager()->flush();
 
             return $this->redirectToRoute('teacher_edit', array('id' => $teacher->getId()));
