@@ -87,7 +87,7 @@ class TeacherController extends Controller {
                 $teacher->addSubject($subject);
                 $subject->addTeacher($teacher);
             }
-            $em = $this->getDoctrine()->getManager();
+            $em->persist($password);
             $em->persist($teacher);
             $em->flush();
 
