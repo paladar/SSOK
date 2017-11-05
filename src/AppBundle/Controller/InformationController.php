@@ -65,11 +65,8 @@ class InformationController extends Controller
      */
     public function showAction(Information $information)
     {
-        $deleteForm = $this->createDeleteForm($information);
-
         return $this->render('information/show.html.twig', array(
             'information' => $information,
-            'delete_form' => $deleteForm->createView(),
         ));
     }
 

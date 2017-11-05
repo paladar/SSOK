@@ -121,11 +121,8 @@ class StudentController extends Controller {
      * @Method("GET")
      */
     public function showAction(Student $student) {
-        $deleteForm = $this->createDeleteForm($student);
-
         return $this->render('student/show.html.twig', array(
                     'student' => $student,
-                    'delete_form' => $deleteForm->createView(),
         ));
     }
 

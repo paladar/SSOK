@@ -8,19 +8,24 @@
         <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
         <link href="{{ asset('datatables/datatables.css') }}" rel="stylesheet">
         <link href="{{ asset('datatables/bootstrap.datatables.css') }}" rel="stylesheet">
+        <link href="{{ asset('css/jquery-ui.min.css') }}?v=250417" rel="stylesheet"/>
+        <link href="{{ asset('css/jquery-ui.structure.css') }}?v=250417" rel="stylesheet"/>
+        <link href="{{ asset('css/jquery-ui.theme.css') }}?v=250417" rel="stylesheet"/>
+        <link href="{{ asset('css/timepicker.css') }}?v=250417" rel="stylesheet"/>
         <link href="{{ asset('css/backend.css') }}?v=250417" rel="stylesheet"/>
     {% endblock stylesheets %}
 
     {% block javascripts %}
-        <script src="{{ asset('adminlte/js/demo.js')}}"></script>
         <script src="{{ asset('js/jquery-3.2.1.min.js') }}"></script>
         <script src="{{ asset('js/jquery-ui.min.js') }}"></script>
         <script src="{{ asset('datatables/datatables.js') }}"></script>
         <script src="{{ asset('bootstrap/js/bootstrap.min.js') }}" type="text/javascript"></script>    
         <script src="{{ asset('adminlte/js/app.min.js') }}" type="text/javascript"></script>
+        <script src="{{ asset('adminlte/js/demo.js')}}"></script>
         <script src="{{ asset('ckeditor/ckeditor.js') }}" type="text/javascript"></script>
-        <script src="{{ asset('js/admin.js') }}" type="text/javascript"></script>
         <script src="{{ asset('adminlte/js/adminlte.min.js')}}"></script>
+        <script src="{{ asset('js/timepicker.js') }}" type="text/javascript"></script>
+        <script src="{{ asset('js/admin.js') }}" type="text/javascript"></script>
     {% endblock javascripts %}
 </html>
 {% block body %} 

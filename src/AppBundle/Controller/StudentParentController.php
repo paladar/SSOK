@@ -65,11 +65,8 @@ class StudentParentController extends Controller
      */
     public function showAction(StudentParent $studentParent)
     {
-        $deleteForm = $this->createDeleteForm($studentParent);
-
         return $this->render('studentparent/show.html.twig', array(
             'studentParent' => $studentParent,
-            'delete_form' => $deleteForm->createView(),
         ));
     }
 

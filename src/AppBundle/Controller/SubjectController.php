@@ -65,11 +65,8 @@ class SubjectController extends Controller
      */
     public function showAction(Subject $subject)
     {
-        $deleteForm = $this->createDeleteForm($subject);
-
         return $this->render('subject/show.html.twig', array(
             'subject' => $subject,
-            'delete_form' => $deleteForm->createView(),
         ));
     }
 

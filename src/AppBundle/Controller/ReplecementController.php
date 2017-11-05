@@ -65,11 +65,8 @@ class ReplecementController extends Controller
      */
     public function showAction(Replecement $replecement)
     {
-        $deleteForm = $this->createDeleteForm($replecement);
-
         return $this->render('replecement/show.html.twig', array(
             'replecement' => $replecement,
-            'delete_form' => $deleteForm->createView(),
         ));
     }
 

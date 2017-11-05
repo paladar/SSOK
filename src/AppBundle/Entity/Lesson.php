@@ -39,15 +39,30 @@ class Lesson {
      * @ORM\JoinColumn(name="id_teacher", referencedColumnName="id", nullable=false)
      */
     protected $teacher;
-    
-        /**
+
+    /**
      * @var ArrayCollection|Presence[] $presences
      *
      * @ORM\OneToMany(targetEntity="Presence", mappedBy="lesson", cascade={"all"}, orphanRemoval=true)
      * @ORM\OrderBy({"id"="ASC"})
      */
     protected $presences;
-    
+
+    /**
+     * @var SchoolClass $schoolClass
+     *
+     * @ORM\ManyToOne(targetEntity="SchoolClass", inversedBy="lessons", fetch="EAGER")
+     * @ORM\JoinColumn(name="id_class", referencedColumnName="id", nullable=true)
+     */
+    protected $schoolClass;
+
+    /**
+     * @var string $day
+     *
+     * @ORM\Column(name="day", type="string", length=5, nullable=false)
+     */
+    protected $day;
+
     /**
      * @var \Datetime $start
      *
@@ -85,14 +100,12 @@ class Lesson {
         $this->presences = new \Doctrine\Common\Collections\ArrayCollection();
     }
 
-
     /**
      * Get id
      *
      * @return integer
      */
-    public function getId()
-    {
+    public function getId() {
         return $this->id;
     }
 
@@ -103,8 +116,7 @@ class Lesson {
      *
      * @return Lesson
      */
-    public function setStart($start)
-    {
+    public function setStart($start) {
         $this->start = $start;
 
         return $this;
@@ -115,8 +127,7 @@ class Lesson {
      *
      * @return \DateTime
      */
-    public function getStart()
-    {
+    public function getStart() {
         return $this->start;
     }
 
@@ -127,8 +138,7 @@ class Lesson {
      *
      * @return Lesson
      */
-    public function setCreatedAt($createdAt)
-    {
+    public function setCreatedAt($createdAt) {
         $this->createdAt = $createdAt;
 
         return $this;
@@ -139,8 +149,7 @@ class Lesson {
      *
      * @return \DateTime
      */
-    public function getCreatedAt()
-    {
+    public function getCreatedAt() {
         return $this->createdAt;
     }
 
@@ -151,8 +160,7 @@ class Lesson {
      *
      * @return Lesson
      */
-    public function setUpdatedAt($updatedAt)
-    {
+    public function setUpdatedAt($updatedAt) {
         $this->updatedAt = $updatedAt;
 
         return $this;
@@ -163,8 +171,7 @@ class Lesson {
      *
      * @return \DateTime
      */
-    public function getUpdatedAt()
-    {
+    public function getUpdatedAt() {
         return $this->updatedAt;
     }
 
@@ -175,8 +182,7 @@ class Lesson {
      *
      * @return Lesson
      */
-    public function setDeletedAt($deletedAt)
-    {
+    public function setDeletedAt($deletedAt) {
         $this->deletedAt = $deletedAt;
 
         return $this;
@@ -187,8 +193,7 @@ class Lesson {
      *
      * @return \DateTime
      */
-    public function getDeletedAt()
-    {
+    public function getDeletedAt() {
         return $this->deletedAt;
     }
 
@@ -199,8 +204,7 @@ class Lesson {
      *
      * @return Lesson
      */
-    public function setSubject(\AppBundle\Entity\Subject $subject)
-    {
+    public function setSubject(\AppBundle\Entity\Subject $subject) {
         $this->subject = $subject;
 
         return $this;
@@ -211,8 +215,7 @@ class Lesson {
      *
      * @return \AppBundle\Entity\Subject
      */
-    public function getSubject()
-    {
+    public function getSubject() {
         return $this->subject;
     }
 
@@ -223,8 +226,7 @@ class Lesson {
      *
      * @return Lesson
      */
-    public function setTeacher(\AppBundle\Entity\Teacher $teacher)
-    {
+    public function setTeacher(\AppBundle\Entity\Teacher $teacher) {
         $this->teacher = $teacher;
 
         return $this;
@@ -235,8 +237,7 @@ class Lesson {
      *
      * @return \AppBundle\Entity\Teacher
      */
-    public function getTeacher()
-    {
+    public function getTeacher() {
         return $this->teacher;
     }
 
@@ -247,8 +248,7 @@ class Lesson {
      *
      * @return Lesson
      */
-    public function addPresence(\AppBundle\Entity\Presence $presence)
-    {
+    public function addPresence(\AppBundle\Entity\Presence $presence) {
         $this->presences[] = $presence;
 
         return $this;
@@ -259,8 +259,7 @@ class Lesson {
      *
      * @param \AppBundle\Entity\Presence $presence
      */
-    public function removePresence(\AppBundle\Entity\Presence $presence)
-    {
+    public function removePresence(\AppBundle\Entity\Presence $presence) {
         $this->presences->removeElement($presence);
     }
 
@@ -269,8 +268,24 @@ class Lesson {
      *
      * @return \Doctrine\Common\Collections\Collection
      */
-    public function getPresences()
-    {
+    public function getPresences() {
         return $this->presences;
     }
+
+    function getSchoolClass() {
+        return $this->schoolClass;
+    }
+
+    function getDay() {
+        return $this->day;
+    }
+
+    function setSchoolClass(SchoolClass $schoolClass) {
+        $this->schoolClass = $schoolClass;
+    }
+
+    function setDay($day) {
+        $this->day = $day;
+    }
+
 }

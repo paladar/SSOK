@@ -69,7 +69,7 @@ class TeacherController extends Controller {
         $password->setPassword($randomString);
         $user->setEnabled(true);
         if ($request->request->get('appbundle_teacher')['email'] != '') {
-            $user->setEmail($request->request->get('appbundle_student')['email']);
+            $user->setEmail($request->request->get('appbundle_teacher')['email']);
         } else {
             $user->setEmail($username);
         }
@@ -107,11 +107,8 @@ class TeacherController extends Controller {
      * @Method("GET")
      */
     public function showAction(Teacher $teacher) {
-        $deleteForm = $this->createDeleteForm($teacher);
-
         return $this->render('teacher/show.html.twig', array(
                     'teacher' => $teacher,
-                    'delete_form' => $deleteForm->createView(),
         ));
     }
 

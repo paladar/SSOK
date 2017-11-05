@@ -9,11 +9,11 @@
                 <div class="admin-label col-xs-3">Nazwa</div><div class="admin-content col-xs-9">{{subject.title}}</div>
             </div>
             {% if subject.teachers is not empty %}
-            <div class="admin-details">
-                {% for teacher in subject.teachers %}
-                    <div class="admin-label col-xs-3">{% if loop.first %}Nauczyciele{% endif %}</div><div class="admin-content col-xs-9">{{teacher}}</div>
-                {% endfor %}
-            </div>
+                <div class="admin-details">
+                    {% for teacher in subject.teachers %}
+                        <div class="admin-label col-xs-3">{% if loop.first %}Nauczyciele{% endif %}</div><div class="admin-content col-xs-9">{{teacher}}</div>
+                    {% endfor %}
+                </div>
             {% endif %}
         </div>
         <div class="col-xs-12">
