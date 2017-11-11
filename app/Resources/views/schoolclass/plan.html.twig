@@ -10,8 +10,9 @@
                         {% for lesson in schoolClass.lessons %}
                             {% if lesson.day == 1 %}
                             <li class='plan-element' onClick='editLesson(1,{{lesson.subject.id}} ,{{lesson.teacher.id}} , "{{lesson.start|date('H:i')}}",{{lesson.id}} )'><span>{{lesson.start|date('H:i')}}</span>{{lesson.subject.title}}</li>
-                                {% endif %}
-                            {% endfor %}
+                            <a href="{{ path('schoolclass_lesson_delete',{'lesson' : lesson.id,'class': schoolClass.id }) }}"><i class="fa fa-trash-o" aria-hidden="true"></i></a>
+                            {% endif %}
+                        {% endfor %}
                     <li class='plan-element plan-add' onClick='addLesson(1)'><i class="fa fa-plus" aria-hidden="true"></i></li>
                 </ul>
                 <ul class="plan-day">
@@ -19,8 +20,9 @@
                         {% for lesson in schoolClass.lessons %}
                             {% if lesson.day == 2 %}
                             <li class='plan-element' onClick='editLesson(1,{{lesson.subject.id}} ,{{lesson.teacher.id}} , "{{lesson.start|date('H:i')}}",{{lesson.id}} )'><span>{{lesson.start|date('H:i')}}</span>{{lesson.subject.title}}</li>
-                                {% endif %}
-                            {% endfor %}
+                            <a href="{{ path('schoolclass_lesson_delete',{'lesson' : lesson.id,'class': schoolClass.id }) }}"><i class="fa fa-trash-o" aria-hidden="true"></i></a>
+                            {% endif %}
+                        {% endfor %}
                     <li class='plan-element plan-add' onClick='addLesson(2)'><i class="fa fa-plus" aria-hidden="true"></i></li>
                 </ul>
                 <ul class="plan-day">
@@ -28,8 +30,9 @@
                         {% for lesson in schoolClass.lessons %}
                             {% if lesson.day == 3 %}
                             <li class='plan-element' onClick='editLesson(1,{{lesson.subject.id}} ,{{lesson.teacher.id}} , "{{lesson.start|date('H:i')}}",{{lesson.id}} )'><span>{{lesson.start|date('H:i')}}</span>{{lesson.subject.title}}</li>
-                                {% endif %}
-                            {% endfor %}
+                            <a href="{{ path('schoolclass_lesson_delete',{'lesson' : lesson.id,'class': schoolClass.id }) }}"><i class="fa fa-trash-o" aria-hidden="true"></i></a>
+                            {% endif %}
+                        {% endfor %}
                     <li class='plan-element plan-add' onClick='addLesson(3)'><i class="fa fa-plus" aria-hidden="true"></i></li>
                 </ul>
                 <ul class="plan-day">
@@ -37,8 +40,9 @@
                         {% for lesson in schoolClass.lessons %}
                             {% if lesson.day == 4 %}
                             <li class='plan-element' onClick='editLesson(1,{{lesson.subject.id}} ,{{lesson.teacher.id}} , "{{lesson.start|date('H:i')}}",{{lesson.id}} )'><span>{{lesson.start|date('H:i')}}</span>{{lesson.subject.title}}</li>
-                                {% endif %}
-                            {% endfor %}
+                            <a href="{{ path('schoolclass_lesson_delete',{'lesson' : lesson.id,'class': schoolClass.id }) }}"><i class="fa fa-trash-o" aria-hidden="true"></i></a>
+                            {% endif %}
+                        {% endfor %}
                     <li class='plan-element plan-add' onClick='addLesson(4)'><i class="fa fa-plus" aria-hidden="true"></i></li>
                 </ul>
                 <ul class="plan-day">
@@ -46,8 +50,9 @@
                         {% for lesson in schoolClass.lessons %}
                             {% if lesson.day == 5 %}
                             <li class='plan-element' onClick='editLesson(1,{{lesson.subject.id}} ,{{lesson.teacher.id}} , "{{lesson.start|date('H:i')}}",{{lesson.id}} )'><span>{{lesson.start|date('H:i')}}</span>{{lesson.subject.title}}</li>
-                                {% endif %}
-                            {% endfor %}
+                            <a href="{{ path('schoolclass_lesson_delete',{'lesson' : lesson.id,'class': schoolClass.id }) }}"><i class="fa fa-trash-o" aria-hidden="true"></i></a>
+                            {% endif %}
+                        {% endfor %}
                     <li class='plan-element plan-add' onClick='addLesson(5)'><i class="fa fa-plus" aria-hidden="true"></i></li>
                 </ul>
             </div>
@@ -110,6 +115,9 @@
             }
             function editLesson(day, subject, teacher, start, lesson) {
             $('.plan-modal').dialog('open');
+            if ($('.fa-trash-o').data('clicked')){
+            $('.plan-modal').dialog('close');
+            }
             action = '{{ path('schoolclass_lesson_edit', { 'id' : 'idPlaceholder',}) }}';
             action = action.replace('idPlaceholder', lesson);
             document.getElementById("plan-form").action = action;

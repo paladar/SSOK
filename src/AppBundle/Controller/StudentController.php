@@ -24,6 +24,7 @@ class StudentController extends Controller {
      * @Method("GET")
      */
     public function indexAction() {
+        $this->denyAccessUnlessGranted('ROLE_ADMIN', null, 'Unable to access this page!');
         $em = $this->getDoctrine()->getManager();
 
         $students = $em->getRepository('AppBundle:Student')->findAll();
@@ -40,6 +41,7 @@ class StudentController extends Controller {
      * @Method({"GET", "POST"})
      */
     public function newAction(Request $request) {
+        $this->denyAccessUnlessGranted('ROLE_ADMIN', null, 'Unable to access this page!');
         $em = $this->getDoctrine()->getManager();
 
         $student = new Student();
@@ -53,9 +55,11 @@ class StudentController extends Controller {
         $i = 1;
         do {
             $check = $em->getRepository('AppBundle:User')->findOneByUsername($username);
-            $username = $username . $i;
+            if ($check != null) {
+                $username = $username . $i;
+            }
             $i++;
-        } while ($check != '');
+        } while ($check != null);
 
 
         $randomString = '';
@@ -87,7 +91,7 @@ class StudentController extends Controller {
             $randomString .= $characters[rand(0, $charactersLength - 1)];
         }
         $parentUser->setPlainPassword($randomString);
-        $parentPassword->setUsername('rodzic.'.$username);
+        $parentPassword->setUsername('rodzic.' . $username);
         $parentPassword->setPassword($randomString);
         if ($request->request->get('appbundle_student')['studentParent']['Email'] != '') {
             $parentUser->setEmail($request->request->get('appbundle_student')['studentParent']['Email']);
@@ -121,6 +125,7 @@ class StudentController extends Controller {
      * @Method("GET")
      */
     public function showAction(Student $student) {
+        $this->denyAccessUnlessGranted('ROLE_ADMIN', null, 'Unable to access this page!');
         return $this->render('student/show.html.twig', array(
                     'student' => $student,
         ));
@@ -133,6 +138,7 @@ class StudentController extends Controller {
      * @Method({"GET", "POST"})
      */
     public function editAction(Request $request, Student $student) {
+        $this->denyAccessUnlessGranted('ROLE_ADMIN', null, 'Unable to access this page!');
         $deleteForm = $this->createDeleteForm($student);
         $editForm = $this->createForm('AppBundle\Form\StudentType', $student);
         $editForm->handleRequest($request);
@@ -157,6 +163,7 @@ class StudentController extends Controller {
      * @Method("DELETE")
      */
     public function deleteAction(Request $request, Student $student) {
+        $this->denyAccessUnlessGranted('ROLE_ADMIN', null, 'Unable to access this page!');
         $form = $this->createDeleteForm($student);
         $form->handleRequest($request);
 

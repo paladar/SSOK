@@ -78,6 +78,9 @@ h5{
 .admin-label{
     font-weight: bold;
 }
+.navbar-custom-menu i{
+    margin-left: 5px;
+}
 /* Form */
 .cke{
     float: left;
@@ -146,6 +149,7 @@ table .actions li{
     border-right: none;
     margin: 0;
     padding: 0;
+    position: relative;
 }
 .plan .plan-day:last-child{
     border-right: 1px solid #333;
@@ -168,6 +172,9 @@ table .actions li{
     position: relative;
     font-weight: bold;
     cursor: pointer;
+    width: 90%;
+    margin-right: 2px;
+    float: left;
 }
 .plan .plan-add{
     margin-top: 20px;
@@ -178,7 +185,8 @@ table .actions li{
     color: #555;
 }
 .plan .plan-add i{
-   color: #333;
+    color: #333;
+    font-size: 18px;
 }
 .plan .plan-element span{
     font-size: 13px;
@@ -186,12 +194,23 @@ table .actions li{
     position: absolute;
     bottom: 5px;
     left: 5px;
+
 }
- .plan-modal{
+.plan .fa-trash-o{
+    font-size: 18px;
+    font-weight: normal;
+    width: 5%;
+    float: left;
+    margin-top: 15px;
+}
+.plan .fa-trash-o:hover{
+    color: red;
+}
+.plan-modal{
     background-color: #E4FFEA !important;
 }
- .ui-dialog-titlebar{
-   background-color: #32B77A !important;
+.ui-dialog-titlebar{
+    background-color: #32B77A !important;
 }
 .ui-timepicker-table td a{
     width: 100%;

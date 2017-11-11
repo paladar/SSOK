@@ -25,6 +25,7 @@ class SchoolClassController extends Controller {
      * @Method("GET")
      */
     public function teachersAction(Request $request) {
+        $this->denyAccessUnlessGranted('ROLE_ADMIN', null, 'Unable to access this page!');
         $em = $this->getDoctrine()->getManager();
 
         $id = $request->query->get('id');
@@ -46,12 +47,13 @@ class SchoolClassController extends Controller {
     }
 
     /**
-     * Finds and displays a schoolClass entity.
+     * Adds lesson
      *
      * @Route("/lessonadd", name="schoolclass_lesson_add")
      * @Method("POST")
      */
     public function lessonAddAction(Request $request) {
+        $this->denyAccessUnlessGranted('ROLE_ADMIN', null, 'Unable to access this page!');
         $em = $this->getDoctrine()->getManager();
 
         $teacherId = $request->request->get('teacher');
@@ -80,6 +82,23 @@ class SchoolClassController extends Controller {
 
         return $this->redirect($this->generateUrl('schoolclass_plan', array('id' => $classId)), 301);
     }
+    
+        /**
+     * Removes lesson
+     *
+     * @Route("/lessondelete/{lesson}/{class}", name="schoolclass_lesson_delete")
+     * @Method("GET")
+     */
+    public function lessonDeleteAction(Request $request, $lesson, $class) {
+        $this->denyAccessUnlessGranted('ROLE_ADMIN', null, 'Unable to access this page!');
+        $em = $this->getDoctrine()->getManager();
+        $lessonToDelete = $em->getRepository('AppBundle:Lesson')->find($lesson);
+
+        $em->remove($lessonToDelete);
+        $em->flush();
+
+        return $this->redirect($this->generateUrl('schoolclass_plan', array('id' => $class)), 301);
+    }
 
     /**
      * Finds and displays a schoolClass entity.
@@ -88,6 +107,7 @@ class SchoolClassController extends Controller {
      * @Method("POST")
      */
     public function lessonEditAction(Request $request, $id) {
+        $this->denyAccessUnlessGranted('ROLE_ADMIN', null, 'Unable to access this page!');
         $em = $this->getDoctrine()->getManager();
 
         $teacherId = $request->request->get('teacher');
@@ -121,6 +141,7 @@ class SchoolClassController extends Controller {
      * @Method("GET")
      */
     public function indexAction() {
+        $this->denyAccessUnlessGranted('ROLE_ADMIN', null, 'Unable to access this page!');
         $em = $this->getDoctrine()->getManager();
 
         $schoolClasses = $em->getRepository('AppBundle:SchoolClass')->findAll();
@@ -137,6 +158,7 @@ class SchoolClassController extends Controller {
      * @Method({"GET", "POST"})
      */
     public function newAction(Request $request) {
+        $this->denyAccessUnlessGranted('ROLE_ADMIN', null, 'Unable to access this page!');
         $schoolClass = new Schoolclass();
         $form = $this->createForm('AppBundle\Form\SchoolClassType', $schoolClass);
         $form->handleRequest($request);
@@ -162,6 +184,7 @@ class SchoolClassController extends Controller {
      * @Method("GET")
      */
     public function showAction(SchoolClass $schoolClass) {
+        $this->denyAccessUnlessGranted('ROLE_ADMIN', null, 'Unable to access this page!');
         return $this->render('schoolclass/show.html.twig', array(
                     'schoolClass' => $schoolClass,
         ));
@@ -174,6 +197,7 @@ class SchoolClassController extends Controller {
      * @Method({"GET", "POST"})
      */
     public function editAction(Request $request, SchoolClass $schoolClass) {
+        $this->denyAccessUnlessGranted('ROLE_ADMIN', null, 'Unable to access this page!');
         $deleteForm = $this->createDeleteForm($schoolClass);
         $editForm = $this->createForm('AppBundle\Form\SchoolClassType', $schoolClass);
         $editForm->handleRequest($request);
@@ -198,6 +222,7 @@ class SchoolClassController extends Controller {
      * @Method("DELETE")
      */
     public function deleteAction(Request $request, SchoolClass $schoolClass) {
+        $this->denyAccessUnlessGranted('ROLE_ADMIN', null, 'Unable to access this page!');
         $form = $this->createDeleteForm($schoolClass);
         $form->handleRequest($request);
 

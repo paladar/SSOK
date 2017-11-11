@@ -24,6 +24,7 @@ class TeacherController extends Controller {
      * @Method("GET")
      */
     public function indexAction() {
+        $this->denyAccessUnlessGranted('ROLE_ADMIN', null, 'Unable to access this page!');
         $em = $this->getDoctrine()->getManager();
 
         $teachers = $em->getRepository('AppBundle:Teacher')->findAll();
@@ -40,6 +41,7 @@ class TeacherController extends Controller {
      * @Method({"GET", "POST"})
      */
     public function newAction(Request $request) {
+        $this->denyAccessUnlessGranted('ROLE_ADMIN', null, 'Unable to access this page!');
         $em = $this->getDoctrine()->getManager();
 
         $teacher = new Teacher();
@@ -107,6 +109,7 @@ class TeacherController extends Controller {
      * @Method("GET")
      */
     public function showAction(Teacher $teacher) {
+        $this->denyAccessUnlessGranted('ROLE_ADMIN', null, 'Unable to access this page!');
         return $this->render('teacher/show.html.twig', array(
                     'teacher' => $teacher,
         ));
@@ -119,6 +122,7 @@ class TeacherController extends Controller {
      * @Method({"GET", "POST"})
      */
     public function editAction(Request $request, Teacher $teacher) {
+        $this->denyAccessUnlessGranted('ROLE_ADMIN', null, 'Unable to access this page!');
         $em = $this->getDoctrine()->getManager();
 
         $deleteForm = $this->createDeleteForm($teacher);
@@ -152,6 +156,7 @@ class TeacherController extends Controller {
      * @Method("DELETE")
      */
     public function deleteAction(Request $request, Teacher $teacher) {
+        $this->denyAccessUnlessGranted('ROLE_ADMIN', null, 'Unable to access this page!');
         $form = $this->createDeleteForm($teacher);
         $form->handleRequest($request);
 

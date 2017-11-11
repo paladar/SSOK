@@ -22,6 +22,7 @@ class ReplecementController extends Controller
      */
     public function indexAction()
     {
+        $this->denyAccessUnlessGranted('ROLE_ADMIN', null, 'Unable to access this page!');
         $em = $this->getDoctrine()->getManager();
 
         $replecements = $em->getRepository('AppBundle:Replecement')->findAll();
@@ -39,6 +40,7 @@ class ReplecementController extends Controller
      */
     public function newAction(Request $request)
     {
+        $this->denyAccessUnlessGranted('ROLE_ADMIN', null, 'Unable to access this page!');
         $replecement = new Replecement();
         $form = $this->createForm('AppBundle\Form\ReplecementType', $replecement);
         $form->handleRequest($request);
@@ -65,6 +67,7 @@ class ReplecementController extends Controller
      */
     public function showAction(Replecement $replecement)
     {
+        $this->denyAccessUnlessGranted('ROLE_ADMIN', null, 'Unable to access this page!');
         return $this->render('replecement/show.html.twig', array(
             'replecement' => $replecement,
         ));
@@ -78,6 +81,7 @@ class ReplecementController extends Controller
      */
     public function editAction(Request $request, Replecement $replecement)
     {
+        $this->denyAccessUnlessGranted('ROLE_ADMIN', null, 'Unable to access this page!');
         $deleteForm = $this->createDeleteForm($replecement);
         $editForm = $this->createForm('AppBundle\Form\ReplecementType', $replecement);
         $editForm->handleRequest($request);
@@ -103,6 +107,7 @@ class ReplecementController extends Controller
      */
     public function deleteAction(Request $request, Replecement $replecement)
     {
+        $this->denyAccessUnlessGranted('ROLE_ADMIN', null, 'Unable to access this page!');
         $form = $this->createDeleteForm($replecement);
         $form->handleRequest($request);
 

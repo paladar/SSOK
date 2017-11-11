@@ -1,0 +1,15 @@
+{% extends 'default/index.html.twig' %}
+
+{% block content %}
+    <div class="row">
+        <h1 class="col-xs-6">Strona główna</h1>
+        <div class="col-xs-12">
+            {% if is_granted('ROLE_ADMIN') %}
+                {% include 'default/admin.html.twig' %}
+            {% elseif is_granted('ROLE_TEACHER') %}
+                {% include 'default/teacher.html.twig' %}
+            {% else %}
+                {% include 'default/student.html.twig' %}
+            {% endif %}
+        </div>
+    {% endblock %}

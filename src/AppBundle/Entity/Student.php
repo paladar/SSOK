@@ -65,12 +65,12 @@ class Student {
     protected $studentComments;
 
     /**
-     * @var SchoolClass $class
+     * @var SchoolClass $schoolClass
      *
      * @ORM\ManyToOne(targetEntity="SchoolClass", inversedBy="students", fetch="EAGER")
      * @ORM\JoinColumn(name="id_class", referencedColumnName="id", nullable=true)
      */
-    protected $class;
+    protected $schoolClass;
 
     /**
      * @var string $email

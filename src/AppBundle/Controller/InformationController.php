@@ -5,29 +5,31 @@ namespace AppBundle\Controller;
 use AppBundle\Entity\Information;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;use Symfony\Component\HttpFoundation\Request;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Symfony\Component\HttpFoundation\Request;
 
 /**
  * Information controller.
  *
  * @Route("information")
  */
-class InformationController extends Controller
-{
+class InformationController extends Controller {
+
     /**
      * Lists all information entities.
      *
      * @Route("/", name="information_index")
      * @Method("GET")
      */
-    public function indexAction()
-    {
+    public function indexAction() {
+        $this->denyAccessUnlessGranted('ROLE_ADMIN', null, 'Unable to access this page!');
+
         $em = $this->getDoctrine()->getManager();
 
         $information = $em->getRepository('AppBundle:Information')->findAll();
 
         return $this->render('information/index.html.twig', array(
-            'information' => $information,
+                    'information' => $information,
         ));
     }
 
@@ -37,8 +39,9 @@ class InformationController extends Controller
      * @Route("/new", name="information_new")
      * @Method({"GET", "POST"})
      */
-    public function newAction(Request $request)
-    {
+    public function newAction(Request $request) {
+        $this->denyAccessUnlessGranted('ROLE_ADMIN', null, 'Unable to access this page!');
+
         $information = new Information();
         $form = $this->createForm('AppBundle\Form\InformationType', $information);
         $form->handleRequest($request);
@@ -52,8 +55,8 @@ class InformationController extends Controller
         }
 
         return $this->render('information/new.html.twig', array(
-            'information' => $information,
-            'form' => $form->createView(),
+                    'information' => $information,
+                    'form' => $form->createView(),
         ));
     }
 
@@ -63,10 +66,10 @@ class InformationController extends Controller
      * @Route("/{id}", name="information_show")
      * @Method("GET")
      */
-    public function showAction(Information $information)
-    {
+    public function showAction(Information $information) {
+        $this->denyAccessUnlessGranted('ROLE_ADMIN', null, 'Unable to access this page!');
         return $this->render('information/show.html.twig', array(
-            'information' => $information,
+                    'information' => $information,
         ));
     }
 
@@ -76,8 +79,9 @@ class InformationController extends Controller
      * @Route("/{id}/edit", name="information_edit")
      * @Method({"GET", "POST"})
      */
-    public function editAction(Request $request, Information $information)
-    {
+    public function editAction(Request $request, Information $information) {
+        $this->denyAccessUnlessGranted('ROLE_ADMIN', null, 'Unable to access this page!');
+
         $deleteForm = $this->createDeleteForm($information);
         $editForm = $this->createForm('AppBundle\Form\InformationType', $information);
         $editForm->handleRequest($request);
@@ -89,9 +93,9 @@ class InformationController extends Controller
         }
 
         return $this->render('information/edit.html.twig', array(
-            'information' => $information,
-            'edit_form' => $editForm->createView(),
-            'delete_form' => $deleteForm->createView(),
+                    'information' => $information,
+                    'edit_form' => $editForm->createView(),
+                    'delete_form' => $deleteForm->createView(),
         ));
     }
 
@@ -101,8 +105,9 @@ class InformationController extends Controller
      * @Route("/{id}", name="information_delete")
      * @Method("DELETE")
      */
-    public function deleteAction(Request $request, Information $information)
-    {
+    public function deleteAction(Request $request, Information $information) {
+        $this->denyAccessUnlessGranted('ROLE_ADMIN', null, 'Unable to access this page!');
+        
         $form = $this->createDeleteForm($information);
         $form->handleRequest($request);
 
@@ -122,12 +127,12 @@ class InformationController extends Controller
      *
      * @return \Symfony\Component\Form\Form The form
      */
-    private function createDeleteForm(Information $information)
-    {
+    private function createDeleteForm(Information $information) {
         return $this->createFormBuilder()
-            ->setAction($this->generateUrl('information_delete', array('id' => $information->getId())))
-            ->setMethod('DELETE')
-            ->getForm()
+                        ->setAction($this->generateUrl('information_delete', array('id' => $information->getId())))
+                        ->setMethod('DELETE')
+                        ->getForm()
         ;
     }
+
 }

@@ -22,6 +22,7 @@ class SubjectController extends Controller
      */
     public function indexAction()
     {
+        $this->denyAccessUnlessGranted('ROLE_ADMIN', null, 'Unable to access this page!');
         $em = $this->getDoctrine()->getManager();
 
         $subjects = $em->getRepository('AppBundle:Subject')->findAll();
@@ -39,6 +40,7 @@ class SubjectController extends Controller
      */
     public function newAction(Request $request)
     {
+        $this->denyAccessUnlessGranted('ROLE_ADMIN', null, 'Unable to access this page!');
         $subject = new Subject();
         $form = $this->createForm('AppBundle\Form\SubjectType', $subject);
         $form->handleRequest($request);
@@ -65,6 +67,7 @@ class SubjectController extends Controller
      */
     public function showAction(Subject $subject)
     {
+        $this->denyAccessUnlessGranted('ROLE_ADMIN', null, 'Unable to access this page!');
         return $this->render('subject/show.html.twig', array(
             'subject' => $subject,
         ));
@@ -78,6 +81,7 @@ class SubjectController extends Controller
      */
     public function editAction(Request $request, Subject $subject)
     {
+        $this->denyAccessUnlessGranted('ROLE_ADMIN', null, 'Unable to access this page!');
         $deleteForm = $this->createDeleteForm($subject);
         $editForm = $this->createForm('AppBundle\Form\SubjectType', $subject);
         $editForm->handleRequest($request);
@@ -103,6 +107,7 @@ class SubjectController extends Controller
      */
     public function deleteAction(Request $request, Subject $subject)
     {
+        $this->denyAccessUnlessGranted('ROLE_ADMIN', null, 'Unable to access this page!');
         $form = $this->createDeleteForm($subject);
         $form->handleRequest($request);
 

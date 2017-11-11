@@ -22,6 +22,7 @@ class StudentParentController extends Controller
      */
     public function indexAction()
     {
+        $this->denyAccessUnlessGranted('ROLE_ADMIN', null, 'Unable to access this page!');
         $em = $this->getDoctrine()->getManager();
 
         $studentParents = $em->getRepository('AppBundle:StudentParent')->findAll();
@@ -39,6 +40,7 @@ class StudentParentController extends Controller
      */
     public function newAction(Request $request)
     {
+        $this->denyAccessUnlessGranted('ROLE_ADMIN', null, 'Unable to access this page!');
         $studentParent = new Studentparent();
         $form = $this->createForm('AppBundle\Form\StudentParentType', $studentParent);
         $form->handleRequest($request);
@@ -65,6 +67,7 @@ class StudentParentController extends Controller
      */
     public function showAction(StudentParent $studentParent)
     {
+        $this->denyAccessUnlessGranted('ROLE_ADMIN', null, 'Unable to access this page!');
         return $this->render('studentparent/show.html.twig', array(
             'studentParent' => $studentParent,
         ));
@@ -78,6 +81,7 @@ class StudentParentController extends Controller
      */
     public function editAction(Request $request, StudentParent $studentParent)
     {
+        $this->denyAccessUnlessGranted('ROLE_ADMIN', null, 'Unable to access this page!');
         $deleteForm = $this->createDeleteForm($studentParent);
         $editForm = $this->createForm('AppBundle\Form\StudentParentType', $studentParent);
         $editForm->handleRequest($request);
@@ -103,6 +107,7 @@ class StudentParentController extends Controller
      */
     public function deleteAction(Request $request, StudentParent $studentParent)
     {
+        $this->denyAccessUnlessGranted('ROLE_ADMIN', null, 'Unable to access this page!');
         $form = $this->createDeleteForm($studentParent);
         $form->handleRequest($request);
 

@@ -34,7 +34,7 @@ class Subject {
     /**
      * @var ArrayCollection|Teacher[] $teachers
      *
-     * @ORM\ManyToMany(targetEntity="Teacher", inversedBy="subject")
+     * @ORM\ManyToMany(targetEntity="Teacher", inversedBy="subjects")
      * @ORM\JoinTable(name="subject_teacher",
      *      joinColumns={@ORM\JoinColumn(name="id_subject", referencedColumnName="id")},
      *      inverseJoinColumns={@ORM\JoinColumn(name="id_teacher", referencedColumnName="id")}
