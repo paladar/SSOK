@@ -113,3 +113,13 @@ stof_doctrine_extensions:
             tree: true
             softdeleteable: true
             sortable: true
+
+knp_snappy:
+    pdf:
+        enabled:    true
+        binary:     /usr/local/bin/wkhtmltopdf
+        options:    []
+    image:
+        enabled:    true
+        binary:     /usr/local/bin/wkhtmltoimage
+        options:    []

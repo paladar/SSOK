@@ -170,6 +170,52 @@ class TeacherController extends Controller {
     }
 
     /**
+     * Finds and displays a teacher default password.
+     *
+     * @Route("/{id}/password", name="teacher_password")
+     * @Method("GET")
+     */
+    public function passwordAction(Teacher $teacher) {
+        $this->denyAccessUnlessGranted('ROLE_ADMIN', null, 'Unable to access this page!');
+        $em = $this->getDoctrine()->getManager();
+
+        $username = $teacher->getUser()->getUsername();
+        $passwordObj = $em->getRepository('AppBundle:Password')->findOneByUsername($username);
+        $password = $passwordObj->getPassword();
+
+        return $this->render('teacher/password.html.twig', array(
+                    'teacher' => $teacher,
+                    'username' => $username,
+                    'password' => $password
+        ));
+    }
+
+    /**
+     * Finds and displays a teacher default password.
+     *
+     * @Route("/{id}/resetpassword", name="teacher_reset_password")
+     * @Method("GET")
+     */
+    public function resetPasswordAction(Teacher $teacher) {
+        $this->denyAccessUnlessGranted('ROLE_ADMIN', null, 'Unable to access this page!');
+        $em = $this->getDoctrine()->getManager();
+
+        $user = $teacher->getUser();
+        $username = $teacher->getUser()->getUsername();
+        $passwordObj = $em->getRepository('AppBundle:Password')->findOneByUsername($username);
+        $password = $passwordObj->getPassword();
+        $user->setPassword($password);
+        $em->persist($user);
+        $em->flush();
+
+        return $this->render('teacher/password.html.twig', array(
+                    'teacher' => $teacher,
+                    'username' => $username,
+                    'password' => $password
+        ));
+    }
+
+    /**
      * Creates a form to delete a teacher entity.
      *
      * @param Teacher $teacher The teacher entity

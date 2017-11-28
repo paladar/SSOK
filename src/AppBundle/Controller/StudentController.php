@@ -3,6 +3,7 @@
 namespace AppBundle\Controller;
 
 use AppBundle\Entity\Student;
+use AppBundle\Entity\StudentParent;
 use AppBundle\Entity\User;
 use AppBundle\Entity\Password;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -174,6 +175,97 @@ class StudentController extends Controller {
         }
 
         return $this->redirectToRoute('student_index');
+    }
+
+    /**
+     * Finds and displays a teacher default password.
+     *
+     * @Route("/{id}/password", name="student_password")
+     * @Method("GET")
+     */
+    public function passwordAction(Student $student) {
+        $this->denyAccessUnlessGranted('ROLE_ADMIN', null, 'Unable to access this page!');
+        $em = $this->getDoctrine()->getManager();
+
+        $username = $student->getUser()->getUsername();
+        $passwordObj = $em->getRepository('AppBundle:Password')->findOneByUsername($username);
+        $password = $passwordObj->getPassword();
+
+        $parentUsername = $student->getStudentParent()->getUser()->getUsername();
+        $passwordParentObj = $em->getRepository('AppBundle:Password')->findOneByUsername($parentUsername);
+        $passwordParent = $passwordParentObj->getPassword();
+
+        return $this->render('student/password.html.twig', array(
+                    'student' => $student,
+                    'username' => $username,
+                    'password' => $password,
+                    'parentusername' => $parentUsername,
+                    'passwordparent' => $passwordParent
+        ));
+    }
+
+    /**
+     * Finds and displays a teacher default password.
+     *
+     * @Route("/{id}/resetpassword", name="student_reset_password")
+     * @Method("GET")
+     */
+    public function resetPasswordAction(Student $student) {
+        $this->denyAccessUnlessGranted('ROLE_ADMIN', null, 'Unable to access this page!');
+        $em = $this->getDoctrine()->getManager();
+
+        $user = $student->getUser();
+        $username = $student->getUser()->getUsername();
+        $passwordObj = $em->getRepository('AppBundle:Password')->findOneByUsername($username);
+        $password = $passwordObj->getPassword();
+        $user->setPassword($password);
+        $em->persist($user);
+        $em->flush();
+
+        $parent = $student->getStudentParent();
+        $parentUsername = $parent->getUser()->getUsername();
+        $passwordObjParent = $em->getRepository('AppBundle:Password')->findOneByUsername($parentUsername);
+        $passwordParent = $passwordObjParent->getPassword();
+
+        return $this->render('student/password.html.twig', array(
+                    'student' => $student,
+                    'username' => $username,
+                    'password' => $password,
+                    'parentusername' => $parentUsername,
+                    'passwordparent' => $passwordParent
+        ));
+    }
+
+    /**
+     * Finds and displays a teacher default password.
+     *
+     * @Route("/{id}/resetparentpassword", name="student_parent_reset_password")
+     * @Method("GET")
+     */
+    public function resetParentPasswordAction(StudentParent $parent) {
+        $this->denyAccessUnlessGranted('ROLE_ADMIN', null, 'Unable to access this page!');
+        $em = $this->getDoctrine()->getManager();
+
+        $user = $parent->getUser();
+        $parentUsername = $parent->getUser()->getUsername();
+        $passwordObj = $em->getRepository('AppBundle:Password')->findOneByUsername($parentUsername);
+        $passwordParent = $passwordObj->getPassword();
+        $user->setPassword($passwordParent);
+        $em->persist($user);
+        $em->flush();
+
+        $student = $parent->getStudent();
+        $username = $student->getUser()->getUsername();
+        $passwordObjStudent = $em->getRepository('AppBundle:Password')->findOneByUsername($username);
+        $password = $passwordObjStudent->getPassword();
+
+        return $this->render('student/password.html.twig', array(
+                    'student' => $student,
+                    'username' => $username,
+                    'password' => $password,
+                    'parentusername' => $parentUsername,
+                    'passwordparent' => $passwordParent
+        ));
     }
 
     /**
