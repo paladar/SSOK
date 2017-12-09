@@ -140,14 +140,16 @@ class Student {
         $this->studentComments = new \Doctrine\Common\Collections\ArrayCollection();
     }
 
+    public function __toString() {
+        return $this->getFirstName() . ' ' . $this->getSurname();
+    }
 
     /**
      * Get id
      *
      * @return integer
      */
-    public function getId()
-    {
+    public function getId() {
         return $this->id;
     }
 
@@ -158,8 +160,7 @@ class Student {
      *
      * @return Student
      */
-    public function setEmail($email)
-    {
+    public function setEmail($email) {
         $this->email = $email;
 
         return $this;
@@ -170,8 +171,7 @@ class Student {
      *
      * @return string
      */
-    public function getEmail()
-    {
+    public function getEmail() {
         return $this->email;
     }
 
@@ -182,8 +182,7 @@ class Student {
      *
      * @return Student
      */
-    public function setFirstName($firstName)
-    {
+    public function setFirstName($firstName) {
         $this->firstName = $firstName;
 
         return $this;
@@ -194,8 +193,7 @@ class Student {
      *
      * @return string
      */
-    public function getFirstName()
-    {
+    public function getFirstName() {
         return $this->firstName;
     }
 
@@ -206,8 +204,7 @@ class Student {
      *
      * @return Student
      */
-    public function setSurname($surname)
-    {
+    public function setSurname($surname) {
         $this->surname = $surname;
 
         return $this;
@@ -218,8 +215,7 @@ class Student {
      *
      * @return string
      */
-    public function getSurname()
-    {
+    public function getSurname() {
         return $this->surname;
     }
 
@@ -230,8 +226,7 @@ class Student {
      *
      * @return Student
      */
-    public function setPhone($phone)
-    {
+    public function setPhone($phone) {
         $this->phone = $phone;
 
         return $this;
@@ -242,8 +237,7 @@ class Student {
      *
      * @return string
      */
-    public function getPhone()
-    {
+    public function getPhone() {
         return $this->phone;
     }
 
@@ -254,8 +248,7 @@ class Student {
      *
      * @return Student
      */
-    public function setAddress($address)
-    {
+    public function setAddress($address) {
         $this->address = $address;
 
         return $this;
@@ -266,8 +259,7 @@ class Student {
      *
      * @return string
      */
-    public function getAddress()
-    {
+    public function getAddress() {
         return $this->address;
     }
 
@@ -278,8 +270,7 @@ class Student {
      *
      * @return Student
      */
-    public function setCreatedAt($createdAt)
-    {
+    public function setCreatedAt($createdAt) {
         $this->createdAt = $createdAt;
 
         return $this;
@@ -290,8 +281,7 @@ class Student {
      *
      * @return \DateTime
      */
-    public function getCreatedAt()
-    {
+    public function getCreatedAt() {
         return $this->createdAt;
     }
 
@@ -302,8 +292,7 @@ class Student {
      *
      * @return Student
      */
-    public function setUpdatedAt($updatedAt)
-    {
+    public function setUpdatedAt($updatedAt) {
         $this->updatedAt = $updatedAt;
 
         return $this;
@@ -314,8 +303,7 @@ class Student {
      *
      * @return \DateTime
      */
-    public function getUpdatedAt()
-    {
+    public function getUpdatedAt() {
         return $this->updatedAt;
     }
 
@@ -326,8 +314,7 @@ class Student {
      *
      * @return Student
      */
-    public function setDeletedAt($deletedAt)
-    {
+    public function setDeletedAt($deletedAt) {
         $this->deletedAt = $deletedAt;
 
         return $this;
@@ -338,8 +325,7 @@ class Student {
      *
      * @return \DateTime
      */
-    public function getDeletedAt()
-    {
+    public function getDeletedAt() {
         return $this->deletedAt;
     }
 
@@ -350,8 +336,7 @@ class Student {
      *
      * @return Student
      */
-    public function setUser(\AppBundle\Entity\User $user = null)
-    {
+    public function setUser(\AppBundle\Entity\User $user = null) {
         $this->user = $user;
 
         return $this;
@@ -362,8 +347,7 @@ class Student {
      *
      * @return \AppBundle\Entity\User
      */
-    public function getUser()
-    {
+    public function getUser() {
         return $this->user;
     }
 
@@ -374,8 +358,7 @@ class Student {
      *
      * @return Student
      */
-    public function setStudentParent(\AppBundle\Entity\StudentParent $studentParent = null)
-    {
+    public function setStudentParent(\AppBundle\Entity\StudentParent $studentParent = null) {
         $this->studentParent = $studentParent;
 
         return $this;
@@ -386,8 +369,7 @@ class Student {
      *
      * @return \AppBundle\Entity\StudentParent
      */
-    public function getStudentParent()
-    {
+    public function getStudentParent() {
         return $this->studentParent;
     }
 
@@ -398,8 +380,7 @@ class Student {
      *
      * @return Student
      */
-    public function addGrade(\AppBundle\Entity\Grade $grade)
-    {
+    public function addGrade(\AppBundle\Entity\Grade $grade) {
         $this->grades[] = $grade;
 
         return $this;
@@ -410,8 +391,7 @@ class Student {
      *
      * @param \AppBundle\Entity\Grade $grade
      */
-    public function removeGrade(\AppBundle\Entity\Grade $grade)
-    {
+    public function removeGrade(\AppBundle\Entity\Grade $grade) {
         $this->grades->removeElement($grade);
     }
 
@@ -420,8 +400,7 @@ class Student {
      *
      * @return \Doctrine\Common\Collections\Collection
      */
-    public function getGrades()
-    {
+    public function getGrades() {
         return $this->grades;
     }
 
@@ -432,8 +411,7 @@ class Student {
      *
      * @return Student
      */
-    public function addPresence(\AppBundle\Entity\Presence $presence)
-    {
+    public function addPresence(\AppBundle\Entity\Presence $presence) {
         $this->presences[] = $presence;
 
         return $this;
@@ -444,8 +422,7 @@ class Student {
      *
      * @param \AppBundle\Entity\Presence $presence
      */
-    public function removePresence(\AppBundle\Entity\Presence $presence)
-    {
+    public function removePresence(\AppBundle\Entity\Presence $presence) {
         $this->presences->removeElement($presence);
     }
 
@@ -454,8 +431,7 @@ class Student {
      *
      * @return \Doctrine\Common\Collections\Collection
      */
-    public function getPresences()
-    {
+    public function getPresences() {
         return $this->presences;
     }
 
@@ -466,8 +442,7 @@ class Student {
      *
      * @return Student
      */
-    public function addStudentComment(\AppBundle\Entity\StudentComment $studentComment)
-    {
+    public function addStudentComment(\AppBundle\Entity\StudentComment $studentComment) {
         $this->studentComments[] = $studentComment;
 
         return $this;
@@ -478,8 +453,7 @@ class Student {
      *
      * @param \AppBundle\Entity\StudentComment $studentComment
      */
-    public function removeStudentComment(\AppBundle\Entity\StudentComment $studentComment)
-    {
+    public function removeStudentComment(\AppBundle\Entity\StudentComment $studentComment) {
         $this->studentComments->removeElement($studentComment);
     }
 
@@ -488,21 +462,19 @@ class Student {
      *
      * @return \Doctrine\Common\Collections\Collection
      */
-    public function getStudentComments()
-    {
+    public function getStudentComments() {
         return $this->studentComments;
     }
 
     /**
      * Set class
      *
-     * @param \AppBundle\Entity\SchoolClass $class
+     * @param \AppBundle\Entity\SchoolClass $schoolClass
      *
      * @return Student
      */
-    public function setClass(\AppBundle\Entity\SchoolClass $class)
-    {
-        $this->class = $class;
+    public function setSchoolClass(\AppBundle\Entity\SchoolClass $schoolClass) {
+        $this->schoolClass = $schoolClass;
 
         return $this;
     }
@@ -512,8 +484,8 @@ class Student {
      *
      * @return \AppBundle\Entity\SchoolClass
      */
-    public function getClass()
-    {
-        return $this->class;
+    public function getSchoolClass() {
+        return $this->schoolClass;
     }
+
 }

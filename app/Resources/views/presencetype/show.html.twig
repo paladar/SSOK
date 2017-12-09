@@ -14,6 +14,9 @@
             <div class="admin-details">
                 <div class="admin-label col-xs-3">Czy liczona jako nieobecna?</div><div class="admin-content col-xs-9">{% if presenceType.countAsAbsence %}Tak{% else %}Nie{% endif %}</div>
             </div>
+            <div class="admin-details">
+                <div class="admin-label col-xs-3">Czy do wyboru dla rodzica?</div><div class="admin-content col-xs-9">{% if presenceType.forParent %}Tak{% else %}Nie{% endif %}</div>
+            </div>
         </div>
         <div class="col-xs-12">
             <a class="btn btn-ssok" href="{{ path('presencetype_edit', { 'id': presenceType.id }) }}">Edytuj</a>

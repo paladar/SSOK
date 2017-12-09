@@ -14,6 +14,13 @@
             <div class="admin-details">
                 <div class="admin-label col-xs-3">Wychowawca</div><div class="admin-content col-xs-9">{{ schoolClass.teacher.firstname }} {{ schoolClass.teacher.surname }}</div>
             </div>
+            {% if schoolClass.students is not empty %}
+                <div class="admin-details">
+                    {% for student in schoolClass.students %}
+                        <div class="admin-label col-xs-3">{% if loop.first %}Uczniowie{% endif %}</div><div class="admin-content col-xs-9">{{student}}</div>
+                    {% endfor %}
+                </div>
+            {% endif %}
         </div>
         <div class="col-xs-12">
             <a class="btn btn-ssok" href="{{ path('schoolclass_edit', { 'id': schoolClass.id }) }}">Edytuj</a>
