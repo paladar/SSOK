@@ -1,0 +1,22 @@
+{% extends 'default/index.html.twig' %}
+
+{% block content %}
+    <div class="row">
+        <h1 class="col-xs-6">Typ ocenty #{{gradeType.id}}</h1>
+        <div class="col-xs-6"><a class="btn btn-ssok" href="{{ path('gradetype_index') }}">Powrót do listy</a></div>
+        <div class="col-xs-12 admin-show">
+            <div class="admin-details">
+                <div class="admin-label col-xs-3">Nazwa</div><div class="admin-content col-xs-9">{{gradeType.label}}</div>
+            </div>
+            <div class="admin-details">
+                <div class="admin-label col-xs-3">Opis</div><div class="admin-content col-xs-9">{{gradeType.description}}</div>
+            </div>
+            <div class="admin-details">
+                <div class="admin-label col-xs-3">Waga</div><div class="admin-content col-xs-9">{{gradeType.rate}}</div>
+            </div>
+        </div>
+        <div class="col-xs-12">
+            <a class="btn btn-ssok" href="{{ path('presencetype_edit', { 'id': presenceType.id }) }}">Edytuj</a>
+        </div>
+    </div>
+{% endblock %}

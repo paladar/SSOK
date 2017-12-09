@@ -20,16 +20,50 @@ class DefaultController extends Controller {
     }
 
     /**
-     * @Route("/pdf", name="pdf")
+     * @Route("/students/password/export", name="students-password-export")
      */
-    public function pdfAction(Request $request) {
-        // replace this example code with whatever you need
-        $html = $this->render('default/main.html.twig', [
-                    'base_dir' => realpath($this->getParameter('kernel.project_dir')) . DIRECTORY_SEPARATOR,
+    public function studentsPasswordExportAction(Request $request) {
+        $em = $this->getDoctrine()->getManager();
+
+        $passwords = [];
+        $students = $em->getRepository('AppBundle:Student')->findAll();
+        foreach ($students as $student){
+            $username = $student->getUser()->getUsername();
+            $parentUsername = $student->getStudentParent()->getUser()->getUsername();
+            $password = $em->getRepository('AppBundle:Password')->findOneByUsername($username);
+            $parentPassword = $em->getRepository('AppBundle:Password')->findOneByUsername($parentUsername);
+            $passwords[] = [$password,$parentPassword];
+        }
+        $html = $this->render('default/Pdf/studentPasswordExport.html.twig', [
+            'base_dir' => realpath($this->getParameter('kernel.project_dir')) . DIRECTORY_SEPARATOR,
+            'passwords' => $passwords,
         ]);
 
         return new PdfResponse(
-                $this->get('knp_snappy.pdf')->getOutputFromHtml($html), 'file.pdf'
+                $this->get('knp_snappy.pdf')->getOutputFromHtml($html), 'uczniowie-hasla.pdf'
+        );
+    }
+    
+        /**
+     * @Route("/teachers/password/export", name="teachers-password-export")
+     */
+    public function teachersPasswordExportAction(Request $request) {
+        $em = $this->getDoctrine()->getManager();
+
+        $passwords = [];
+        $teachers = $em->getRepository('AppBundle:Teacher')->findAll();
+        foreach ($teachers as $teacher){
+            $username = $teacher->getUser()->getUsername();
+            $password = $em->getRepository('AppBundle:Password')->findOneByUsername($username);
+            $passwords[] = $password;
+        }
+        $html = $this->render('default/Pdf/teachersPasswordExport.html.twig', [
+            'base_dir' => realpath($this->getParameter('kernel.project_dir')) . DIRECTORY_SEPARATOR,
+            'passwords' => $passwords,
+        ]);
+
+        return new PdfResponse(
+                $this->get('knp_snappy.pdf')->getOutputFromHtml($html), 'nauczycielee-hasla.pdf'
         );
     }
 

@@ -1,0 +1,41 @@
+{% extends 'default/index.html.twig' %}
+
+{% block content %}
+    <div class="row">
+        <h1 class="col-xs-6">Lista typów oceny</h1>
+        <div class="col-xs-6"><a class="btn btn-ssok" href="{{ path('gradetype_new') }}">Dodaj typ oceny</a></div>
+        <div class="col-xs-12">
+            <table class="datatable table table-striped table-bordered">
+                <thead>
+                    <tr>
+                        <th>Id</th>
+                        <th>Skrót</th>
+                        <th>Opis</th>
+                        <th>Waga</th>
+                        <th>Akcje</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for gradeType in gradeTypes %}
+                        <tr>
+                            <td><a href="{{ path('gradetype_show', { 'id': gradeType.id }) }}">{{ gradeType.id }}</a></td>
+                            <td>{{ gradeType.label }}</td>
+                            <td>{{ gradeType.description }}</td>
+                            <td>{{ gradeType.rate }}</td>
+                            <td>
+                                <ul class="actions">
+                                    <li>
+                                        <a href="{{ path('gradetype_show', { 'id': gradeType.id }) }}"   ><i class="fa fa-eye" aria-hidden="true"></i></a>
+                                    </li>
+                                    <li>
+                                        <a href="{{ path('gradetype_edit', { 'id': gradeType.id }) }}"   ><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
+                                    </li>
+                                </ul>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+{% endblock %}

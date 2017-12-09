@@ -49,6 +49,13 @@ class Presence {
     protected $presenceType;
 
     /**
+     * @var boolean $checked
+     *
+     * @ORM\Column(name="checked", type="boolean")
+     */
+    private $checked = false;
+
+    /**
      * @var \Datetime $date
      *
      * @ORM\Column(name="date", type="date")

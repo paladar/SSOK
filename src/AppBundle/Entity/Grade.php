@@ -48,6 +48,14 @@ class Grade {
     protected $value;
 
     /**
+     * @var GradeType $gradeType
+     *
+     * @ORM\ManyToOne(targetEntity="GradeType", inversedBy="gardes", fetch="EAGER")
+     * @ORM\JoinColumn(name="id_grade_type", referencedColumnName="id", nullable=false)
+     */
+    protected $gradeType;
+
+    /**
      * @var \Datetime $createdAt
      *
      * @Gedmo\Timestampable(on="create")
@@ -70,14 +78,12 @@ class Grade {
      */
     protected $deletedAt;
 
-
     /**
      * Get id
      *
      * @return integer
      */
-    public function getId()
-    {
+    public function getId() {
         return $this->id;
     }
 
@@ -88,8 +94,7 @@ class Grade {
      *
      * @return Grade
      */
-    public function setValue($value)
-    {
+    public function setValue($value) {
         $this->value = $value;
 
         return $this;
@@ -100,8 +105,7 @@ class Grade {
      *
      * @return string
      */
-    public function getValue()
-    {
+    public function getValue() {
         return $this->value;
     }
 
@@ -112,8 +116,7 @@ class Grade {
      *
      * @return Grade
      */
-    public function setCreatedAt($createdAt)
-    {
+    public function setCreatedAt($createdAt) {
         $this->createdAt = $createdAt;
 
         return $this;
@@ -124,8 +127,7 @@ class Grade {
      *
      * @return \DateTime
      */
-    public function getCreatedAt()
-    {
+    public function getCreatedAt() {
         return $this->createdAt;
     }
 
@@ -136,8 +138,7 @@ class Grade {
      *
      * @return Grade
      */
-    public function setUpdatedAt($updatedAt)
-    {
+    public function setUpdatedAt($updatedAt) {
         $this->updatedAt = $updatedAt;
 
         return $this;
@@ -148,8 +149,7 @@ class Grade {
      *
      * @return \DateTime
      */
-    public function getUpdatedAt()
-    {
+    public function getUpdatedAt() {
         return $this->updatedAt;
     }
 
@@ -160,8 +160,7 @@ class Grade {
      *
      * @return Grade
      */
-    public function setDeletedAt($deletedAt)
-    {
+    public function setDeletedAt($deletedAt) {
         $this->deletedAt = $deletedAt;
 
         return $this;
@@ -172,8 +171,7 @@ class Grade {
      *
      * @return \DateTime
      */
-    public function getDeletedAt()
-    {
+    public function getDeletedAt() {
         return $this->deletedAt;
     }
 
@@ -184,8 +182,7 @@ class Grade {
      *
      * @return Grade
      */
-    public function setStudent(\AppBundle\Entity\Student $student)
-    {
+    public function setStudent(\AppBundle\Entity\Student $student) {
         $this->student = $student;
 
         return $this;
@@ -196,8 +193,7 @@ class Grade {
      *
      * @return \AppBundle\Entity\Student
      */
-    public function getStudent()
-    {
+    public function getStudent() {
         return $this->student;
     }
 
@@ -208,8 +204,7 @@ class Grade {
      *
      * @return Grade
      */
-    public function setLesson(\AppBundle\Entity\Subject $lesson)
-    {
+    public function setLesson(\AppBundle\Entity\Subject $lesson) {
         $this->lesson = $lesson;
 
         return $this;
@@ -220,8 +215,8 @@ class Grade {
      *
      * @return \AppBundle\Entity\Subject
      */
-    public function getLesson()
-    {
+    public function getLesson() {
         return $this->lesson;
     }
+
 }

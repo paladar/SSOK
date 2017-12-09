@@ -9,11 +9,11 @@ use Gedmo\Mapping\Annotation as Gedmo;
 /**
  * PresenceType
  *
- * @ORM\Table(name="presenceTypes")
- * @ORM\Entity(repositoryClass="AppBundle\Entity\Repository\PresenceTypeRepository")
+ * @ORM\Table(name="gradeType")
+ * @ORM\Entity(repositoryClass="AppBundle\Entity\Repository\GradeTypeRepository")
  * @Gedmo\SoftDeleteable(fieldName="deletedAt", timeAware=false)
  */
-class PresenceType {
+class GradeType {
 
     /**
      * @var int $id
@@ -25,12 +25,12 @@ class PresenceType {
     private $id;
 
     /**
-     * @var ArrayCollection|Presence[] $presences
+     * @var ArrayCollection|Grade[] $grades
      *
-     * @ORM\OneToMany(targetEntity="Presence", mappedBy="presenceType", cascade={"all"}, orphanRemoval=true)
+     * @ORM\OneToMany(targetEntity="Grade", mappedBy="gradeType", cascade={"all"}, orphanRemoval=true)
      * @ORM\OrderBy({"id"="ASC"})
      */
-    protected $presences;
+    protected $grades;
 
     /**
      * @var string $label
@@ -47,18 +47,11 @@ class PresenceType {
     private $description;
 
     /**
-     * @var boolean $countAsAbsence
+     * @var integer $rate
      *
-     * @ORM\Column(name="count_as_absence", type="boolean")
+     * @ORM\Column(name="rate", type="integer")
      */
-    private $countAsAbsence = true;
-
-    /**
-     * @var boolean $forParent
-     *
-     * @ORM\Column(name="for_parent", type="boolean")
-     */
-    private $forParent = false;
+    private $rate = 1;
 
     /**
      * @var \Datetime $createdAt
@@ -87,15 +80,17 @@ class PresenceType {
      * Constructor
      */
     public function __construct() {
-        $this->presences = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->grades = new \Doctrine\Common\Collections\ArrayCollection();
     }
+
 
     /**
      * Get id
      *
      * @return integer
      */
-    public function getId() {
+    public function getId()
+    {
         return $this->id;
     }
 
@@ -104,9 +99,10 @@ class PresenceType {
      *
      * @param string $label
      *
-     * @return PresenceType
+     * @return GradeType
      */
-    public function setLabel($label) {
+    public function setLabel($label)
+    {
         $this->label = $label;
 
         return $this;
@@ -117,7 +113,8 @@ class PresenceType {
      *
      * @return string
      */
-    public function getLabel() {
+    public function getLabel()
+    {
         return $this->label;
     }
 
@@ -126,9 +123,10 @@ class PresenceType {
      *
      * @param string $description
      *
-     * @return PresenceType
+     * @return GradeType
      */
-    public function setDescription($description) {
+    public function setDescription($description)
+    {
         $this->description = $description;
 
         return $this;
@@ -139,30 +137,33 @@ class PresenceType {
      *
      * @return string
      */
-    public function getDescription() {
+    public function getDescription()
+    {
         return $this->description;
     }
 
     /**
-     * Set countAsAbsence
+     * Set rate
      *
-     * @param boolean $countAsAbsence
+     * @param integer $rate
      *
-     * @return PresenceType
+     * @return GradeType
      */
-    public function setCountAsAbsence($countAsAbsence) {
-        $this->countAsAbsence = $countAsAbsence;
+    public function setRate($rate)
+    {
+        $this->rate = $rate;
 
         return $this;
     }
 
     /**
-     * Get countAsAbsence
+     * Get rate
      *
-     * @return boolean
+     * @return integer
      */
-    public function getCountAsAbsence() {
-        return $this->countAsAbsence;
+    public function getRate()
+    {
+        return $this->rate;
     }
 
     /**
@@ -170,9 +171,10 @@ class PresenceType {
      *
      * @param \DateTime $createdAt
      *
-     * @return PresenceType
+     * @return GradeType
      */
-    public function setCreatedAt($createdAt) {
+    public function setCreatedAt($createdAt)
+    {
         $this->createdAt = $createdAt;
 
         return $this;
@@ -183,7 +185,8 @@ class PresenceType {
      *
      * @return \DateTime
      */
-    public function getCreatedAt() {
+    public function getCreatedAt()
+    {
         return $this->createdAt;
     }
 
@@ -192,9 +195,10 @@ class PresenceType {
      *
      * @param \DateTime $updatedAt
      *
-     * @return PresenceType
+     * @return GradeType
      */
-    public function setUpdatedAt($updatedAt) {
+    public function setUpdatedAt($updatedAt)
+    {
         $this->updatedAt = $updatedAt;
 
         return $this;
@@ -205,7 +209,8 @@ class PresenceType {
      *
      * @return \DateTime
      */
-    public function getUpdatedAt() {
+    public function getUpdatedAt()
+    {
         return $this->updatedAt;
     }
 
@@ -214,9 +219,10 @@ class PresenceType {
      *
      * @param \DateTime $deletedAt
      *
-     * @return PresenceType
+     * @return GradeType
      */
-    public function setDeletedAt($deletedAt) {
+    public function setDeletedAt($deletedAt)
+    {
         $this->deletedAt = $deletedAt;
 
         return $this;
@@ -227,39 +233,42 @@ class PresenceType {
      *
      * @return \DateTime
      */
-    public function getDeletedAt() {
+    public function getDeletedAt()
+    {
         return $this->deletedAt;
     }
 
     /**
-     * Add presence
+     * Add grade
      *
-     * @param \AppBundle\Entity\Presence $presence
+     * @param \AppBundle\Entity\Grade $grade
      *
-     * @return PresenceType
+     * @return GradeType
      */
-    public function addPresence(\AppBundle\Entity\Presence $presence) {
-        $this->presences[] = $presence;
+    public function addGrade(\AppBundle\Entity\Grade $grade)
+    {
+        $this->grades[] = $grade;
 
         return $this;
     }
 
     /**
-     * Remove presence
+     * Remove grade
      *
-     * @param \AppBundle\Entity\Presence $presence
+     * @param \AppBundle\Entity\Grade $grade
      */
-    public function removePresence(\AppBundle\Entity\Presence $presence) {
-        $this->presences->removeElement($presence);
+    public function removeGrade(\AppBundle\Entity\Grade $grade)
+    {
+        $this->grades->removeElement($grade);
     }
 
     /**
-     * Get presences
+     * Get grades
      *
      * @return \Doctrine\Common\Collections\Collection
      */
-    public function getPresences() {
-        return $this->presences;
+    public function getGrades()
+    {
+        return $this->grades;
     }
-
 }

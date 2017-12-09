@@ -12,6 +12,7 @@
                         <th>Skrót</th>
                         <th>Opis</th>
                         <th>Czy liczony jako nieobecny?</th>
+                        <th>Czy do wyboru dla rodzica?</th>
                         <th>Akcje</th>
                     </tr>
                 </thead>
@@ -22,6 +23,7 @@
                             <td>{{ presenceType.label }}</td>
                             <td>{{ presenceType.description }}</td>
                             <td>{% if presenceType.countAsAbsence %}Tak{% else %}Nie{% endif %}</td>
+                            <td>{% if presenceType.forParent %}Tak{% else %}Nie{% endif %}</td>
                             <td>
                                 <ul class="actions">
                                     <li>
