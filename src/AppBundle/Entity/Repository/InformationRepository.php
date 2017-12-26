@@ -10,4 +10,12 @@ namespace AppBundle\Entity\Repository;
  */
 class InformationRepository extends \Doctrine\ORM\EntityRepository
 {
+        public function findAllOrdered()
+    {
+        return $this->getEntityManager()
+            ->createQuery(
+                'SELECT i FROM AppBundle:Information i ORDER BY i.createdAt DESC'
+            )
+            ->getResult();
+    }
 }

@@ -218,8 +218,11 @@ class StudentController extends Controller {
         $username = $student->getUser()->getUsername();
         $passwordObj = $em->getRepository('AppBundle:Password')->findOneByUsername($username);
         $password = $passwordObj->getPassword();
-        $user->setPassword($password);
+        $user->setPlainPassword($password);
+        $userManager = $this->container->get('fos_user.user_manager');
+        $userManager->updatePassword($user);
         $em->persist($user);
+        $em->persist($student);
         $em->flush();
 
         $parent = $student->getStudentParent();
@@ -250,8 +253,11 @@ class StudentController extends Controller {
         $parentUsername = $parent->getUser()->getUsername();
         $passwordObj = $em->getRepository('AppBundle:Password')->findOneByUsername($parentUsername);
         $passwordParent = $passwordObj->getPassword();
-        $user->setPassword($passwordParent);
+        $user->setPlainPassword($passwordParent);
+        $userManager = $this->container->get('fos_user.user_manager');
+        $userManager->updatePassword($user);
         $em->persist($user);
+        $em->persist($parent);
         $em->flush();
 
         $student = $parent->getStudent();

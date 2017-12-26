@@ -5,11 +5,11 @@
         <h1 class="col-xs-6">Strona główna</h1>
         <div class="col-xs-12">
             {% if is_granted('ROLE_ADMIN') %}
-                {% include 'default/admin.html.twig' %}
+                {% include 'default/Admin/main.html.twig'  %}
             {% elseif is_granted('ROLE_TEACHER') %}
-                {% include 'default/teacher.html.twig' %}
+                {% include 'default/Teacher/main.html.twig' with {'teacher' : user.teacher} %}
             {% else %}
-                {% include 'default/student.html.twig' %}
+                {% include 'default/Student/main.html.twig' %}
             {% endif %}
         </div>
     {% endblock %}

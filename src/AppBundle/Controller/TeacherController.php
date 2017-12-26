@@ -204,8 +204,11 @@ class TeacherController extends Controller {
         $username = $teacher->getUser()->getUsername();
         $passwordObj = $em->getRepository('AppBundle:Password')->findOneByUsername($username);
         $password = $passwordObj->getPassword();
-        $user->setPassword($password);
+        $user->setPlainPassword($password);
+        $userManager = $this->container->get('fos_user.user_manager');
+        $userManager->updatePassword($user);
         $em->persist($user);
+        $em->persist($teacher);
         $em->flush();
 
         return $this->render('teacher/password.html.twig', array(

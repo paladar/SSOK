@@ -157,6 +157,7 @@ class Information {
     public function getDeletedAt() {
         return $this->deletedAt;
     }
+    
     function getTitle() {
         return $this->title;
     }

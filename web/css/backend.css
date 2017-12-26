@@ -10,6 +10,9 @@ and open the template in the editor.
 
 
 /* Main */
+a{
+    color: #333;
+}
 h1{
     color:#444A2E;
     font-size: 30px;
@@ -37,6 +40,23 @@ h5{
     font-size: 18px;
     margin-bottom: 10px;
 }
+.pagination{
+    text-align: center;
+    width: 100%;
+}
+.pagination a{
+    padding: 5px 10px;
+    margin: 3px;
+    background-color: #00a65a;
+    color: #fff;
+    display: inline-block;
+}
+.pagination a:hover{
+    background-color: #222d32;
+}
+.pagination .active-page{
+    background-color: #222d32;
+}
 .logo img{
     width: 90px;
     margin-bottom: 10px;
@@ -54,10 +74,11 @@ h5{
     color: #fff;
     margin-top: 20px;
     float: right;
+    text-transform: uppercase;
 }
 .btn-ssok:hover{
-    background-color: #fff;
-    color: #00a65a;
+    background-color: #222d32;
+    color: #fff;
 }
 .btn-danger{
     float: right;
@@ -196,6 +217,14 @@ table .actions li{
     left: 5px;
 
 }
+.plan .plan-element p{
+    font-size: 13px;
+    font-weight: normal;
+    position: absolute;
+    bottom: -5px;
+    right: 5px;
+
+}
 .plan .fa-trash-o{
     font-size: 18px;
     font-weight: normal;
@@ -208,6 +237,51 @@ table .actions li{
 }
 .plan-modal{
     background-color: #E4FFEA !important;
+}
+.plan-mini .plan-day{
+    height: 400px;
+}
+.plan-mini .plan-header{
+    font-size: 16px;
+}
+.plan-mini .plan-element{
+    font-size: 13px;
+    margin: 5px 10px 0;
+    cursor: initial;
+}
+.plan .plan-element:hover{
+    background-color: #CAEEB3;
+    color: initial;
+}
+.newses .news{
+    cursor: pointer;
+}
+.newses .news:hover{
+    opacity: 0.7;
+    text-decoration: underline;
+}
+.newses .news h4{
+    font-weight: bold;
+    padding-left: 10px;
+    border-left: 5px solid #00a65a;
+}
+.newses .news p {
+    display: inline-block;
+    text-overflow: ellipsis;
+    word-wrap: break-word;
+    overflow: hidden;
+    max-height: 54px;
+    line-height: 18px;
+    position: relative;
+}
+.newses-mini .news p {
+    display: inline-block;
+    text-overflow: ellipsis;
+    word-wrap: break-word;
+    overflow: hidden;
+    max-height: 36px;
+    line-height: 18px;
+    position: relative;
 }
 .ui-dialog-titlebar{
     background-color: #32B77A !important;

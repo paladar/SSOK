@@ -7,7 +7,7 @@
             <div class="plan">
                 <ul class="plan-day">
                     <li class='plan-header'>Poniedziałek</li>
-                        {% for lesson in schoolClass.lessons %}
+                        {% for lesson in schoolClass.lessons | sortbyfield('start') %}
                             {% if lesson.day == 1 %}
                             <li class='plan-element' onClick='editLesson(1,{{lesson.subject.id}} ,{{lesson.teacher.id}} , "{{lesson.start|date('H:i')}}",{{lesson.id}} )'><span>{{lesson.start|date('H:i')}}</span>{{lesson.subject.title}}</li>
                             <a href="{{ path('schoolclass_lesson_delete',{'lesson' : lesson.id,'class': schoolClass.id }) }}"><i class="fa fa-trash-o" aria-hidden="true"></i></a>
@@ -17,7 +17,7 @@
                 </ul>
                 <ul class="plan-day">
                     <li class='plan-header'>Wtorek</li>
-                        {% for lesson in schoolClass.lessons %}
+                        {% for lesson in schoolClass.lessons | sortbyfield('start') %}
                             {% if lesson.day == 2 %}
                             <li class='plan-element' onClick='editLesson(1,{{lesson.subject.id}} ,{{lesson.teacher.id}} , "{{lesson.start|date('H:i')}}",{{lesson.id}} )'><span>{{lesson.start|date('H:i')}}</span>{{lesson.subject.title}}</li>
                             <a href="{{ path('schoolclass_lesson_delete',{'lesson' : lesson.id,'class': schoolClass.id }) }}"><i class="fa fa-trash-o" aria-hidden="true"></i></a>
@@ -27,7 +27,7 @@
                 </ul>
                 <ul class="plan-day">
                     <li class='plan-header'>Środa</li>
-                        {% for lesson in schoolClass.lessons %}
+                        {% for lesson in schoolClass.lessons | sortbyfield('start') %}
                             {% if lesson.day == 3 %}
                             <li class='plan-element' onClick='editLesson(1,{{lesson.subject.id}} ,{{lesson.teacher.id}} , "{{lesson.start|date('H:i')}}",{{lesson.id}} )'><span>{{lesson.start|date('H:i')}}</span>{{lesson.subject.title}}</li>
                             <a href="{{ path('schoolclass_lesson_delete',{'lesson' : lesson.id,'class': schoolClass.id }) }}"><i class="fa fa-trash-o" aria-hidden="true"></i></a>
@@ -37,7 +37,7 @@
                 </ul>
                 <ul class="plan-day">
                     <li class='plan-header'>Czwartek</li>
-                        {% for lesson in schoolClass.lessons %}
+                        {% for lesson in schoolClass.lessons | sortbyfield('start') %}
                             {% if lesson.day == 4 %}
                             <li class='plan-element' onClick='editLesson(1,{{lesson.subject.id}} ,{{lesson.teacher.id}} , "{{lesson.start|date('H:i')}}",{{lesson.id}} )'><span>{{lesson.start|date('H:i')}}</span>{{lesson.subject.title}}</li>
                             <a href="{{ path('schoolclass_lesson_delete',{'lesson' : lesson.id,'class': schoolClass.id }) }}"><i class="fa fa-trash-o" aria-hidden="true"></i></a>
@@ -47,7 +47,7 @@
                 </ul>
                 <ul class="plan-day">
                     <li class='plan-header'>Piątek</li>
-                        {% for lesson in schoolClass.lessons %}
+                        {% for lesson in schoolClass.lessons | sortbyfield('start') %}
                             {% if lesson.day == 5 %}
                             <li class='plan-element' onClick='editLesson(1,{{lesson.subject.id}} ,{{lesson.teacher.id}} , "{{lesson.start|date('H:i')}}",{{lesson.id}} )'><span>{{lesson.start|date('H:i')}}</span>{{lesson.subject.title}}</li>
                             <a href="{{ path('schoolclass_lesson_delete',{'lesson' : lesson.id,'class': schoolClass.id }) }}"><i class="fa fa-trash-o" aria-hidden="true"></i></a>
@@ -92,72 +92,73 @@
                 </div>
             </form>
         </div>
-        <script>
-            $('#timepicker').timepicker({
-            hourText: 'Godzina', // Define the locale text for "Hours"
-                    minuteText: 'Minuta', // Define the locale text for "Minute"
-                    amPmText: ['', ''],
-            });
-            $(function () {
-            $(".plan-modal").dialog({
-            autoOpen: false,
-            });
-            $('#select-teacher').hide();
-            });
-            function addLesson(day) {
-            $('.plan-modal').dialog('open');
-            action = '{{ path('schoolclass_lesson_add') }}';
-            document.getElementById("plan-form").action = action;
-            $('#plan-day').val(day);
-            $('#plan-subject option[value="0"]').prop({selected: true});
-            $('#select-teacher').hide();
-            $('#timepicker').val('');
-            }
-            function editLesson(day, subject, teacher, start, lesson) {
-            $('.plan-modal').dialog('open');
-            if ($('.fa-trash-o').data('clicked')){
-            $('.plan-modal').dialog('close');
-            }
-            action = '{{ path('schoolclass_lesson_edit', { 'id' : 'idPlaceholder',}) }}';
-            action = action.replace('idPlaceholder', lesson);
-            document.getElementById("plan-form").action = action;
-            $('#plan-day').val(day);
-            $.ajax({
-            type: "GET",
-                    data: {id: subject},
-                    dataType: 'json',
-                    url: '{{ path('schoolclass_teachers') }}',
-                    success: function ($data) {
-                    $('#plan-teacher').find('option').remove();
-                    $.each($data, function (i, val) {
-                    option = '<option value="' + val.id + '">' + val.name + '</option>';
-                    $("#plan-teacher").append(option);
-                    });
-                    $("#select-teacher").show();
-                    }
-            });
-            $('#plan-teacher option[value="' + teacher + '"]').prop({selected: true});
-            $('#plan-subject option[value="' + subject + '"]').prop({selected: true});
-            $('#timepicker').val(start);
-            }
-            $('#plan-subject').on('change', function () {
-            if ($(this).val() !== 0) {
-            var selectedId = $(this).val();
-            $.ajax({
-            type: "GET",
-                    data: {id: selectedId},
-                    dataType: 'json',
-                    url: '{{ path('schoolclass_teachers') }}',
-                    success: function ($data) {
-                    $('#plan-teacher').find('option').remove();
-                    $.each($data, function (i, val) {
-                    option = '<option value="' + val.id + '">' + val.name + '</option>';
-                    $("#plan-teacher").append(option);
-                    });
-                    $("#select-teacher").show();
-                    }
-            });
-            }
-            })
-        </script>
-    {% endblock %}
+    </div>
+    <script>
+        $('#timepicker').timepicker({
+        hourText: 'Godzina', // Define the locale text for "Hours"
+                minuteText: 'Minuta', // Define the locale text for "Minute"
+                amPmText: ['', ''],
+        });
+        $(function () {
+        $(".plan-modal").dialog({
+        autoOpen: false,
+        });
+        $('#select-teacher').hide();
+        });
+        function addLesson(day) {
+        $('.plan-modal').dialog('open');
+        action = '{{ path('schoolclass_lesson_add') }}';
+        document.getElementById("plan-form").action = action;
+        $('#plan-day').val(day);
+        $('#plan-subject option[value="0"]').prop({selected: true});
+        $('#select-teacher').hide();
+        $('#timepicker').val('');
+        }
+        function editLesson(day, subject, teacher, start, lesson) {
+        $('.plan-modal').dialog('open');
+        if ($('.fa-trash-o').data('clicked')){
+        $('.plan-modal').dialog('close');
+        }
+        action = '{{ path('schoolclass_lesson_edit', { 'id' : 'idPlaceholder',}) }}';
+        action = action.replace('idPlaceholder', lesson);
+        document.getElementById("plan-form").action = action;
+        $('#plan-day').val(day);
+        $.ajax({
+        type: "GET",
+                data: {id: subject},
+                dataType: 'json',
+                url: '{{ path('schoolclass_teachers') }}',
+                success: function ($data) {
+                $('#plan-teacher').find('option').remove();
+                $.each($data, function (i, val) {
+                option = '<option value="' + val.id + '">' + val.name + '</option>';
+                $("#plan-teacher").append(option);
+                });
+                $("#select-teacher").show();
+                }
+        });
+        $('#plan-teacher option[value="' + teacher + '"]').prop({selected: true});
+        $('#plan-subject option[value="' + subject + '"]').prop({selected: true});
+        $('#timepicker').val(start);
+        }
+        $('#plan-subject').on('change', function () {
+        if ($(this).val() !== 0) {
+        var selectedId = $(this).val();
+        $.ajax({
+        type: "GET",
+                data: {id: selectedId},
+                dataType: 'json',
+                url: '{{ path('schoolclass_teachers') }}',
+                success: function ($data) {
+                $('#plan-teacher').find('option').remove();
+                $.each($data, function (i, val) {
+                option = '<option value="' + val.id + '">' + val.name + '</option>';
+                $("#plan-teacher").append(option);
+                });
+                $("#select-teacher").show();
+                }
+        });
+        }
+        })
+    </script>
+{% endblock %}

@@ -1,0 +1,49 @@
+{% block content %}
+    <div class="row">
+        <h2 class="col-xs-6">Twój plan</h2>
+        <div class="col-xs-12">
+            <div class="plan plan-mini">
+                <ul class="plan-day">
+                    <li class='plan-header'>Poniedziałek</li>
+                        {% for lesson in lessons | sortbyfield('start')  %}
+                            {% if lesson.day == 1 %}
+                            <li class='plan-element'><span>{{lesson.start|date('H:i')}}</span>{{lesson.subject.title}} <p>{{lesson.schoolclass.number}}{{lesson.schoolclass.letter}}</p></li>
+                                {% endif %}
+                            {% endfor %}
+                </ul>
+                <ul class="plan-day">
+                    <li class='plan-header'>Wtorek</li>
+                        {% for lesson in lessons | sortbyfield('start')  %}
+                            {% if lesson.day == 2 %}
+                            <li class='plan-element'><span>{{lesson.start|date('H:i')}}</span>{{lesson.subject.title}} <p>{{lesson.schoolclass.number}}{{lesson.schoolclass.letter}}</p></li>
+                                {% endif %}
+                            {% endfor %}
+                </ul>
+                <ul class="plan-day">
+                    <li class='plan-header'>Środa</li>
+                        {% for lesson in lessons | sortbyfield('start')  %}
+                            {% if lesson.day == 3 %}
+                            <li class='plan-element'><span>{{lesson.start|date('H:i')}}</span>{{lesson.subject.title}} <p>{{lesson.schoolclass.number}}{{lesson.schoolclass.letter}}</p></li>
+                                {% endif %}
+                            {% endfor %}
+                </ul>
+                <ul class="plan-day">
+                    <li class='plan-header'>Czwartek</li>
+                        {% for lesson in lessons | sortbyfield('start')  %}
+                            {% if lesson.day == 4 %}
+                            <li class='plan-element'><span>{{lesson.start|date('H:i')}}</span>{{lesson.subject.title}} <p>{{lesson.schoolclass.number}}{{lesson.schoolclass.letter}}</p></li>
+                                {% endif %}
+                            {% endfor %}
+                </ul>
+                <ul class="plan-day">
+                    <li class='plan-header'>Piątek</li>
+                        {% for lesson in lessons | sortbyfield('start')  %}
+                            {% if lesson.day == 5 %}
+                            <li class='plan-element'><span>{{lesson.start|date('H:i')}}</span>{{lesson.subject.title}} <p>{{lesson.schoolclass.number}}{{lesson.schoolclass.letter}}</p></li>
+                                {% endif %}
+                            {% endfor %}
+                </ul>
+            </div>
+        </div>
+    </div>
+{% endblock %}
