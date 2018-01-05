@@ -1,1 +1,11 @@
-{# empty Twig template #}
+<div class="row">
+    <div class="col-sm-8">
+        {% include 'default/Student/plan.html.twig' with {'schoolClass' : student.schoolClass} %}
+    </div>
+    <div class="col-sm-4">
+        {% include 'default/Student/news.html.twig' with {'newses' : newses} %}
+    </div>
+</div>
+<div class="row">
+
+</div>

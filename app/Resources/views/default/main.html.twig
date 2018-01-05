@@ -9,7 +9,7 @@
             {% elseif is_granted('ROLE_TEACHER') %}
                 {% include 'default/Teacher/main.html.twig' with {'teacher' : user.teacher} %}
             {% else %}
-                {% include 'default/Student/main.html.twig' %}
+                {% include 'default/Student/main.html.twig' with {'student' : user.student} %}
             {% endif %}
         </div>
     {% endblock %}
