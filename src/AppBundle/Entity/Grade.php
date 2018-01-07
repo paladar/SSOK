@@ -38,7 +38,7 @@ class Grade {
      * @ORM\ManyToOne(targetEntity="Subject", inversedBy="grades", fetch="EAGER")
      * @ORM\JoinColumn(name="id_subject", referencedColumnName="id", nullable=false)
      */
-    protected $lesson;
+    protected $subject;
 
     /**
      * @var string $value
@@ -50,7 +50,7 @@ class Grade {
     /**
      * @var GradeType $gradeType
      *
-     * @ORM\ManyToOne(targetEntity="GradeType", inversedBy="gardes", fetch="EAGER")
+     * @ORM\ManyToOne(targetEntity="GradeType", inversedBy="grades", fetch="EAGER")
      * @ORM\JoinColumn(name="id_grade_type", referencedColumnName="id", nullable=false)
      */
     protected $gradeType;
@@ -198,25 +198,34 @@ class Grade {
     }
 
     /**
-     * Set lesson
+     * Set subject
      *
-     * @param \AppBundle\Entity\Subject $lesson
+     * @param \AppBundle\Entity\Subject $subject
      *
      * @return Grade
      */
-    public function setLesson(\AppBundle\Entity\Subject $lesson) {
-        $this->lesson = $lesson;
+    public function setSubject(\AppBundle\Entity\Subject $subject) {
+        $this->subject = $subject;
 
         return $this;
     }
 
     /**
-     * Get lesson
+     * Get subject
      *
      * @return \AppBundle\Entity\Subject
      */
-    public function getLesson() {
-        return $this->lesson;
+    public function getSubject() {
+        return $this->subject;
     }
+    function getGradeType() {
+        return $this->gradeType;
+    }
+
+    function setGradeType(GradeType $gradeType) {
+        $this->gradeType = $gradeType;
+    }
+
+
 
 }

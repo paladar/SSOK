@@ -21,7 +21,7 @@
                             <td><a href="{{ path('gradetype_show', { 'id': gradeType.id }) }}">{{ gradeType.id }}</a></td>
                             <td>{{ gradeType.label }}</td>
                             <td>{{ gradeType.description }}</td>
-                            <td>{{ gradeType.rate }}</td>
+                            <td style="color:{{ gradeType.color }} ">{{ gradeType.rate }}</td>
                             <td>
                                 <ul class="actions">
                                     <li>

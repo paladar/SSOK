@@ -1,0 +1,91 @@
+{% extends 'default/index.html.twig' %}
+
+{% block content %}
+    <div class="row">
+        <h1 class="col-xs-6">Wybierz przedmiot</h1>
+        <div class="col-xs-12">
+            <table class="studentTable table table-striped table-bordered">
+                <thead>
+                    <tr>
+                        <th>Uczeń</th>
+                        <th>Oceny</th>
+                        <th>Dodaj ocenę</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for student in students %}
+                        <tr>
+                            <td>{{ student.firstName }} {{ student.surname }}</td>
+                            <td>
+                                {% for grade in student.grades %}
+                                    <span onclick="deleteGrade({{grade.id}})" class="grade" style="color:{{grade.gradetype.color}}; border-color:{{grade.gradetype.color}};">{{grade.value}}</span>
+                                {% endfor %}
+                            </td>
+                            <td><i onclick="addGrade({{student.id}})" class="ajaxAdd fa fa-plus-square" aria-hidden="true"></i></td>
+                            {% endfor %}
+                </tbody>
+            </table>
+            <div class='grade-modal'>
+                <form id="grade-form" name="grade-form" action="" method="post">
+                    <div class="form-group">
+                        <div>
+                            <div>
+                                <label>Wartość</label>
+                                <input name="value" class="form-control" type="text" required pattern="1|2|3|4|5|6"/>
+                            </div>
+                        </div>
+                        <div id="select-type">
+                            <div>
+                                <label>Typ</label>
+                                <select name="type" id="grade-type" class="form-control" required/>
+                                </select>
+                            </div>
+                        </div>
+                        <input type="hidden" name="student" id="student-input">
+                        <input type="hidden" name="subject" value="{{subject.id}}">
+                        <input type="hidden" name="schoolclass" value="{{schoolClass.id}}">
+                        <div>
+                            <input name="submit" class="btn btn-ssok" type="submit" value="Zapisz"/>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <script>
+            $(".grade-modal").dialog({
+                autoOpen: false,
+            });
+            $.ajax({
+                type: "GET",
+                url: '{{ path('grade_get_types') }}',
+                success: function ($data) {
+                    $.each($data, function (i, val) {
+                        option = '<option value="' + val.id + '">' + val.label + '</option>';
+                        $("#grade-type").append(option);
+                    });
+                }
+            });
+            $(".grade").hover(
+                    function () {
+                        value = $(this).html();
+                        $(this).html('<i class="fa fa-trash-o" aria-hidden="true"></i>');
+                        $(this).css('padding','3px 6px');
+                    }, function () {
+                $(this).html(value);
+                $(this).css('padding','3px 8px');
+            }
+            );
+            function addGrade(student) {
+                $('.grade-modal').dialog('open');
+                action = '{{ path('grade_add') }}';
+                document.getElementById("grade-form").action = action;
+                $('#student-input').val(student);
+            }
+            function deleteGrade(id) {
+                string = "{{ path('grade_delete' ,{'id': 'PLACEHOLDER','subject': subject.id,'schoolClass':schoolClass.id })}}";
+                url = string.replace('PLACEHOLDER', id);
+                window.location.href = url;
+            }
+
+        </script>
+    {% endblock %}

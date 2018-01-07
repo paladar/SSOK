@@ -52,6 +52,13 @@ class GradeType {
      * @ORM\Column(name="rate", type="integer")
      */
     private $rate = 1;
+    
+        /**
+     * @var string $color
+     *
+     * @ORM\Column(name="color", type="string")
+     */
+    private $color = '#000000';
 
     /**
      * @var \Datetime $createdAt
@@ -271,4 +278,14 @@ class GradeType {
     {
         return $this->grades;
     }
+    
+    function getColor() {
+        return $this->color;
+    }
+
+    function setColor($color) {
+        $this->color = $color;
+    }
+
+
 }

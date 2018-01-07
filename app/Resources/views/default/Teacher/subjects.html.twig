@@ -1,0 +1,18 @@
+{% extends 'default/index.html.twig' %}
+
+{% block content %}
+    <div class="row">
+        <h1 class="col-xs-6">Wybierz przedmiot</h1>
+        <div class="col-xs-12">
+
+            {% if subjects|length == 0 %}
+                Nie masz żadnych przypisanych przedmiotów!
+            {% else %}
+                <ul class="teacher-select">
+                    {% for subject in subjects %}
+                        <a href="{{ path('gradeIndexClass' ,{'id': app.user.teacher.id,'subjectId': subject.id })}}"><li>{{subject.title}}</li></a>
+                            {% endfor %}
+                </ul>
+            {% endif %}
+        </div>
+    {% endblock %}

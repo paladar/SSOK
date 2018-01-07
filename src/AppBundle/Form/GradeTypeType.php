@@ -5,6 +5,7 @@ namespace AppBundle\Form;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Form\Extension\Core\Type\ColorType;
 
 class GradeTypeType extends AbstractType
 {
@@ -15,7 +16,8 @@ class GradeTypeType extends AbstractType
     {
         $builder->add('label', null, array('label' => 'Nazwa'))
                 ->add('description', null, array('label' => 'Opis'))
-                ->add('rate', null, array('label' => 'Waga'));
+                ->add('rate', null, array('label' => 'Waga'))
+                ->add('color', ColorType::class, array('label' => 'Kolor'));
     }
     
     /**
