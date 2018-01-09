@@ -1,0 +1,29 @@
+{% extends 'default/index.html.twig' %}
+
+{% block content %}
+    <div class="row">
+        <h1 class="col-xs-6">Twoje oceny</h1>
+        <div class="col-xs-12">
+            <table class="studentTable table table-striped table-bordered">
+                <thead>
+                    <tr>
+                        <th>Przedmiot</th>
+                        <th>Oceny</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for subject in subjects %}
+                        <tr>
+                            <td>{{subject.title}}</td>
+                            <td style="width:auto;">
+                                {% for grade in student.grades %}
+                                    {% if grade.subject.title == subject.title %}
+                                        <span class="grade" style="color:{{grade.gradetype.color}}; border-color:{{grade.gradetype.color}}; cursor:initial;">{{grade.value}}</span>
+                                    {% endif %}
+                                {% endfor %}
+                            </td>
+                            {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    {% endblock %}

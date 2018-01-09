@@ -361,3 +361,15 @@ table .actions li{
     font-weight: bolder;
     cursor: pointer;
 }
+.latest{
+    list-style: none;
+    padding-left: 15px;
+}
+.latest li{
+    font-size: 20px;
+    margin-bottom: 5px;
+    text-decoration: underline;
+}
+.latest li span{
+    font-weight: bolder;
+}

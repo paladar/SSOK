@@ -145,5 +145,33 @@ class GradeController extends Controller {
 
         return $this->redirect($this->generateUrl('gradeIndex', array('id' => $schoolClass, 'subjectId' => $subject)), 301);
     }
+    
+        /**
+     * @Route("student/grades/{id}", name="gradeStudentIndex")
+     */
+    public function indexGradesStudentAction(Request $request, $id) {
+        $this->denyAccessUnlessGranted('ROLE_STUDENT', null, 'Unable to access this page!');
+        $em = $this->getDoctrine()->getManager();
+        $student = $em->getRepository('AppBundle:Student')->find($id);
+        $schoolClass = $student->getSchoolClass();
+        $grades = $student->getGrades();
+        $subjects = [];
+        foreach ($schoolClass->getLessons() as $lesson) {
+            $flag = 0;
+            foreach ($subjects as $subject) {
+                if ($lesson->getSubject()->getTitle() == $subject->getTitle()) {
+                    $flag = 1;
+                }
+            }
+            if ($flag == 0) {
+                $subjects[] = $lesson->getSubject();
+            }
+        }
+        return $this->render('default/Student/grades.html.twig', [
+                    'student' => $student,
+                    'subjects' => $subjects,
+                    'grades' => $grades,
+        ]);
+    }
 
 }
