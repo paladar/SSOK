@@ -4,11 +4,14 @@
         <a href="{{ path('homepage')}}"><i class="fa fa-home" aria-hidden="true"></i>Strona główna</a>
     </li>
     <hr>
-        <li>
+    <li>
         <a href="{{ path('newses')}}"><i class="fa fa-newspaper-o" aria-hidden="true"></i>Aktualności</a>
     </li>
-            <li>
+    <li>
         <a href="{{ path('gradeIndexSubjects' ,{'id': app.user.teacher.id })}}"><i class="fa fa-graduation-cap" aria-hidden="true"></i>Oceniaj</a>
+    </li>
+    <li>
+        <a href="{{ path('presencesIndex' ,{'id': app.user.teacher.id })}}"><i class="fa fa-bell" aria-hidden="true"></i>Sprawdź obecność</a>
     </li>
 </ul>
 

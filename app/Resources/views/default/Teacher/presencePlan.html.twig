@@ -1,0 +1,48 @@
+{% block content %}
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="plan">
+                <ul class="plan-day">
+                    <li class='plan-header'>Poniedziałek</li>
+                        {% for lesson in teacher.lessons | sortbyfield('start')  %}
+                            {% if lesson.day == 1 %}
+                            <a href="{{ path('presence' ,{'date': monday|date('d-m-Y'),'schoolClassId':lesson.schoolclass.id,'lessonId':lesson.id })}}"><li class='plan-element'><span>{{lesson.start|date('H:i')}}</span>{{lesson.subject.title}} <p>{{lesson.schoolclass.number}}{{lesson.schoolclass.letter}}</p></li></a>
+                                    {% endif %}
+                                {% endfor %}
+                </ul>
+                <ul class="plan-day">
+                    <li class='plan-header'>Wtorek</li>
+                        {% for lesson in teacher.lessons | sortbyfield('start')  %}
+                            {% if lesson.day == 2 %}
+                            <a href="{{ path('presence' ,{'date': monday|date_modify('+1 day')|date('d-m-Y'),'schoolClassId':lesson.schoolclass.id,'lessonId':lesson.id })}}"><li class='plan-element'><span>{{lesson.start|date('H:i')}}</span>{{lesson.subject.title}} <p>{{lesson.schoolclass.number}}{{lesson.schoolclass.letter}}</p></li></a>
+                                    {% endif %}
+                                {% endfor %}
+                </ul>
+                <ul class="plan-day">
+                    <li class='plan-header'>Środa</li>
+                        {% for lesson in teacher.lessons | sortbyfield('start')  %}
+                            {% if lesson.day == 3 %}
+                            <a href="{{ path('presence' ,{'date': monday|date_modify('+2 day')|date('d-m-Y'),'schoolClassId':lesson.schoolclass.id,'lessonId':lesson.id })}}"><li class='plan-element'><span>{{lesson.start|date('H:i')}}</span>{{lesson.subject.title}} <p>{{lesson.schoolclass.number}}{{lesson.schoolclass.letter}}</p></li></a>
+                                    {% endif %}
+                                {% endfor %}
+                </ul>
+                <ul class="plan-day">
+                    <li class='plan-header'>Czwartek</li>
+                        {% for lesson in teacher.lessons | sortbyfield('start')  %}
+                            {% if lesson.day == 4 %}
+                            <a href="{{ path('presence' ,{'date': monday|date_modify('+3 day')|date('d-m-Y'),'schoolClassId':lesson.schoolclass.id,'lessonId':lesson.id })}}"><li class='plan-element'><span>{{lesson.start|date('H:i')}}</span>{{lesson.subject.title}} <p>{{lesson.schoolclass.number}}{{lesson.schoolclass.letter}}</p></li></a> 
+                                    {% endif %}
+                                {% endfor %}
+                </ul>
+                <ul class="plan-day">
+                    <li class='plan-header'>Piątek</li>
+                        {% for lesson in teacher.lessons | sortbyfield('start')  %}
+                            {% if lesson.day == 5 %}
+                            <a href="{{ path('presence' ,{'date': monday|date_modify('+4 day')|date('d-m-Y'),'schoolClassId':lesson.schoolclass.id,'lessonId':lesson.id })}}"><li class='plan-element'><span>{{lesson.start|date('H:i')}}</span>{{lesson.subject.title}} <p>{{lesson.schoolclass.number}}{{lesson.schoolclass.letter}}</p></li></a>      
+                                    {% endif %}
+                                {% endfor %}
+                </ul>
+            </div>
+        </div>
+    </div>
+{% endblock %}

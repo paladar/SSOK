@@ -15,9 +15,9 @@
                     {% for grade in student.grades | sortbyfield('createdAt') %}
                         {% if loop.index <= 3 %}
                             <li>{{grade.subject.title}}: <span style="color:{{grade.gradetype.color}}">{{grade.value}}</span></li>
-                        {% endif %}
-                    {% endfor %}
-                    {% if student.grades is empty %}
+                            {% endif %}
+                        {% endfor %}
+                        {% if student.grades is empty %}
                         Brak ocen
                     {% endif %}
                 </ul>
@@ -27,5 +27,15 @@
     <div class="col-sm-4">
     </div>
     <div class="col-sm-4">
+        <div class="row">
+            <h2 class="col-xs-6">Zastępstwa</h2>
+            <div class="col-xs-12">
+                <ul class="latest replecements">
+                    {% for rep in replecements %}
+                        <li><span>{{loop.index}}.</span>{{ rep.description | raw }}</li>
+                        {% endfor %}
+                </ul>
+            </div>
+        </div>
     </div>
 </div>

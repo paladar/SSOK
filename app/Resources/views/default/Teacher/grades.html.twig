@@ -2,25 +2,31 @@
 
 {% block content %}
     <div class="row">
-        <h1 class="col-xs-6">Wybierz przedmiot</h1>
+        <h1 class="col-xs-6">Oceny</h1>
         <div class="col-xs-12">
             <table class="studentTable table table-striped table-bordered">
                 <thead>
                     <tr>
                         <th>Uczeń</th>
                         <th>Oceny</th>
+                        <th>Średnia</th>
                         <th>Dodaj ocenę</th>
                     </tr>
                 </thead>
                 <tbody>
                     {% for student in students %}
+                        {% set gradesSum = 0 %}
+                        {% set gradesRateSum = 0 %}
                         <tr>
                             <td>{{ student.firstName }} {{ student.surname }}</td>
                             <td>
                                 {% for grade in student.grades %}
+                                    {% set gradesSum = gradesSum + (grade.value*grade.gradetype.rate) %}
+                                    {% set gradesRateSum = gradesRateSum + grade.gradetype.rate %}
                                     <span onclick="deleteGrade({{grade.id}})" class="grade" style="color:{{grade.gradetype.color}}; border-color:{{grade.gradetype.color}};">{{grade.value}}</span>
                                 {% endfor %}
                             </td>
+                            <td>{{ gradesSum/gradesRateSum }}</td>
                             <td><i onclick="addGrade({{student.id}})" class="ajaxAdd fa fa-plus-square" aria-hidden="true"></i></td>
                             {% endfor %}
                 </tbody>

@@ -88,6 +88,13 @@ h1::before, .h1::before{
     float: right;
     text-transform: uppercase;
 }
+.btn-ssok-left{
+    background-color: #00a65a;
+    color: #fff;
+    margin-top: 20px;
+    float: left;
+    text-transform: uppercase; 
+}
 .btn-ssok:hover{
     background-color: #222d32;
     color: #fff;
@@ -372,4 +379,16 @@ table .actions li{
 }
 .latest li span{
     font-weight: bolder;
+}
+.replecements li{
+    font-size: 14px;
+    border-bottom: 1px solid #000;
+    text-decoration: none;
+}
+.replecements li:last-child{
+    border-bottom: none;
+}
+.replecements li span{
+    float: left;
+    padding-right: 5px;
 }

@@ -1,0 +1,22 @@
+{% extends 'default/index.html.twig' %}
+
+{% block content %}
+    <div class="row">
+        <h2 class="col-xs-12">{{monday|date('d-m-Y')}} - {{monday|date_modify('+4 day')|date('d-m-Y')}}</h2>
+        <div class="col-xs-12">
+            {% include 'default/Teacher/presencePlan.html.twig' with {'teacher' : teacher,'monday' : monday} %}
+        </div>
+    </div>
+    <div class="row">
+        <h2 class="col-xs-12">{{mondayBefore|date('d-m-Y')}} - {{mondayBefore|date_modify('+4 day')|date('d-m-Y')}}</h2>
+        <div class="col-xs-12">
+            {% include 'default/Teacher/presencePlan.html.twig' with {'teacher' : teacher,'monday' : mondayBefore} %}
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-6"><a class="btn btn-ssok-left" href="{{ path('presencesIndex' ,{'id': app.user.teacher.id,'date': date+1 })}}">Poprzedni okres</a></div>
+        {% if date != 0 %}
+            <div class="col-sm-6"><a class="btn btn-ssok" href="{{ path('presencesIndex' ,{'id': app.user.teacher.id,'date': date-1 })}}">Następny okres</a></div>
+        {% endif %}
+    </div>
+{% endblock %}

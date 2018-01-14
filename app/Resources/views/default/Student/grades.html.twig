@@ -9,20 +9,26 @@
                     <tr>
                         <th>Przedmiot</th>
                         <th>Oceny</th>
+                        <th>Średnia</th>
                     </tr>
                 </thead>
                 <tbody>
                     {% for subject in subjects %}
+                        {% set gradesSum = 0 %}
+                        {% set gradesRateSum = 0 %}
                         <tr>
                             <td>{{subject.title}}</td>
                             <td style="width:auto;">
                                 {% for grade in student.grades %}
                                     {% if grade.subject.title == subject.title %}
+                                        {% set gradesSum = gradesSum + (grade.value*grade.gradetype.rate) %}
+                                        {% set gradesRateSum = gradesRateSum + grade.gradetype.rate %}
                                         <span class="grade" style="color:{{grade.gradetype.color}}; border-color:{{grade.gradetype.color}}; cursor:initial;">{{grade.value}}</span>
                                     {% endif %}
                                 {% endfor %}
                             </td>
-                            {% endfor %}
+                            <td>{{ gradesSum/gradesRateSum }}</td>
+                        {% endfor %}
                 </tbody>
             </table>
         </div>

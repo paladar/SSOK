@@ -225,5 +225,21 @@ class Presence {
     public function getPresenceType() {
         return $this->presenceType;
     }
+    function getChecked() {
+        return $this->checked;
+    }
+
+    function getDate() {
+        return $this->date;
+    }
+
+    function setChecked($checked) {
+        $this->checked = $checked;
+    }
+
+    function setDate(\Datetime $date) {
+        $this->date = $date;
+    }
+
 
 }

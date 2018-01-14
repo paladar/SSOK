@@ -16,11 +16,20 @@ class DefaultController extends Controller {
         $em = $this->getDoctrine()->getManager();
         $user = $this->get('security.token_storage')->getToken()->getUser();
         $newses = $em->getRepository('AppBundle:Information')->findAll();
+        $allReplecements = $em->getRepository('AppBundle:Replecement')->findAll();
+        $today = \DateTime::createFromFormat('Y-m-d', date('Y-m-d'));
+        $replecements = [];
+        foreach ($allReplecements as $rep) {
+            if ($rep->getDate() >= $today) {
+                $replecements[] = $rep;
+            }
+        }
         // replace this example code with whatever you need
         return $this->render('default/main.html.twig', [
                     'base_dir' => realpath($this->getParameter('kernel.project_dir')) . DIRECTORY_SEPARATOR,
                     'user' => $user,
-                    'newses' => $newses
+                    'newses' => $newses,
+                    'replecements' => $replecements
         ]);
     }
 

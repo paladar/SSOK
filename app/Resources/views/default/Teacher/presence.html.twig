@@ -1,0 +1,49 @@
+{% extends 'default/index.html.twig' %}
+
+{% block content %}
+    {% set type = presenceType.id %}
+    {% set presenceId = 0 %}
+    <div class="row">
+        <h1 class="col-xs-6">Obecności</h1>
+        <div class="col-xs-12">
+            <table class="studentTable table table-striped table-bordered">
+                <thead>
+                    <tr>
+                        <th>Uczeń</th>
+                        <th>Obecność</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for student in schoolClass.students %}
+                        <tr>
+                            <td>{{ student.firstName }} {{ student.surname }}</td>
+                            <td>
+                                {% for presence in student.presences %}
+                                    {% if presence.date|date('Y-m-d') == date|date('Y-m-d') and presence.lesson.id == lesson.id %}
+                                        {% set presenceId = presence.id %}
+                                        {% set type = presence.presenceType.id %}
+                                    {% endif %}
+                                {% endfor %}
+                                <select onchange="updatePresence({{presenceId}})" class="form-control" id="presence{{presenceId}}" autocomplete="off">
+                                    {% for pt in presenceTypes %}
+                                        <option value="{{pt.id}}" {%if type is defined%}{%if type == pt.id %}selected="selected"{% endif %}{% endif %}>{{pt.label}}</option> 
+                                    {% endfor %}
+                                </select>
+                            </td>
+                        {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        <script>
+            function updatePresence(id) {
+                presenceType = $("#presence"+id+" option:selected").val();
+                string = "{{ path('updatePresence' ,{'presenceId': 'PID','typeId':'TID' })}}";
+                string2 = string.replace('TID', presenceType);
+                link = string2.replace('PID', id);
+                $.ajax({
+                    type: "POST",
+                    url: link
+                });
+            };
+        </script>
+    {% endblock %}
