@@ -24,6 +24,8 @@
                         {% include 'default/Menus/admin.html.twig' %}
                     {% elseif is_granted('ROLE_TEACHER') %}
                         {% include 'default/Menus/teacher.html.twig' %}
+                    {% elseif is_granted('ROLE_PARENT') %}
+                        {% include 'default/Menus/parent.html.twig' %}
                     {% else %}
                         {% include 'default/Menus/student.html.twig' %}
                     {% endif %}

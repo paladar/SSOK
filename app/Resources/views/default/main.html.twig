@@ -8,6 +8,8 @@
                 {% include 'default/Admin/main.html.twig'  %}
             {% elseif is_granted('ROLE_TEACHER') %}
                 {% include 'default/Teacher/main.html.twig' with {'teacher' : user.teacher} %}
+            {% elseif is_granted('ROLE_PARENT') %}
+                {% include 'default/Student/main.html.twig' with {'student' : user.studentparent.student} %}
             {% else %}
                 {% include 'default/Student/main.html.twig' with {'student' : user.student} %}
             {% endif %}

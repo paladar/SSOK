@@ -392,3 +392,14 @@ table .actions li{
     float: left;
     padding-right: 5px;
 }
+.nopointer{
+    cursor: initial !important;
+}
+.comment-i{
+    font-size: 16px;
+    padding-left: 10px;
+    cursor: pointer;
+}
+.comment-i:hover{
+    color: #3c8dbc;
+}

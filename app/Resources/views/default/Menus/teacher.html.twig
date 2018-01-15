@@ -11,6 +11,9 @@
         <a href="{{ path('gradeIndexSubjects' ,{'id': app.user.teacher.id })}}"><i class="fa fa-graduation-cap" aria-hidden="true"></i>Oceniaj</a>
     </li>
     <li>
+        <a href="{{ path('commentIndexSubjects' ,{'id': app.user.teacher.id })}}"><i class="fa fa-exclamation-triangle" aria-hidden="true"></i>Wstaw uwagę</a>
+    </li>
+    <li>
         <a href="{{ path('presencesIndex' ,{'id': app.user.teacher.id })}}"><i class="fa fa-bell" aria-hidden="true"></i>Sprawdź obecność</a>
     </li>
 </ul>

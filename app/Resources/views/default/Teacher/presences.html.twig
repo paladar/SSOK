@@ -14,9 +14,9 @@
         </div>
     </div>
     <div class="row">
-        <div class="col-sm-6"><a class="btn btn-ssok-left" href="{{ path('presencesIndex' ,{'id': app.user.teacher.id,'date': date+1 })}}">Poprzedni okres</a></div>
+        <div class="col-sm-6"><a class="btn btn-ssok-left" href="{{ path('presencesIndex' ,{'id': teacher.id,'date': date+1 })}}">Poprzedni okres</a></div>
         {% if date != 0 %}
-            <div class="col-sm-6"><a class="btn btn-ssok" href="{{ path('presencesIndex' ,{'id': app.user.teacher.id,'date': date-1 })}}">Następny okres</a></div>
+            <div class="col-sm-6"><a class="btn btn-ssok" href="{{ path('presencesIndex' ,{'id': teacher.id,'date': date-1 })}}">Następny okres</a></div>
         {% endif %}
     </div>
 {% endblock %}

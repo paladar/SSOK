@@ -5,6 +5,7 @@
     {% set presenceId = 0 %}
     <div class="row">
         <h1 class="col-xs-6">Obecności</h1>
+        <div class="col-xs-6"><a class="btn btn-ssok" href="{{ path('presencesIndex', { 'id': teacher.id }) }}">Powrót do listy</a></div>
         <div class="col-xs-12">
             <table class="studentTable table table-striped table-bordered">
                 <thead>
@@ -36,7 +37,7 @@
         </div>
         <script>
             function updatePresence(id) {
-                presenceType = $("#presence"+id+" option:selected").val();
+                presenceType = $("#presence" + id + " option:selected").val();
                 string = "{{ path('updatePresence' ,{'presenceId': 'PID','typeId':'TID' })}}";
                 string2 = string.replace('TID', presenceType);
                 link = string2.replace('PID', id);
@@ -44,6 +45,7 @@
                     type: "POST",
                     url: link
                 });
-            };
+            }
+            ;
         </script>
     {% endblock %}

@@ -26,7 +26,7 @@
                                     <span onclick="deleteGrade({{grade.id}})" class="grade" style="color:{{grade.gradetype.color}}; border-color:{{grade.gradetype.color}};">{{grade.value}}</span>
                                 {% endfor %}
                             </td>
-                            <td>{{ gradesSum/gradesRateSum }}</td>
+                            <td>{% if gradesRateSum != 0%}{{ gradesSum/gradesRateSum }}{% endif %}</td>
                             <td><i onclick="addGrade({{student.id}})" class="ajaxAdd fa fa-plus-square" aria-hidden="true"></i></td>
                             {% endfor %}
                 </tbody>

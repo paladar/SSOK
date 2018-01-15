@@ -1,0 +1,88 @@
+{% block content %}
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="plan">
+                <ul class="plan-day">
+                    <li class='plan-header'>Poniedziałek</li>
+                        {% for lesson in student.schoolClass.lessons | sortbyfield('start')  %}
+                            {% set presT = '' %}
+                            {% set pres = 0 %}
+                            {% for presence in student.presences %}
+                                {% if presence.date|date('Y-m-d') == monday|date('Y-m-d') and presence.lesson.id == lesson.id %}
+                                    {% set presT = presence.presenceType.label %}
+                                    {% set pres = presence %}
+                                {% endif %}
+                            {% endfor %}
+                            {% if lesson.day == 1 and presT != '' %}
+                            <li class='plan-element {% if not is_granted('ROLE_PARENT') %}nopointer{% endif %}' {% if is_granted('ROLE_PARENT') %}onclick="changePresence({{pres.id}})"{% endif %}><span>{{lesson.start|date('H:i')}}</span>{{lesson.subject.title}}<p>{{presT}}</p></li>
+                                {% endif %}
+                            {% endfor %}
+                </ul>
+                <ul class="plan-day">
+                    <li class='plan-header'>Wtorek</li>
+                        {% for lesson in student.schoolClass.lessons | sortbyfield('start')  %}
+                            {% set presT = '' %}
+                            {% set pres = 0 %}
+                            {% for presence in student.presences %}
+                                {% if presence.date|date('Y-m-d') == monday|date_modify('+1 day')|date('Y-m-d') and presence.lesson.id == lesson.id %}
+                                    {% set presT = presence.presenceType.label %}
+                                    {% set pres = presence %}
+                                {% endif %}
+                            {% endfor %}
+                            {% if lesson.day == 2 and presT != '' %}
+                            <li class='plan-element {% if not is_granted('ROLE_PARENT') %}nopointer{% endif %}' {% if is_granted('ROLE_PARENT') %}onclick="changePresence({{pres.id}})"{% endif %}><span>{{lesson.start|date('H:i')}}</span>{{lesson.subject.title}}<p>{{presT}}</p></li>
+                                {% endif %}
+                            {% endfor %}
+                </ul>
+                <ul class="plan-day">
+                    <li class='plan-header'>Środa</li>
+                        {% for lesson in student.schoolClass.lessons | sortbyfield('start')  %}
+                            {% set presT = '' %}
+                            {% set pres = 0 %}
+                            {% for presence in student.presences %}
+                                {% if presence.date|date('Y-m-d') == monday|date_modify('+2 day')|date('Y-m-d') and presence.lesson.id == lesson.id %}
+                                    {% set presT = presence.presenceType.label %}
+                                    {% set pres = presence %}
+                                {% endif %}
+                            {% endfor %}
+                            {% if lesson.day == 3 and presT != '' %}
+                            <li class='plan-element {% if not is_granted('ROLE_PARENT') %}nopointer{% endif %}' {% if is_granted('ROLE_PARENT') %}onclick="changePresence({{pres.id}})"{% endif %}><span>{{lesson.start|date('H:i')}}</span>{{lesson.subject.title}}<p>{{presT}}</p></li>
+                                {% endif %}
+                            {% endfor %}
+                </ul>
+                <ul class="plan-day">
+                    <li class='plan-header'>Czwartek</li>
+                        {% for lesson in student.schoolClass.lessons | sortbyfield('start')  %}
+                            {% set presT = '' %}
+                            {% set pres = 0 %}
+                            {% for presence in student.presences %}
+                                {% if presence.date|date('Y-m-d') == monday|date_modify('+3 day')|date('Y-m-d') and presence.lesson.id == lesson.id %}
+                                    {% set presT = presence.presenceType.label %}
+                                    {% set pres = presence %}
+                                {% endif %}
+                            {% endfor %}
+                            {% if lesson.day == 4 and presT != '' %}
+                            <li class='plan-element {% if not is_granted('ROLE_PARENT') %}nopointer{% endif %}' {% if is_granted('ROLE_PARENT') %}onclick="changePresence({{pres.id}})"{% endif %}><span>{{lesson.start|date('H:i')}}</span>{{lesson.subject.title}}<p>{{presT}}</p></li>
+                                {% endif %}
+                            {% endfor %}
+                </ul>
+                <ul class="plan-day">
+                    <li class='plan-header'>Piątek</li>
+                        {% for lesson in student.schoolClass.lessons | sortbyfield('start')  %}
+                            {% set presT = '' %}
+                            {% set pres = 0 %}
+                            {% for presence in student.presences %}
+                                {% if presence.date|date('Y-m-d') == monday|date_modify('+4 day')|date('Y-m-d') and presence.lesson.id == lesson.id %}
+                                    {% set presT = presence.presenceType.label %}
+                                    {% set pres = presence %}
+                                {% endif %}
+                            {% endfor %}
+                            {% if lesson.day == 5 and presT != '' %}
+                            <li class='plan-element {% if not is_granted('ROLE_PARENT') %}nopointer{% endif %}'{% if is_granted('ROLE_PARENT') %}onclick="changePresence({{pres.id}})"{% endif %}><span>{{lesson.start|date('H:i')}}</span>{{lesson.subject.title}}<p>{{presT}}</p></li>
+                                {% endif %}
+                            {% endfor %}
+                </ul>
+            </div>
+        </div>
+    </div>
+{% endblock %}

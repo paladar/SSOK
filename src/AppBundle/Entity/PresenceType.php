@@ -261,5 +261,14 @@ class PresenceType {
     public function getPresences() {
         return $this->presences;
     }
+    function getForParent() {
+        return $this->forParent;
+    }
+
+    function setForParent($forParent) {
+        $this->forParent = $forParent;
+    }
+
+
 
 }

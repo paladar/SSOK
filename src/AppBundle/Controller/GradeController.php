@@ -135,7 +135,7 @@ class GradeController extends Controller {
      * @Route("/gradedelete/{id}/{subject}/{schoolClass}", name="grade_delete")
      * @Method("GET")
      */
-    public function lessonDeleteAction(Request $request, $id, $subject, $schoolClass) {
+    public function gradeDeleteAction(Request $request, $id, $subject, $schoolClass) {
         $this->denyAccessUnlessGranted('ROLE_TEACHER', null, 'Unable to access this page!');
         $em = $this->getDoctrine()->getManager();
         $gradeToDelete = $em->getRepository('AppBundle:Grade')->find($id);

@@ -116,4 +116,54 @@ class DefaultController extends Controller {
         ]);
     }
 
+    /**
+     * @Route("/newyear", name="new_year")
+     */
+    public function newYearAction(Request $request) {
+        $em = $this->getDoctrine()->getManager();
+        $user = $this->get('security.token_storage')->getToken()->getUser();
+
+        $newses = $em->getRepository('AppBundle:Information')->findAll();
+
+        $lastClass = $em->getRepository('AppBundle:SystemParameter')->findOneByName('last_class');
+        $schoolClasses = $em->getRepository('AppBundle:SchoolClass')->findAll();
+        foreach ($schoolClasses as $sc) {
+            if ($sc->getNumber() >= $lastClass->getValue()) {
+                $em->remove($sc);
+            } else {
+                $number = $sc->getNumber();
+                $number = $number + 1;
+                $sc->setNumber($number);
+            }
+        }
+        $lessons = $em->getRepository('AppBundle:Lesson')->findAll();
+        foreach ($lessons as $l) {
+            $em->remove($l);
+        }
+        $grades = $em->getRepository('AppBundle:Grade')->findAll();
+        foreach ($grades as $g) {
+            $em->remove($g);
+        }
+        $presences = $em->getRepository('AppBundle:Presence')->findAll();
+        foreach ($presences as $p) {
+            $em->remove($p);
+        }
+        $replecements = $em->getRepository('AppBundle:Replecement')->findAll();
+        foreach ($replecements as $r) {
+            $em->remove($r);
+        }
+        $comments = $em->getRepository('AppBundle:StudentComment')->findAll();
+        foreach ($comments as $c) {
+            $em->remove($c);
+        }
+
+        $em->flush();
+        return $this->redirect($this->generateUrl('homepage', [
+                            'base_dir' => realpath($this->getParameter('kernel.project_dir')) . DIRECTORY_SEPARATOR,
+                            'user' => $user,
+                            'newses' => $newses,
+                            'replecements' => $replecements
+                        ]), 301);
+    }
+
 }

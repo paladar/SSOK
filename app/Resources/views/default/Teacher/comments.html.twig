@@ -1,0 +1,54 @@
+{% extends 'default/index.html.twig' %}
+
+{% block content %}
+    <div class="row">
+        <h1 class="col-xs-6">Uwagi</h1>
+        <div class="col-xs-12">
+            {% for student in students %}
+                <h5>{{student.firstname}} {{student.surname}}<i class="comment-i fa fa-plus-square" onclick="addComment({{student.id}})" aria-hidden="true"></i></h5>
+            <ul>
+                {% for comment in student.studentcomments %}
+                    {% if comment.teacher.id == teacher.id %}
+                        <li>{{comment.value}}<i class="comment-i fa fa-trash" onclick="deleteComment({{comment.id}})" aria-hidden="true"></i></li>
+                    {% endif %}
+                {% endfor %}
+            </ul>
+            {% endfor %}
+            <div class='comment-modal'>
+                <form id="comment-form" name="comment-form" action="" method="post">
+                    <div class="form-group">
+                        <div>
+                            <div>
+                                <label>Wartość</label>
+                                <input name="value" class="form-control" type="text" required />
+                            </div>
+                        </div>
+                        <input type="hidden" name="student" id="student-input">
+                        <input type="hidden" name="teacher" value="{{teacher.id}}">
+                        <input type="hidden" name="subject" value="{{subject.id}}">
+                        <input type="hidden" name="schoolclass" value="{{schoolClass.id}}">
+                        <div>
+                            <input name="submit" class="btn btn-ssok" type="submit" value="Zapisz"/>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <script>
+            $(".comment-modal").dialog({
+                autoOpen: false,
+            });
+            function addComment(student) {
+                $('.comment-modal').dialog('open');
+                action = '{{ path('comment_add') }}';
+                document.getElementById("comment-form").action = action;
+                $('#student-input').val(student);
+            }
+            function deleteComment(id) {
+                string = "{{ path('comment_delete' ,{'id': 'PLACEHOLDER','subject': subject.id,'schoolClass':schoolClass.id })}}";
+                url = string.replace('PLACEHOLDER', id);
+                window.location.href = url;
+            }
+
+        </script>
+    {% endblock %}
