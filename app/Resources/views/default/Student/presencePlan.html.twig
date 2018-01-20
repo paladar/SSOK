@@ -2,7 +2,7 @@
     <div class="row">
         <div class="col-xs-12">
             <div class="plan">
-                <ul class="plan-day">
+                <ul class="plan-day {% if monday|date('Y-m-d') <= minDate|date('Y-m-d') or monday|date('Y-m-d') >= maxDate|date('Y-m-d') %}vacation{% endif %}">
                     <li class='plan-header'>Poniedziałek</li>
                         {% for lesson in student.schoolClass.lessons | sortbyfield('start')  %}
                             {% set presT = '' %}
@@ -18,7 +18,7 @@
                                 {% endif %}
                             {% endfor %}
                 </ul>
-                <ul class="plan-day">
+                <ul class="plan-day {% if monday|date_modify('+1 day')|date('Y-m-d') <= minDate|date('Y-m-d') or monday|date_modify('+1 day')|date('Y-m-d') >= maxDate|date('Y-m-d') %}vacation{% endif %}">
                     <li class='plan-header'>Wtorek</li>
                         {% for lesson in student.schoolClass.lessons | sortbyfield('start')  %}
                             {% set presT = '' %}
@@ -34,7 +34,7 @@
                                 {% endif %}
                             {% endfor %}
                 </ul>
-                <ul class="plan-day">
+                <ul class="plan-day {% if monday|date_modify('+2 day')|date('Y-m-d') <= minDate|date('Y-m-d') or monday|date_modify('+2 day')|date('Y-m-d') >= maxDate|date('Y-m-d') %}vacation{% endif %}">
                     <li class='plan-header'>Środa</li>
                         {% for lesson in student.schoolClass.lessons | sortbyfield('start')  %}
                             {% set presT = '' %}
@@ -50,7 +50,7 @@
                                 {% endif %}
                             {% endfor %}
                 </ul>
-                <ul class="plan-day">
+                <ul class="plan-day {% if monday|date_modify('+3 day')|date('Y-m-d') <= minDate|date('Y-m-d') or monday|date_modify('+3 day')|date('Y-m-d') >= maxDate|date('Y-m-d') %}vacation{% endif %}">
                     <li class='plan-header'>Czwartek</li>
                         {% for lesson in student.schoolClass.lessons | sortbyfield('start')  %}
                             {% set presT = '' %}
@@ -66,7 +66,7 @@
                                 {% endif %}
                             {% endfor %}
                 </ul>
-                <ul class="plan-day">
+                <ul class="plan-day  {% if monday|date_modify('+4 day')|date('Y-m-d') <= minDate|date('Y-m-d') or monday|date_modify('+4 day')|date('Y-m-d') >= maxDate|date('Y-m-d') %}vacation{% endif %}">
                     <li class='plan-header'>Piątek</li>
                         {% for lesson in student.schoolClass.lessons | sortbyfield('start')  %}
                             {% set presT = '' %}

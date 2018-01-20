@@ -1,0 +1,34 @@
+{% extends 'default/index.html.twig' %}
+
+{% block content %}
+    <div class="row">
+        <h1 class="col-xs-6">Oceny</h1>
+        <div class="col-xs-12">
+            <table class="studentTable table table-striped table-bordered">
+                <thead>
+                    <tr>
+                        <th>Uczeń</th>
+                        <th>Oceny</th>
+                        <th>Średnia</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for student in schoolClass.students %}
+                        {% set gradesSum = 0 %}
+                        {% set gradesRateSum = 0 %}
+                        <tr>
+                            <td>{{ student.firstName }} {{ student.surname }}</td>
+                            <td>
+                                {% for grade in student.grades %}
+                                    {% if grade.subject == subject %}
+                                        {% set gradesSum = gradesSum + (grade.value*grade.gradetype.rate) %}
+                                        {% set gradesRateSum = gradesRateSum + grade.gradetype.rate %}
+                                        <span>{{grade.value}}</span>
+                                    {% endif %}
+                                {% endfor %}
+                            </td>
+                            <td>{% if gradesRateSum != 0%}{{ gradesSum/gradesRateSum }}{% endif %}</td>
+                        {% endfor %}
+                </tbody>
+            </table>
+        {% endblock %}

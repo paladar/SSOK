@@ -403,3 +403,7 @@ table .actions li{
 .comment-i:hover{
     color: #3c8dbc;
 }
+.vacation{
+    pointer-events: none;
+    opacity: 0.5;
+}

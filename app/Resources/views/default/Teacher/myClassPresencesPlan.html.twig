@@ -4,7 +4,7 @@
             <div class="plan">
                 <ul class="plan-day {% if monday|date('Y-m-d') <= minDate|date('Y-m-d') or monday|date('Y-m-d') >= maxDate|date('Y-m-d') %}vacation{% endif %}">
                     <li class='plan-header'>Poniedziałek</li>
-                        {% for lesson in teacher.lessons | sortbyfield('start')  %}
+                        {% for lesson in schoolClass.lessons | sortbyfield('start')  %}
                             {% if lesson.day == 1 %}
                             <a href="{{ path('presence' ,{'date': monday|date('d-m-Y'),'schoolClassId':lesson.schoolclass.id,'lessonId':lesson.id })}}"><li class='plan-element'><span>{{lesson.start|date('H:i')}}</span>{{lesson.subject.title}} <p>{{lesson.schoolclass.number}}{{lesson.schoolclass.letter}}</p></li></a>
                                     {% endif %}
@@ -12,7 +12,7 @@
                 </ul>
                 <ul class="plan-day {% if monday|date_modify('+1 day')|date('Y-m-d') <= minDate|date('Y-m-d') or monday|date_modify('+1 day')|date('Y-m-d') >= maxDate|date('Y-m-d') %}vacation{% endif %}">
                     <li class='plan-header'>Wtorek</li>
-                        {% for lesson in teacher.lessons | sortbyfield('start')  %}
+                        {% for lesson in schoolClass.lessons | sortbyfield('start')  %}
                             {% if lesson.day == 2 %}
                             <a href="{{ path('presence' ,{'date': monday|date_modify('+1 day')|date('d-m-Y'),'schoolClassId':lesson.schoolclass.id,'lessonId':lesson.id })}}"><li class='plan-element'><span>{{lesson.start|date('H:i')}}</span>{{lesson.subject.title}} <p>{{lesson.schoolclass.number}}{{lesson.schoolclass.letter}}</p></li></a>
                                     {% endif %}
@@ -20,7 +20,7 @@
                 </ul>
                 <ul class="plan-day {% if monday|date_modify('+2 day')|date('Y-m-d') <= minDate|date('Y-m-d') or monday|date_modify('+2 day')|date('Y-m-d') >= maxDate|date('Y-m-d') %}vacation{% endif %}">
                     <li class='plan-header'>Środa</li>
-                        {% for lesson in teacher.lessons | sortbyfield('start')  %}
+                        {% for lesson in schoolClass.lessons | sortbyfield('start')  %}
                             {% if lesson.day == 3 %}
                             <a href="{{ path('presence' ,{'date': monday|date_modify('+2 day')|date('d-m-Y'),'schoolClassId':lesson.schoolclass.id,'lessonId':lesson.id })}}"><li class='plan-element'><span>{{lesson.start|date('H:i')}}</span>{{lesson.subject.title}} <p>{{lesson.schoolclass.number}}{{lesson.schoolclass.letter}}</p></li></a>
                                     {% endif %}
@@ -28,7 +28,7 @@
                 </ul>
                 <ul class="plan-day {% if monday|date_modify('+3 day')|date('Y-m-d') <= minDate|date('Y-m-d') or monday|date_modify('+3 day')|date('Y-m-d') >= maxDate|date('Y-m-d') %}vacation{% endif %}">
                     <li class='plan-header'>Czwartek</li>
-                        {% for lesson in teacher.lessons | sortbyfield('start')  %}
+                        {% for lesson in schoolClass.lessons | sortbyfield('start')  %}
                             {% if lesson.day == 4 %}
                             <a href="{{ path('presence' ,{'date': monday|date_modify('+3 day')|date('d-m-Y'),'schoolClassId':lesson.schoolclass.id,'lessonId':lesson.id })}}"><li class='plan-element'><span>{{lesson.start|date('H:i')}}</span>{{lesson.subject.title}} <p>{{lesson.schoolclass.number}}{{lesson.schoolclass.letter}}</p></li></a> 
                                     {% endif %}
@@ -36,7 +36,7 @@
                 </ul>
                 <ul class="plan-day {% if monday|date_modify('+4 day')|date('Y-m-d') <= minDate|date('Y-m-d') or monday|date_modify('+4 day')|date('Y-m-d') >= maxDate|date('Y-m-d') %}vacation{% endif %}">
                     <li class='plan-header'>Piątek</li>
-                        {% for lesson in teacher.lessons | sortbyfield('start')  %}
+                        {% for lesson in schoolClass.lessons | sortbyfield('start')  %}
                             {% if lesson.day == 5 %}
                             <a href="{{ path('presence' ,{'date': monday|date_modify('+4 day')|date('d-m-Y'),'schoolClassId':lesson.schoolclass.id,'lessonId':lesson.id })}}"><li class='plan-element'><span>{{lesson.start|date('H:i')}}</span>{{lesson.subject.title}} <p>{{lesson.schoolclass.number}}{{lesson.schoolclass.letter}}</p></li></a>      
                                     {% endif %}

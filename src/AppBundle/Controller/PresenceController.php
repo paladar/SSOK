@@ -24,6 +24,8 @@ class PresenceController extends Controller {
         $this->denyAccessUnlessGranted('ROLE_TEACHER', null, 'Unable to access this page!');
         $em = $this->getDoctrine()->getManager();
         $teacher = $em->getRepository('AppBundle:Teacher')->find($id);
+        $minDate = $em->getRepository('AppBundle:SystemParameter')->findOneByName('min_date');
+        $maxDate = $em->getRepository('AppBundle:SystemParameter')->findOneByName('max_date');
         $today = strtotime(date('Y-m-d'));
         $timestamp = strtotime(date('Y-m-d'));
         if (date('j', $timestamp) === '1') {
@@ -47,7 +49,9 @@ class PresenceController extends Controller {
                     'teacher' => $teacher,
                     'monday' => $monday,
                     'mondayBefore' => $mondayBefore,
-                    'date' => $date
+                    'date' => $date,
+                    'minDate' => $minDate->getValue(),
+                    'maxDate' => $maxDate->getValue()
         ]);
     }
 
@@ -58,6 +62,8 @@ class PresenceController extends Controller {
         $this->denyAccessUnlessGranted('ROLE_STUDENT', null, 'Unable to access this page!');
         $em = $this->getDoctrine()->getManager();
         $student = $em->getRepository('AppBundle:Student')->find($id);
+        $minDate = $em->getRepository('AppBundle:SystemParameter')->findOneByName('min_date');
+        $maxDate = $em->getRepository('AppBundle:SystemParameter')->findOneByName('max_date');
         $today = strtotime(date('Y-m-d'));
         $timestamp = strtotime(date('Y-m-d'));
         if (date('j', $timestamp) === '1') {
@@ -81,7 +87,9 @@ class PresenceController extends Controller {
                     'student' => $student,
                     'monday' => $monday,
                     'mondayBefore' => $mondayBefore,
-                    'date' => $date
+                    'date' => $date,
+                    'minDate' => $minDate->getValue(),
+                    'maxDate' => $maxDate->getValue()
         ]);
     }
 
@@ -94,7 +102,7 @@ class PresenceController extends Controller {
 
         $user = $this->get('security.token_storage')->getToken()->getUser();
         $teacher = $user->getTeacher();
-            
+
         $schoolClass = $em->getRepository('AppBundle:SchoolClass')->find($schoolClassId);
         $lesson = $em->getRepository('AppBundle:Lesson')->find($lessonId);
         $presenceTypes = $em->getRepository('AppBundle:PresenceType')->findAll();

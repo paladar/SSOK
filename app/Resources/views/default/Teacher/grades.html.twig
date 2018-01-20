@@ -21,9 +21,11 @@
                             <td>{{ student.firstName }} {{ student.surname }}</td>
                             <td>
                                 {% for grade in student.grades %}
-                                    {% set gradesSum = gradesSum + (grade.value*grade.gradetype.rate) %}
-                                    {% set gradesRateSum = gradesRateSum + grade.gradetype.rate %}
-                                    <span onclick="deleteGrade({{grade.id}})" class="grade" style="color:{{grade.gradetype.color}}; border-color:{{grade.gradetype.color}};">{{grade.value}}</span>
+                                    {% if grade.subject == subject %}
+                                        {% set gradesSum = gradesSum + (grade.value*grade.gradetype.rate) %}
+                                        {% set gradesRateSum = gradesRateSum + grade.gradetype.rate %}
+                                        <span onclick="deleteGrade({{grade.id}})" class="grade" style="color:{{grade.gradetype.color}}; border-color:{{grade.gradetype.color}};">{{grade.value}}</span>
+                                    {% endif %}
                                 {% endfor %}
                             </td>
                             <td>{% if gradesRateSum != 0%}{{ gradesSum/gradesRateSum }}{% endif %}</td>
@@ -75,10 +77,10 @@
                     function () {
                         value = $(this).html();
                         $(this).html('<i class="fa fa-trash-o" aria-hidden="true"></i>');
-                        $(this).css('padding','3px 6px');
+                        $(this).css('padding', '3px 6px');
                     }, function () {
                 $(this).html(value);
-                $(this).css('padding','3px 8px');
+                $(this).css('padding', '3px 8px');
             }
             );
             function addGrade(student) {

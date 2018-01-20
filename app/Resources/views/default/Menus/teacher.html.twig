@@ -16,5 +16,13 @@
     <li>
         <a href="{{ path('presencesIndex' ,{'id': app.user.teacher.id })}}"><i class="fa fa-bell" aria-hidden="true"></i>Sprawdź obecność</a>
     </li>
+    {% if app.user.teacher.class != null %}
+        <li>
+            <a href="{{ path('my_class')}}"><i class="fa fa-info" aria-hidden="true"></i>Moja klasa</a>
+        </li>
+    {% endif %}
+    <li>
+        <a href="{{ path('student_contact')}}"><i class="fa fa-phone" aria-hidden="true"></i>Kontakt</a>
+    </li>
 </ul>
 
