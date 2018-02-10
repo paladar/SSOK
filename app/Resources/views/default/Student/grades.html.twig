@@ -9,7 +9,7 @@
                     <tr>
                         <th>Przedmiot</th>
                         <th>Oceny</th>
-                        <th>Średnia</th>
+                        <th>Średnia ważona</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -27,7 +27,7 @@
                                     {% endif %}
                                 {% endfor %}
                             </td>
-                            <td>{% if gradesRateSum != 0%}{{ gradesSum/gradesRateSum }}{% endif %}</td>
+                            <td>{% if gradesRateSum != 0%}{{ (gradesSum/gradesRateSum)|number_format(2, '.', ',') }}{% endif %}</td>
                         {% endfor %}
                 </tbody>
             </table>

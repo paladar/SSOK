@@ -11,6 +11,8 @@
                         <th>Klasa</th>
                         <th>Email</th>
                         <th>Telefon</th>
+                        <th>Email rodzica</th>
+                        <th>Telefon rodzica</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -20,6 +22,8 @@
                             <td>{{ student.schoolclass.number }}{{ student.schoolclass.letter }}</td>
                             <td><a href="mailto:{{ student.email }}">{{ student.email }}</a></td>
                             <td>{{ student.phone }}</td>
+                            <td>{% if student.studentPranet %}<a href="mailto:{{ student.studentParent.email }}">{{ student.studentParent.email }}</a>{% endif %}</td>
+                            <td>{% if student.studentPranet %}{{ student.studentParent.phone }}{% endif %}</td>
                         </tr>
                     {% endfor %}
                 </tbody>

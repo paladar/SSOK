@@ -36,7 +36,7 @@ class Student {
      * @var StudentParent $studentParent
      *
      * @ORM\OneToOne(targetEntity="StudentParent", cascade={"persist"}, inversedBy="student")
-     * @ORM\JoinColumn(name="id_studentStudentParent", referencedColumnName="id")
+     * @ORM\JoinColumn(name="id_student_parent", referencedColumnName="id")
      */
     protected $studentParent;
 

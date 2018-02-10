@@ -19,7 +19,7 @@
                     <li class='plan-header'>Wtorek</li>
                         {% for lesson in schoolClass.lessons | sortbyfield('start') %}
                             {% if lesson.day == 2 %}
-                            <li class='plan-element' onClick='editLesson(1,{{lesson.subject.id}} ,{{lesson.teacher.id}} , "{{lesson.start|date('H:i')}}",{{lesson.id}} )'><span>{{lesson.start|date('H:i')}}</span>{{lesson.subject.title}}</li>
+                            <li class='plan-element' onClick='editLesson(2,{{lesson.subject.id}} ,{{lesson.teacher.id}} , "{{lesson.start|date('H:i')}}",{{lesson.id}} )'><span>{{lesson.start|date('H:i')}}</span>{{lesson.subject.title}}</li>
                             <a href="{{ path('schoolclass_lesson_delete',{'lesson' : lesson.id,'class': schoolClass.id }) }}"><i class="fa fa-trash-o" aria-hidden="true"></i></a>
                             {% endif %}
                         {% endfor %}
@@ -29,7 +29,7 @@
                     <li class='plan-header'>Środa</li>
                         {% for lesson in schoolClass.lessons | sortbyfield('start') %}
                             {% if lesson.day == 3 %}
-                            <li class='plan-element' onClick='editLesson(1,{{lesson.subject.id}} ,{{lesson.teacher.id}} , "{{lesson.start|date('H:i')}}",{{lesson.id}} )'><span>{{lesson.start|date('H:i')}}</span>{{lesson.subject.title}}</li>
+                            <li class='plan-element' onClick='editLesson(3,{{lesson.subject.id}} ,{{lesson.teacher.id}} , "{{lesson.start|date('H:i')}}",{{lesson.id}} )'><span>{{lesson.start|date('H:i')}}</span>{{lesson.subject.title}}</li>
                             <a href="{{ path('schoolclass_lesson_delete',{'lesson' : lesson.id,'class': schoolClass.id }) }}"><i class="fa fa-trash-o" aria-hidden="true"></i></a>
                             {% endif %}
                         {% endfor %}
@@ -39,7 +39,7 @@
                     <li class='plan-header'>Czwartek</li>
                         {% for lesson in schoolClass.lessons | sortbyfield('start') %}
                             {% if lesson.day == 4 %}
-                            <li class='plan-element' onClick='editLesson(1,{{lesson.subject.id}} ,{{lesson.teacher.id}} , "{{lesson.start|date('H:i')}}",{{lesson.id}} )'><span>{{lesson.start|date('H:i')}}</span>{{lesson.subject.title}}</li>
+                            <li class='plan-element' onClick='editLesson(4,{{lesson.subject.id}} ,{{lesson.teacher.id}} , "{{lesson.start|date('H:i')}}",{{lesson.id}} )'><span>{{lesson.start|date('H:i')}}</span>{{lesson.subject.title}}</li>
                             <a href="{{ path('schoolclass_lesson_delete',{'lesson' : lesson.id,'class': schoolClass.id }) }}"><i class="fa fa-trash-o" aria-hidden="true"></i></a>
                             {% endif %}
                         {% endfor %}
@@ -49,7 +49,7 @@
                     <li class='plan-header'>Piątek</li>
                         {% for lesson in schoolClass.lessons | sortbyfield('start') %}
                             {% if lesson.day == 5 %}
-                            <li class='plan-element' onClick='editLesson(1,{{lesson.subject.id}} ,{{lesson.teacher.id}} , "{{lesson.start|date('H:i')}}",{{lesson.id}} )'><span>{{lesson.start|date('H:i')}}</span>{{lesson.subject.title}}</li>
+                            <li class='plan-element' onClick='editLesson(5,{{lesson.subject.id}} ,{{lesson.teacher.id}} , "{{lesson.start|date('H:i')}}",{{lesson.id}} )'><span>{{lesson.start|date('H:i')}}</span>{{lesson.subject.title}}</li>
                             <a href="{{ path('schoolclass_lesson_delete',{'lesson' : lesson.id,'class': schoolClass.id }) }}"><i class="fa fa-trash-o" aria-hidden="true"></i></a>
                             {% endif %}
                         {% endfor %}

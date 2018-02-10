@@ -34,7 +34,7 @@ class Information {
     /**
      * @var string $description
      *
-     * @ORM\Column(name="description", type="string", length=10000, nullable=false)
+     * @ORM\Column(name="description", type="string", length=255, nullable=false)
      */
     private $description;
 

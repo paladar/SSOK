@@ -8,7 +8,6 @@ use Symfony\Component\HttpFoundation\Request;
 use Knp\Bundle\SnappyBundle\Snappy\Response\PdfResponse;
 
 class DefaultController extends Controller {
-
     /**
      * @Route("/", name="homepage")
      */
@@ -32,7 +31,6 @@ class DefaultController extends Controller {
                     'replecements' => $replecements
         ]);
     }
-
     /**
      * @Route("/students/password/export", name="students-password-export")
      */

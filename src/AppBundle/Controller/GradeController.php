@@ -27,7 +27,7 @@ class GradeController extends Controller {
         $subjects = $teacher->getSubjects();
         $count = count($subjects);
         if ($count == 1) {
-            return $this->redirectToRoute('indexClass', array('id' => $teacher->getId(), 'subjectId' => $subjects[0]->getId()));
+            return $this->redirectToRoute('gradeIndexClass', array('id' => $teacher->getId(), 'subjectId' => $subjects[0]->getId()));
         }
         return $this->render('default/Teacher/subjects.html.twig', [
                     'subjects' => $subjects,

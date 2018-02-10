@@ -13,6 +13,15 @@ and open the template in the editor.
 a{
     color: #333;
 }
+.login-page{
+    background-color: #00a65a;
+}
+.login-logo{
+    color: #fff;
+}
+.btn-flat{
+    background-color: #00a65a;
+}
 a:hover{
     color: #3c8dbc;
 }

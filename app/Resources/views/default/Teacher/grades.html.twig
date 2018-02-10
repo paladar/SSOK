@@ -9,7 +9,7 @@
                     <tr>
                         <th>Uczeń</th>
                         <th>Oceny</th>
-                        <th>Średnia</th>
+                        <th>Średnia ważona</th>
                         <th>Dodaj ocenę</th>
                     </tr>
                 </thead>
@@ -28,7 +28,7 @@
                                     {% endif %}
                                 {% endfor %}
                             </td>
-                            <td>{% if gradesRateSum != 0%}{{ gradesSum/gradesRateSum }}{% endif %}</td>
+                            <td>{% if gradesRateSum != 0%}{{ (gradesSum/gradesRateSum)|number_format(2, '.', ',') }}{% endif %}</td>
                             <td><i onclick="addGrade({{student.id}})" class="ajaxAdd fa fa-plus-square" aria-hidden="true"></i></td>
                             {% endfor %}
                 </tbody>

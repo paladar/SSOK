@@ -16,12 +16,12 @@
     <div class="row">
         <div class="col-sm-6">
             {% if monday|date_modify('-3 day')|date('Y-m-d') > minDate|date('Y-m-d') %}
-                <a class="btn btn-ssok-left" href="{{ path('presencesIndex' ,{'id': teacher.id,'date': date+1 })}}">Poprzedni okres</a>
+                <a class="btn btn-ssok-left" href="{{ path('presencesStudentIndex' ,{'id': student.id,'date': date+1 })}}">Poprzedni okres</a>
             {% endif %}
         </div>
         <div class="col-sm-6">
             {% if date != 0 and monday|date_modify('+7 day')|date('Y-m-d') < maxDate|date('Y-m-d') %}
-                <a class="btn btn-ssok" href="{{ path('presencesIndex' ,{'id': teacher.id,'date': date-1 })}}">Następny okres</a>
+                <a class="btn btn-ssok" href="{{ path('presencesStudentIndex' ,{'id': student.id,'date': date-1 })}}">Następny okres</a>
             {% endif %}
         </div>
     </div>

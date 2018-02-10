@@ -132,7 +132,7 @@ class StudentCommentController extends Controller {
     /**
      * @Route("student/comments/{id}", name="commentStudentIndex")
      */
-    public function indexGCommentsStudentAction(Request $request, $id) {
+    public function indexCommentsStudentAction(Request $request, $id) {
         $this->denyAccessUnlessGranted('ROLE_STUDENT', null, 'Unable to access this page!');
         $em = $this->getDoctrine()->getManager();
         $student = $em->getRepository('AppBundle:Student')->find($id);
